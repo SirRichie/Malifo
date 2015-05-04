@@ -8,6 +8,6 @@ namespace Server
 {
     public class Class1
     {
-        int x = 0;
+        int x = 1;
     }
 }
