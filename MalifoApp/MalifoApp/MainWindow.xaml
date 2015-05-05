@@ -26,7 +26,31 @@
             </RibbonTab>
         </Ribbon>
         <DockPanel LastChildFill="False" Grid.Row="1">
-            <RichTextBox DockPanel.Dock="Right" AcceptsReturn="True" Width="250"/>
+            <!--
+            <RichTextBox  DockPanel.Dock="Right" AcceptsReturn="True" Width="250" IsEnabled="False">
+                <FlowDocument/>
+            </RichTextBox>
+            -->
+            <FlowDocumentScrollViewer DockPanel.Dock="Right" Width="250" Background="#FFF9F7C2">
+                <FlowDocument Background="#FFF9F7C2">
+                    <Paragraph FontSize="10">
+                        <Run Foreground="#FFB0830A" >[10:24]</Run>
+                        <Run Foreground="#FF9B0A0A">Tobias</Run> zieht 2R, 5J
+                    </Paragraph>
+                    <Paragraph FontSize="10">
+                        <Run Foreground="#FFB0830A" >[10:24]</Run>
+                        <Run Foreground="#FF9B0A0A">Tobias</Run> zieht 2R, 5J
+                    </Paragraph>
+                    <Paragraph FontSize="10">
+                        <Run Foreground="#FFB0830A" >[10:24]</Run>
+                        <Run Foreground="#FF9B0A0A">Tobias</Run> zieht 2R, 5J
+                    </Paragraph>
+                    <Paragraph FontSize="10" TextAlignment="Left">
+                        <Run Foreground="#FFB0830A" >[10:24]</Run>
+                        <Run Foreground="#FF9B0A0A">Tobias</Run> zieht 2R, 5J und danach noch mehr, denn dies ist ein langer Text
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
         </DockPanel>
     </Grid>
 </Window>
