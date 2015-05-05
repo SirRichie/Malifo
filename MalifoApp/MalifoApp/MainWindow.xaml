@@ -1,8 +1,32 @@
 ﻿<Window x:Class="MalifoApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="555" Width="839">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="RibbonWin"  SelectedIndex="0">
+
+            <RibbonTab Header="Malifo" KeyTip="H" >
+                <RibbonGroup Name="Drawing" Header="Drawing">
+                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="" />
+                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="" />
+                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="" />
+                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="" />
+                </RibbonGroup>
+                <RibbonSeparator Margin="50,0" />
+                <RibbonGroup Name="Server" Header="Server">
+                    <RibbonTextBox Name="serverAddress" Label="Server Address" />
+                    <RibbonTextBox Name="username" Label="Username" />
+                    <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" />
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <DockPanel LastChildFill="False" Grid.Row="1">
+            <RichTextBox DockPanel.Dock="Right" AcceptsReturn="True" Width="250"/>
+        </DockPanel>
     </Grid>
 </Window>
