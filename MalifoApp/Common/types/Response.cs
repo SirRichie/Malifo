@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.types
 {
+    [Serializable]
     public class Response
     {
+       
     }
 }
