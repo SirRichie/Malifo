@@ -48,8 +48,7 @@ namespace Server
 			th.Abort();
 
             StopClientThreads();
-            _threads = null;
-			// Listener stoppen
+            _threads = null;		
 			_listener.Stop();
             _listener = null;
 		}
@@ -58,7 +57,6 @@ namespace Server
         {
             for (IEnumerator e = _threads.GetEnumerator(); e.MoveNext(); )
             {
-
                 ServerThread serverThread = (ServerThread)e.Current;
                 serverThread.stop = true;
                 while (serverThread.running)
@@ -82,11 +80,8 @@ namespace Server
 		
 		private void Run()		
 		{	
-			while (true) {
-				// Wartet auf eingehenden Verbindungswunsch
-				TcpClient clientThread = _listener.AcceptTcpClient();
-				// Initialisiert und startet einen Server-Thread
-				// und fügt ihn zur Liste der Server-Threads hinzu
+			while (true) {				
+				TcpClient clientThread = _listener.AcceptTcpClient();				
 				_threads.Add(new ServerThread(clientThread));
                 Thread.Sleep(1);
 			}

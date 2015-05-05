@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Server.handler
 {
@@ -18,6 +19,7 @@ namespace Server.handler
         private HandlerFactory()
 		{
             handlerList = new List<IHandler>();
+            GetHanlderFromAssebly();
 		}
 
         public void RegisterHandler(IHandler handler) 
@@ -39,6 +41,17 @@ namespace Server.handler
             return handler;
         }
 
+        private void GetHanlderFromAssebly()
+        {           
+            var currentAssembly = this.GetType().GetTypeInfo().Assembly;           
+            var iDisposableAssemblies = currentAssembly.DefinedTypes.Where(type => type.ImplementedInterfaces.Any(inter => inter == typeof(IHandler))).ToList();
+            foreach (var typeInfo in iDisposableAssemblies)
+            {
+                Object handle = Activator.CreateInstance(currentAssembly.GetType(typeInfo.FullName));
+                handlerList.Add((IHandler)handle);
+            }
+        }
+
         private bool RequestTypeIsHandled(Type type)
         {
             var handler = GetHandlerByType(type);
@@ -51,8 +64,16 @@ namespace Server.handler
 
         private IHandler GetHandlerByType(Type type)
         {
-            var handler = (from item in handlerList where item.GetHandledType() == type select item).Single<IHandler>();
-            return handler;
+            try
+            {
+                var handler = (from item in handlerList where item.GetHandledType() == type select item).Single<IHandler>();
+                return handler;
+            }
+            catch (Exception e)
+            {
+
+            }
+            return null;
         }
     }
 

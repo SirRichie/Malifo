@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common.types;
+using Common.types.impl;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,32 +14,9 @@ namespace Client
     {
         public static void Main(String[] args)
         {
-            // Verbindung zum Server aufbauen
-            TcpClient c = new TcpClient("localhost", 4711);
-            // Stream zum lesen holen
-            StreamReader inStream = new StreamReader(c.GetStream());
-            bool loop = true;
-            while (loop)
-            {
-                try
-                {
-                    // Hole nächsten Zeitstring vom Server
-                    String time = inStream.ReadLine();
-                    // Setze das Schleifen-Flag zurück
-                    // wenn der Server aufgehört hat zu senden
-                    loop = !time.Equals("");
-                    // Gib die Zeit auf der Console aus
-                    Console.WriteLine(time);
-                }
-                catch (Exception)
-                {
-                    // Setze das Schleifen-Flag zurück
-                    // wenn ein Fehler in der Kommunikation aufgetreten ist
-                    loop = false;
-                }
-            }
-            // Schließe die Verbindung zum Server
-            c.Close();
+            ServerInterface serverInterface = ServerInterfaceFactory.GetServerInterface("localhost", 4711);
+            LoginResponse res = (LoginResponse) serverInterface.Execute(new LoginRequest() { ClientHash = null, UserName = "Bert" });
+           
         }
     }
 }

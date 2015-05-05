@@ -1,4 +1,6 @@
 ﻿using Server.configuration;
+using Server.handler;
+using Server.handler.impl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace Server
     {
         public static void Main(String[] args)
         {
+            //HandlerFactory factory = HandlerFactory.Instance;
+            //factory.RegisterHandler(new LoginHandler());
             ServerConfiguration config = new ServerConfiguration()
             {
                 LocalAddress = IPAddress.Parse("127.0.0.1"),
