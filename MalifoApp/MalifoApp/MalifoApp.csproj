@@ -102,9 +102,6 @@
     <Resource Include="Resources\twocards.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\fourcards_128.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\connect_icon.jpg" />
     <Resource Include="Resources\disconnect_icon.jpg" />
   </ItemGroup>
