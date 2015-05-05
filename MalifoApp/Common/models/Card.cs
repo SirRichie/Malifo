@@ -9,6 +9,7 @@ namespace Common.models
     public class Card
     {
         public string Text {get; set;}
+        public string ShortText { get; set; }
         public byte[] Image { get; set; }
 
         public Card() { }
