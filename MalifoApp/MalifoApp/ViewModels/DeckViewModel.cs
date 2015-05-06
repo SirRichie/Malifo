@@ -50,6 +50,11 @@ namespace MalifoApp.ViewModels
         private void ExecuteDrawCommand(object parameter)
         {
             System.Diagnostics.Debug.WriteLine("parameter: {0}", parameter);
+            int numberOfCards = Convert.ToInt32(parameter);
+            // TODO return the result somehow
+            deck.Draw(numberOfCards);
+            OnPropertyChanged("CardsCount");
+            OnPropertyChanged("DiscardCount");
         }
     }
 }

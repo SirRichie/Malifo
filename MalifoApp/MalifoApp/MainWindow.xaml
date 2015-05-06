@@ -56,12 +56,14 @@
                 </FlowDocument>
             </FlowDocumentScrollViewer>
             <Grid ShowGridLines="True">
+                <!--
                 <Grid.Width>
                     <MultiBinding Converter="{StaticResource subConverter}">
                         <Binding ElementName="MainDockPanel" Path="ActualWidth" />
                         <Binding ElementName="LogViewer" Path="ActualWidth" />
                     </MultiBinding>
                 </Grid.Width>
+                -->
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
