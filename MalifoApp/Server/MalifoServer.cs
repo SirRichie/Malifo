@@ -80,8 +80,8 @@ namespace Server
         }
 		
 		private void Run()		
-		{	
-            Console.WriteLine()
+		{
+            Console.WriteLine();
 			while (true) {				
 				TcpClient clientThread = _listener.AcceptTcpClient();				
 				_threads.Add(new ServerThread(clientThread));
