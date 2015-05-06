@@ -1,7 +1,11 @@
 ﻿<Window x:Class="MalifoApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="555" Width="839">
+        Title="MainWindow" Height="555" Width="839"
+        xmlns:local="clr-namespace:MalifoApp.DataConversion">
+    <Window.Resources>
+        <local:SubConverter x:Key="subConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -12,10 +16,10 @@
 
             <RibbonTab Header="Malifo" KeyTip="H" >
                 <RibbonGroup Name="Drawing" Header="Drawing">
-                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="" />
-                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="" />
-                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="" />
-                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="" />
+                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding MainDeck.DrawCommand}" CommandParameter="1" />
+                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding MainDeck.DrawCommand}" CommandParameter="2" />
+                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding MainDeck.DrawCommand}" CommandParameter="3" />
+                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding MainDeck.DrawCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonSeparator Margin="50,0" />
                 <RibbonGroup Name="Server" Header="Server">
@@ -25,13 +29,13 @@
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>
-        <DockPanel LastChildFill="False" Grid.Row="1">
+        <DockPanel x:Name="MainDockPanel" LastChildFill="False" Grid.Row="1">
             <!--
             <RichTextBox  DockPanel.Dock="Right" AcceptsReturn="True" Width="250" IsEnabled="False">
                 <FlowDocument/>
             </RichTextBox>
             -->
-            <FlowDocumentScrollViewer DockPanel.Dock="Right" Width="250" Background="#FFF9F7C2">
+            <FlowDocumentScrollViewer x:Name="LogViewer" DockPanel.Dock="Right" Width="250" Background="#FFF9F7C2">
                 <FlowDocument Background="#FFF9F7C2">
                     <Paragraph FontSize="10">
                         <Run Foreground="#FFB0830A" >[10:24]</Run>
@@ -51,6 +55,26 @@
                     </Paragraph>
                 </FlowDocument>
             </FlowDocumentScrollViewer>
+            <Grid ShowGridLines="True">
+                <Grid.Width>
+                    <MultiBinding Converter="{StaticResource subConverter}">
+                        <Binding ElementName="MainDockPanel" Path="ActualWidth" />
+                        <Binding ElementName="LogViewer" Path="ActualWidth" />
+                    </MultiBinding>
+                </Grid.Width>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="Deck Size"/>
+                <Label Content="{Binding MainDeck.CardsCount}" Grid.Column="1" />
+                <Label Content="Discard Size" Grid.Row="1" />
+                <Label Content="{Binding MainDeck.DiscardCount}" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
         </DockPanel>
     </Grid>
 </Window>

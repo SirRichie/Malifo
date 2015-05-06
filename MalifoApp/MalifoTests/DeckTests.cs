@@ -64,6 +64,11 @@ namespace MalifoTests
             // verify implicit
         }
 
+        /// <summary>
+        /// Creates a deck with dummy data for the cards
+        /// </summary>
+        /// <param name="amount">number of the cards in the deck</param>
+        /// <returns>the new deck</returns>
         private Stack<Card> createTestDeck(int amount)
         {
             Stack<Card> deck = new Stack<Card>(amount);
