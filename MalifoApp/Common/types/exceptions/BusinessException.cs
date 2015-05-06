@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.types.exceptions
 {
-    public class BusinessException : Exception
+    [Serializable]
+    public class BusinessException : Exception, ITransferableObject
     {
         public BusinessException()
             : base()
@@ -25,5 +26,8 @@ namespace Common.types.exceptions
         {
 
         }
+
+        public string ClientHash
+        { get; set;}
     }
 }

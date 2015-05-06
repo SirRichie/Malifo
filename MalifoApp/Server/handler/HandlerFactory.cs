@@ -76,7 +76,8 @@ namespace Server.handler
             return null;
         }
     }
-
+            
+    [Serializable]
     public class HandlerFactoryException : BusinessException
     {
         public HandlerFactoryException(string msg)

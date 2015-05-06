@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.types
 {
-    [Serializable]
-    public class Response : ITransferableObject
+   public interface ITransferableObject
     {
-        public string ClientHash { get; set; }
+       string ClientHash { get; set; }
     }
 }

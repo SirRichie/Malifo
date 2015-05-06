@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.types
+namespace Common.types.serverNotifications
 {
-    [Serializable]
-    public class Request : ITransferableObject
+    public interface ServerNotification : ITransferableObject
     {
-        public string ClientHash { get; set; }
+     
     }
 }

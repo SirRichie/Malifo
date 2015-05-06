@@ -50,6 +50,8 @@
     <Compile Include="types\impl\LoginResponse.cs" />
     <Compile Include="types\Request.cs" />
     <Compile Include="types\Response.cs" />
+    <Compile Include="types\serverNotifications\ServerNotification.cs" />
+    <Compile Include="types\ITransferableObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

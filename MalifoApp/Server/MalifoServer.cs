@@ -1,4 +1,6 @@
 ﻿using Server.configuration;
+using Server.Services;
+using Server.userManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,15 +15,14 @@ namespace Server
 	public class MalifoServer : IDisposable
 	{
 		private ServerConfiguration _serverConfiguration;
-
 		private static TcpListener _listener = null;
         private static IList<ServerThread> _threads = new List<ServerThread>();
-
         public bool _stopServer = false;
 		
 		public MalifoServer(ServerConfiguration serverConfiguration)
 		{
 			_serverConfiguration = serverConfiguration;
+            ServiceManager.Instance.UserService = new UserService(UserManager.Instance, ClientManager.Instance);
 		}
 
         public void StopServer()
@@ -80,6 +81,7 @@ namespace Server
 		
 		private void Run()		
 		{	
+            Console.WriteLine()
 			while (true) {				
 				TcpClient clientThread = _listener.AcceptTcpClient();				
 				_threads.Add(new ServerThread(clientThread));

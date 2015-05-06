@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.types.exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,11 +30,27 @@ namespace Server.userManagement
 		public void AddUser(UserInfo userInfo)
 		{
 			if (UserHashIsPersistend(userInfo)) {
-				var tmpUserInfo = GetUserInfoByHash(userInfo.SessionHash);			
+				var tmpUserInfo = GetUserInfoByHash(userInfo.SessionHash);               
 			}else{
+                if (!UserNameAvailable(userInfo.UserName))
+                {
+                    throw new UserManagerException("UserNamer already taken");
+                }
 				userList.Add(userInfo);
 			}
 		}
+
+        private bool UserNameAvailable(string userName)
+        {
+            foreach (UserInfo info in userList)
+            {
+                if (info.UserName.Equals(userName))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
 		private bool UserHashIsPersistend(UserInfo userInfo)
 		{
@@ -51,9 +68,31 @@ namespace Server.userManagement
 		}
 		
 		private UserInfo GetUserInfoByHash(string userHash){
-			return (from info in userList
-                    where info.SessionHash.Equals(userHash)
-			                   select info).SingleOrDefault();
+            var userInfos = (from info in userList
+                             where info.SessionHash.Equals(userHash)
+                             select info).ToList<UserInfo>();
+            if (userInfos.Count != 1)
+            {
+                return null;
+                
+            }
+            return userInfos[0];
 		}
 	}
+
+    [Serializable]
+    public class UserManagerException: BusinessException
+    {
+        public UserManagerException(string msg)
+            : base(msg)
+        {
+
+        }
+
+        public UserManagerException(string msg, Exception e)
+            : base(msg, e)
+        {
+
+        }   
+    }
 }

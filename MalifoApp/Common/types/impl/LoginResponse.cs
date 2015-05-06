@@ -10,6 +10,6 @@ namespace Common.types.impl
     [Serializable]
     public class LoginResponse :Response
     {
-        public string UserHash { get; set; }
+       
     }
 }

@@ -10,8 +10,7 @@ namespace Common.types.impl
 {
     [Serializable]
     public class LoginRequest: Request
-    {
-        public string ClientHash { get; set; }
+    {       
         public string UserName { get; set; }
     }  
 }
