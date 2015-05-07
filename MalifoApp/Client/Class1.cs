@@ -16,7 +16,7 @@ namespace Client
         {
             ServerInterface serverInterface = ServerInterfaceFactory.GetServerInterface("localhost", 4711);
             LoginResponse res = (LoginResponse) serverInterface.Execute(new LoginRequest() { ClientHash = null, UserName = "Bert" });
-           
+            Console.WriteLine("Hash: "+res.ClientHash);
         }
     }
 }
