@@ -15,11 +15,17 @@
         <Ribbon x:Name="RibbonWin"  SelectedIndex="0">
 
             <RibbonTab Header="Malifo" KeyTip="H" >
-                <RibbonGroup Name="Drawing" Header="Drawing">
+                <RibbonGroup Header="Drawing - General">
                     <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding MainDeck.DrawCommand}" CommandParameter="1" />
                     <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding MainDeck.DrawCommand}" CommandParameter="2" />
                     <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding MainDeck.DrawCommand}" CommandParameter="3" />
                     <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding MainDeck.DrawCommand}" CommandParameter="4" />
+                </RibbonGroup>
+                <RibbonGroup Header="Drawing - Special">
+                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="1" />
+                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="2" />
+                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="3" />
+                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonSeparator Margin="50,0" />
                 <RibbonGroup Name="Server" Header="Connection">
@@ -29,7 +35,7 @@
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>
-        <DockPanel x:Name="MainDockPanel" LastChildFill="False" Grid.Row="1">
+        <DockPanel x:Name="MainDockPanel" LastChildFill="True" Grid.Row="1">
             
             <FlowDocumentScrollViewer x:Name="LogViewer" DockPanel.Dock="Right" Width="250" Background="#FFF9F7C2" Document="{Binding GameLog.Document}" LayoutUpdated="LogViewer_LayoutUpdated" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
                 <!--
@@ -54,26 +60,63 @@
                 -->
             </FlowDocumentScrollViewer>
             <Grid ShowGridLines="True">
-                
+                <!--
                 <Grid.Width>
                     <MultiBinding Converter="{StaticResource subConverter}">
                         <Binding ElementName="MainDockPanel" Path="ActualWidth" />
                         <Binding ElementName="LogViewer" Path="ActualWidth" />
                     </MultiBinding>
                 </Grid.Width>
+                -->
                 
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+               
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label Content="Deck Size"/>
-                <Label Content="{Binding MainDeck.CardsCount}" Grid.Column="1" />
-                <Label Content="Discard Size" Grid.Row="1" />
-                <Label Content="{Binding MainDeck.DiscardCount}" Grid.Row="1" Grid.Column="1"/>
+                
+                <ListView ItemsSource="{Binding Players}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Deck.CardsCount}" Header="Deck Size" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Deck.DiscardCount}" Header="Discard Size" />
+
+                            <GridViewColumn Header="Main Draw">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <ItemsControl ItemsSource="{Binding Path=LastMainDraw}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <Image ToolTip="{Binding Path=Text}"
+                                                          Source="Resources/dummycard.png"
+                                                          Margin="3,0,3,0"
+                                                          Height="80" Width="80" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Grid.Column="1">
+                    <Label Content="Deck Size"/>
+                    <Label Content="{Binding MainDeck.CardsCount}" Grid.Column="1" />
+                    <Label Content="Discard Size" Grid.Row="1" />
+                    <Label Content="{Binding MainDeck.DiscardCount}" Grid.Row="1" Grid.Column="1"/>
+                </StackPanel>
             </Grid>
         </DockPanel>
     </Grid>

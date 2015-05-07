@@ -83,6 +83,16 @@ namespace MalifoApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dummycard {
+            get {
+                object obj = ResourceManager.GetObject("dummycard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fourcards {
             get {
                 object obj = ResourceManager.GetObject("fourcards", resourceCulture);

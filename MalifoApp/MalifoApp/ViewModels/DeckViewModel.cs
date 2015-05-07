@@ -9,15 +9,36 @@ using System.Windows.Input;
 
 namespace MalifoApp.ViewModels
 {
+    public delegate void CardsDrawn(IList<Card> cards);
+
     public class DeckViewModel : ViewModel
     {
         private Deck deck;
-        private GameLogViewModel gameLog;
 
-        public DeckViewModel(Deck deck, GameLogViewModel gameLog)
+        public DeckViewModel(Deck deck)
         {
             this.deck = deck;
-            this.gameLog = gameLog;
+        }
+
+        public event CardsDrawn CardsDrawnEvent;
+        protected virtual void OnCardsDrawn(IList<Card> cards)
+        {
+            if (CardsDrawnEvent != null)
+            {
+                CardsDrawnEvent(cards);
+            }
+        }
+
+        public Deck Deck
+        {
+            get
+            {
+                return deck;
+            }
+            set
+            {
+                deck = value;
+            }
         }
 
         public int CardsCount
@@ -53,16 +74,8 @@ namespace MalifoApp.ViewModels
         {
             System.Diagnostics.Debug.WriteLine("parameter: {0}", parameter);
             int numberOfCards = Convert.ToInt32(parameter);
-            // TODO return the result somehow
             IList<Card> result = deck.Draw(numberOfCards);
-
-            String text = "zieht ";
-            foreach (Card card in result)
-            {
-                text += card.ShortText + ", ";
-            }
-
-            gameLog.Add(new GameLogEvent() { Text = text, Playername = "Tobias", Timestamp = DateTime.Now });
+            OnCardsDrawn(result);
 
             OnPropertyChanged("CardsCount");
             OnPropertyChanged("DiscardCount");

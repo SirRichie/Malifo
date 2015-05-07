@@ -35,6 +35,19 @@ namespace MalifoApp
             }
         }
 
+        private DeckViewModel personalDeck;
+        public DeckViewModel PersonalDeck
+        {
+            get
+            {
+                return personalDeck;
+            }
+            set
+            {
+                personalDeck = value;
+            }
+        }
+
         private GameLogViewModel gameLog;
         public GameLogViewModel GameLog
         {
@@ -48,6 +61,9 @@ namespace MalifoApp
             }
         }
 
+        public IList<PlayerViewModel> Players { get; set; }
+        
+
 
         public MainWindow()
         {
@@ -56,12 +72,28 @@ namespace MalifoApp
 
             // initialize view models
             GameLog = new GameLogViewModel(new GameLog(new List<GameLogEvent>()));
-            MainDeck = new DeckViewModel(new Deck(createTestDeck(54)), GameLog);
+            MainDeck = new DeckViewModel(new Deck(createTestDeck(54)));
+            MainDeck.CardsDrawnEvent += MainDeck_CardsDrawnEvent;
+            Players = createTestPlayers();
+            
             
 
 
             InitializeComponent();
 
+        }
+
+        void MainDeck_CardsDrawnEvent(IList<Card> cards)
+        {
+            String text = "zieht ";
+            foreach (Card card in cards)
+            {
+                text += card.ShortText + ", ";
+            }
+
+            GameLog.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+
+            Players[0].LastMainDraw = cards;
         }
 
         /// <summary>
@@ -80,6 +112,23 @@ namespace MalifoApp
             }
 
             return deck;
+        }
+
+        private List<PlayerViewModel> createTestPlayers()
+        {
+            List<PlayerViewModel> result = new List<PlayerViewModel>();
+
+            Player p1 = new Player() { Name = "Player 1", Deck = new Deck(createTestDeck(13)) };
+            Player p2 = new Player() { Name = "Player 2", Deck = new Deck(createTestDeck(13)) };
+            Player p3 = new Player() { Name = "Player 3", Deck = new Deck(createTestDeck(13)) };
+            Player p4 = new Player() { Name = "Player 4", Deck = new Deck(createTestDeck(13)) };
+
+            result.Add(new PlayerViewModel(p1));
+            result.Add(new PlayerViewModel(p2));
+            result.Add(new PlayerViewModel(p3));
+            result.Add(new PlayerViewModel(p4));
+
+            return result;
         }
 
         private void LogViewer_LayoutUpdated(object sender, EventArgs e)
