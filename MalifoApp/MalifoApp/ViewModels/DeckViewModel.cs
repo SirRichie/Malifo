@@ -12,10 +12,12 @@ namespace MalifoApp.ViewModels
     public class DeckViewModel : ViewModel
     {
         private Deck deck;
+        private GameLogViewModel gameLog;
 
-        public DeckViewModel(Deck deck)
+        public DeckViewModel(Deck deck, GameLogViewModel gameLog)
         {
             this.deck = deck;
+            this.gameLog = gameLog;
         }
 
         public int CardsCount
@@ -52,7 +54,16 @@ namespace MalifoApp.ViewModels
             System.Diagnostics.Debug.WriteLine("parameter: {0}", parameter);
             int numberOfCards = Convert.ToInt32(parameter);
             // TODO return the result somehow
-            deck.Draw(numberOfCards);
+            IList<Card> result = deck.Draw(numberOfCards);
+
+            String text = "zieht ";
+            foreach (Card card in result)
+            {
+                text += card.ShortText + ", ";
+            }
+
+            gameLog.Add(new GameLogEvent() { Text = text, Playername = "Tobias", Timestamp = DateTime.Now });
+
             OnPropertyChanged("CardsCount");
             OnPropertyChanged("DiscardCount");
         }

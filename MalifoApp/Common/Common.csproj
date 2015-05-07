@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="models\Card.cs" />
     <Compile Include="models\Deck.cs" />
+    <Compile Include="models\GameLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="types\exceptions\BusinessException.cs" />
     <Compile Include="types\impl\LoginRequest.cs" />
