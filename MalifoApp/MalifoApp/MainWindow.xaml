@@ -31,7 +31,7 @@
         </Ribbon>
         <DockPanel x:Name="MainDockPanel" LastChildFill="False" Grid.Row="1">
             
-            <FlowDocumentScrollViewer x:Name="LogViewer" DockPanel.Dock="Right" Width="250" Background="#FFF9F7C2" Document="{Binding GameLog.Document}" LayoutUpdated="LogViewer_LayoutUpdated" SourceUpdated="LogViewer_SourceUpdated_1" TextInput="LogViewer_TextInput_1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+            <FlowDocumentScrollViewer x:Name="LogViewer" DockPanel.Dock="Right" Width="250" Background="#FFF9F7C2" Document="{Binding GameLog.Document}" LayoutUpdated="LogViewer_LayoutUpdated" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
                 <!--
                 <FlowDocument Background="#FFF9F7C2">
                     <Paragraph FontSize="10">

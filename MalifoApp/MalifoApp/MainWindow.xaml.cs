@@ -62,49 +62,6 @@ namespace MalifoApp
 
             InitializeComponent();
 
-            LogViewer.SourceUpdated += LogViewer_SourceUpdated;
-            LogViewer.MouseEnter += LogViewer_MouseEnter;
-            LogViewer.DataContextChanged += LogViewer_DataContextChanged;
-            LogViewer.RequestBringIntoView += LogViewer_RequestBringIntoView;
-            LogViewer.TargetUpdated += LogViewer_TargetUpdated;
-            LogViewer.TextInput += LogViewer_TextInput;
-
-            LogViewer.Document.SourceUpdated += Document_SourceUpdated;
-        }
-
-        void Document_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("document source updated");
-        }
-
-        void LogViewer_TextInput(object sender, TextCompositionEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("text input");
-        }
-
-        void LogViewer_TargetUpdated(object sender, DataTransferEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("target updated");
-        }
-
-        void LogViewer_RequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("request bring into view");
-        }
-
-        void LogViewer_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("data context changed");
-        }
-
-        void LogViewer_MouseEnter(object sender, MouseEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("mouse entered");
-        }
-
-        void LogViewer_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("SourceUpdated: " + e);
         }
 
         /// <summary>
@@ -130,16 +87,6 @@ namespace MalifoApp
             System.Diagnostics.Debug.WriteLine("layout updated");
             if (LogViewer.Document.Blocks.LastBlock != null)
                 (LogViewer.Document.Blocks.LastBlock as Paragraph).Inlines.LastInline.BringIntoView();
-        }
-
-        private void LogViewer_SourceUpdated_1(object sender, DataTransferEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("source updated");
-        }
-
-        private void LogViewer_TextInput_1(object sender, TextCompositionEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("text input");
         }
     }
 }
