@@ -6,21 +6,16 @@ using System.Threading.Tasks;
 
 namespace Common.models
 {
+    /// <summary>
+    /// Represents a card in the game
+    /// After careful consideration, we just need to store the key's name, which makes this class superfluous, but we keep it for future extensibility
+    /// </summary>
     [Serializable]
     public class Card
     {
-        public string Text {get; set;}
-        public string ShortText { get; set; }
         /// <summary>
-        /// a reference string to a card's name, used like a primary key
+        /// the card's key, used to access all other, static resources like images and texts
         /// </summary>
-        public string ImageReference { get; set; }
-
-        public Card() { }
-
-        public Card(string text)
-        {
-            this.Text = text;
-        }
+        public string Key { get; set; }
     }
 }

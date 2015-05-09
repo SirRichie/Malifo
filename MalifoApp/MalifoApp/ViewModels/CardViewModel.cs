@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace MalifoApp.ViewModels
 {
@@ -18,12 +19,23 @@ namespace MalifoApp.ViewModels
         {
             get
             {
-                return Model.Text;
+                return CardRegistry.Instance.Texts[Model.Key];
             }
-            set
+        }
+
+        public ImageSource Image
+        {
+            get
             {
-                Model.Text = value;
-                OnPropertyChanged("Text");
+                return CardRegistry.Instance.Images[Model.Key];
+            }
+        }
+
+        public string ShortText
+        {
+            get
+            {
+                return CardRegistry.Instance.ShortTexts[Model.Key];
             }
         }
     }

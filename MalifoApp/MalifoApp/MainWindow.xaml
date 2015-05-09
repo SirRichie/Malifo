@@ -77,7 +77,7 @@
                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0">
                     
 
-                    
+                    <Image Name="debugImage" Width="70" />
                     <Label Content="Deck" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid>
                         <Image Source="Resources/facedown.jpg" Width="70" Margin="0,0,0,20" />
@@ -87,6 +87,7 @@
                     <Label Content="Discard" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid>
                         <Image Source="Resources/faceup.png" Width="70" />
+                        <!--<Image Source="Resources/Cards/card_p1_black_joker.png" Width="70" />-->
                         <Label Content="{Binding MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                 </StackPanel>
@@ -111,9 +112,11 @@
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <StackPanel>
+                                                            <!--Source="Resources/dummycard.png"-->
                                                             <Image ToolTip="{Binding Path=Text}"
-                                                          Source="Resources/dummycard.png"
-                                                          Margin="3,0,3,0"
+                                                          Source="{Binding Path=Image}"
+                                                                   
+                                                          Margin="1,0,1,0"
                                                           Height="80" Width="50" />
                                                         </StackPanel>
                                                     </DataTemplate>
