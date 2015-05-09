@@ -28,11 +28,8 @@ namespace Server.userManagement
         {
             IFormatter formatter = new BinaryFormatter();
             if (CheckClientIsConnected(client))
-            {
-                lock (client)
-                {
-                    formatter.Serialize(client.GetStream(), notivication);
-                }
+            {               
+                formatter.Serialize(client.GetStream(), notivication);
             }
         }
 

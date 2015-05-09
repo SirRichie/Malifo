@@ -22,15 +22,20 @@ namespace Server
 		public MalifoServer(ServerConfiguration serverConfiguration)
 		{
 			_serverConfiguration = serverConfiguration;
-            ServiceManager.Instance.UserService = new UserService(UserManager.Instance, ClientManager.Instance);
+            ServiceManager.Instance.UserService = new UserService(UserManager.Instance, ClientManager.Instance);            
 		}
+
+        public void StartServer()
+        {
+            new Thread(new ThreadStart(RunServer)).Start();
+        }
 
         public void StopServer()
         {
             _stopServer = true;
         }
         
-		public void runServer()
+		private void RunServer()
 		{
             CheckConfiguration();
 
@@ -85,7 +90,7 @@ namespace Server
 			while (true) {				
 				TcpClient clientThread = _listener.AcceptTcpClient();				
 				_threads.Add(new ServerThread(clientThread));
-                Thread.Sleep(1);
+                Thread.Sleep(100);
 			}
 		}
 

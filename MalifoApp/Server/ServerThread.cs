@@ -35,53 +35,58 @@ namespace Server
                 if (!connection.Connected)
                 {
                     stop = true;
-                }
-                lock (connection)
+                }              
+                try
                 {
+                    string messageHash = null;
+                    Object obj = null;
                     try
                     {
-                        string messageHash = null;
-                        Object obj = formatter.Deserialize(connection.GetStream());
-                        Response resp = null;
-                        Request request = null;
-                        if (obj is ITransferableObject)
-                        {
-                            if (clientHash == null)
-                            {
-                                clientHash = Guid.NewGuid().ToString();
-                                ((ITransferableObject)obj).ClientHash = clientHash;
-                                ClientManager.Instance.AddClient(clientHash, connection);
-                            }
-                        }
-
-                        if (obj is Request)
-                        {
-                           
-                            if (clientHash.Equals(((ITransferableObject)obj).ClientHash))
-                            {
-                                request = (Request)obj;
-                                messageHash = request.MessageHash;
-                                var handler = HandlerFactory.Instance.GetHandlerForRequestType(request.GetType());
-                                resp = handler.HandleRequest(request);
-                                resp.ClientHash = clientHash;
-                                resp.MessageHash = messageHash;
-                                formatter.Serialize(connection.GetStream(), resp);
-                            }
-                        }
+                        obj = formatter.Deserialize(connection.GetStream());
                     }
                     catch (Exception e)
                     {
-                        if (e is BusinessException)
+                        continue;
+                    }
+                    Response resp = null;
+                    Request request = null;
+                    if (obj is ITransferableObject)
+                    {
+                        if (clientHash == null)
                         {
-                            formatter.Serialize(connection.GetStream(), e);
+                            clientHash = Guid.NewGuid().ToString();
+                            ((ITransferableObject)obj).ClientHash = clientHash;
+                            ClientManager.Instance.AddClient(clientHash, connection);
                         }
-                        else
+                    }
+
+                    if (obj is Request)
+                    {
+                           
+                        if (clientHash.Equals(((ITransferableObject)obj).ClientHash))
                         {
-                            connection.Close();
-                            Console.WriteLine("Error: " + e.Message);
-                        }                     
+                            request = (Request)obj;
+                            messageHash = request.MessageHash;
+                            var handler = HandlerFactory.Instance.GetHandlerForRequestType(request.GetType());
+                            resp = handler.HandleRequest(request);
+                            resp.ClientHash = clientHash;
+                            resp.MessageHash = messageHash;
+                            formatter.Serialize(connection.GetStream(), resp);
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    if (e is BusinessException)
+                    {
+                        formatter.Serialize(connection.GetStream(), e);
+                    }
+                    else
+                    {
+                        connection.Close();
+                        Console.WriteLine("Error: " + e.Message);
+                    }                     
+                }                
             }
             running = false;
 		}

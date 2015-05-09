@@ -38,7 +38,7 @@ namespace Client
         public ServerMessageQueue(TcpClient tcpClient)
         {
             _tcpClient = tcpClient;
-            _timeout = 1000;                       
+            _timeout = 4000;                       
             _timer = new Stopwatch();
         }
 
@@ -74,12 +74,12 @@ namespace Client
             {
                 _responsehandler = RaiseResponseEvent;
                 _notificationhandler = RaiseNotivicationEvent;
-                Thread.Sleep(100);
+                Thread.Sleep(200);
                 Object response = null;
-                lock (_tcpClient)
-                {
+                //lock (_tcpClient)
+                //{
                     response = formatter.Deserialize(_tcpClient.GetStream());
-                }
+                //}
                 if (!(response is ITransferableObject))
                 {
                     continue;
@@ -106,7 +106,7 @@ namespace Client
             {
                 _responsehandler = RaiseResponseEvent;
                 _notificationhandler = RaiseNotivicationEvent;
-                Thread.Sleep(100);  
+                Thread.Sleep(200);  
                 if (!handlerSubcribed())
                 {
                     continue;

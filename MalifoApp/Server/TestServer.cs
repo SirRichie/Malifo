@@ -25,9 +25,8 @@ namespace Server
             };
 
             MalifoServer server = new MalifoServer(config);
-
-            Thread th = new Thread(new ThreadStart(server.runServer));
-            th.Start();
+            server.StartServer();
+           
         }
     }
 }
