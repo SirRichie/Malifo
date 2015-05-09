@@ -98,7 +98,7 @@
                                                             <Image ToolTip="{Binding Path=Text}"
                                                           Source="Resources/dummycard.png"
                                                           Margin="3,0,3,0"
-                                                          Height="80" Width="80" />
+                                                          Height="80" Width="50" />
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>

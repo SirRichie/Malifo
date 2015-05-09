@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Common.models
 {
+    [Serializable]
     public class Card
     {
         public string Text {get; set;}
         public string ShortText { get; set; }
-        public byte[] Image { get; set; }
+        /// <summary>
+        /// a reference string to a card's name, used like a primary key
+        /// </summary>
+        public string ImageReference { get; set; }
 
         public Card() { }
 

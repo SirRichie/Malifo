@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Common.models
 {
+    /// <summary>
+    /// Represents the game's log with results of all actions taken
+    /// </summary>
+    [Serializable]
     public class GameLog
     {
         public IList<GameLogEvent> Events { get; private set; }
@@ -18,6 +22,7 @@ namespace Common.models
         }
     }
 
+    [Serializable]
     public class GameLogEvent
     {
         public DateTime Timestamp { get; set; }
