@@ -63,6 +63,546 @@ namespace MalifoApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap card_p1_black_joker {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_black_joker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_1 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_10 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_11 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_12 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_13 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_2 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_3 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_4 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_5 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_6 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_7 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_8 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_crows_9 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_crows_9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_1 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_10 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_11 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_12 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_13 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_2 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_3 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_4 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_5 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_6 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_7 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_8 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_masks_9 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_masks_9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_1 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_10 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_11 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_12 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_13 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_2 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_3 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_4 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_5 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_6 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_7 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_8 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_ram_9 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_ram_9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_red_joker {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_red_joker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_1 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_10 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_11 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_12 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_13 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_2 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_3 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_4 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_5 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_6 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_7 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_8 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_p1_tomes_9 {
+            get {
+                object obj = ResourceManager.GetObject("card_p1_tomes_9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap connect_icon {
             get {
                 object obj = ResourceManager.GetObject("connect_icon", resourceCulture);
@@ -93,6 +633,26 @@ namespace MalifoApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap facedown {
+            get {
+                object obj = ResourceManager.GetObject("facedown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap faceup {
+            get {
+                object obj = ResourceManager.GetObject("faceup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fourcards {
             get {
                 object obj = ResourceManager.GetObject("fourcards", resourceCulture);
@@ -106,6 +666,16 @@ namespace MalifoApp.Properties {
         internal static System.Drawing.Bitmap onecard {
             get {
                 object obj = ResourceManager.GetObject("onecard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap server {
+            get {
+                object obj = ResourceManager.GetObject("server", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

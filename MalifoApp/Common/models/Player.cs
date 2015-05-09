@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Common.models
 {
+    /// <summary>
+    /// Represents a player in the game, including their unique name
+    /// </summary>
+    [Serializable]
     public class Player
     {
         public string Name { get; set; }

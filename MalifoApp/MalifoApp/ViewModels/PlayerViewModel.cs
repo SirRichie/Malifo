@@ -40,28 +40,32 @@ namespace MalifoApp.ViewModels
             }
         }
 
-        public IList<Card> LastMainDraw
+        public IList<CardViewModel> LastMainDraw
         {
             get
             {
-                return Model.LastMainDraw;
+                if (Model.LastMainDraw == null)
+                    return null;
+                return Model.LastMainDraw.Select(c => new CardViewModel(c)).ToList();
             }
             set
             {
-                Model.LastMainDraw = value;
+                Model.LastMainDraw = value.Select(c => new Card(){Key = c.Model.Key}).ToList();
                 OnPropertyChanged("LastMainDraw");
             }
         }
 
-        public IList<Card> LastPersonalDraw
+        public IList<CardViewModel> LastPersonalDraw
         {
             get
             {
-                return Model.LastPersonalDraw;
+                if (Model.LastPersonalDraw == null)
+                    return null;
+                return Model.LastPersonalDraw.Select(c => new CardViewModel(c)).ToList();
             }
             set
             {
-                Model.LastPersonalDraw = value;
+                Model.LastPersonalDraw = value.Select(c => new Card() { Key = c.Model.Key }).ToList();
                 OnPropertyChanged("LastPersonalDraw");
             }
         }

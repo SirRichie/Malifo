@@ -74,13 +74,32 @@ namespace MalifoApp
             GameLog = new GameLogViewModel(new GameLog(new List<GameLogEvent>()));
             MainDeck = new DeckViewModel(new Deck(createTestDeck(54)));
             MainDeck.CardsDrawnEvent += MainDeck_CardsDrawnEvent;
+            PersonalDeck = new DeckViewModel(new Deck(createTestDeck(13)));
+            PersonalDeck.CardsDrawnEvent += PersonalDeck_CardsDrawnEvent;
             Players = createTestPlayers();
-            
-            
+
+            CardRegistry registry = CardRegistry.Instance;
+
+            //MalifoApp.Properties.Resources.ResourceManager.
 
 
             InitializeComponent();
 
+            // debugImage.Source = CardRegistry.Instance.Images["BJ"];
+
+        }
+
+        void PersonalDeck_CardsDrawnEvent(IList<Card> cards)
+        {
+            String text = "zieht (personal) ";
+            foreach (Card card in cards)
+            {
+                text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
+            }
+
+            GameLog.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+
+            Players[0].LastPersonalDraw = cards.Select(c => new CardViewModel(c)).ToList();
         }
 
         void MainDeck_CardsDrawnEvent(IList<Card> cards)
@@ -88,12 +107,12 @@ namespace MalifoApp
             String text = "zieht ";
             foreach (Card card in cards)
             {
-                text += card.ShortText + ", ";
+                text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
             }
 
             GameLog.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
 
-            Players[0].LastMainDraw = cards;
+            Players[0].LastMainDraw = cards.Select(c => new CardViewModel(c)).ToList();
         }
 
         /// <summary>
@@ -106,8 +125,7 @@ namespace MalifoApp
             Stack<Card> deck = new Stack<Card>(amount);
             for (int i = 0; i < amount; i++)
             {
-                Card card = new Card(i.ToString());
-                card.ShortText = i.ToString();
+                Card card = new Card() { Key = CardRegistry.Instance.ShortTexts.Keys.ToList()[i] };
                 deck.Push(card);
             }
 
@@ -133,7 +151,6 @@ namespace MalifoApp
 
         private void LogViewer_LayoutUpdated(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("layout updated");
             if (LogViewer.Document.Blocks.LastBlock != null)
                 (LogViewer.Document.Blocks.LastBlock as Paragraph).Inlines.LastInline.BringIntoView();
         }

@@ -9,6 +9,7 @@ namespace Common.models
     /// <summary>
     /// Represents a card stack
     /// </summary>
+    [Serializable]
     public class Deck
     {
         public Stack<Card> Cards { get; private set; }
