@@ -148,7 +148,6 @@ namespace MalifoApp
 
         private void LogViewer_LayoutUpdated(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("layout updated");
             if (LogViewer.Document.Blocks.LastBlock != null)
                 (LogViewer.Document.Blocks.LastBlock as Paragraph).Inlines.LastInline.BringIntoView();
         }

@@ -28,11 +28,16 @@
                     <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonSeparator Margin="50,0" />
-                <RibbonGroup Name="Server" Header="Connection">
+                <RibbonGroup Header="Client">
                     <RibbonTextBox Name="serverAddress" Label="Server Address" />
                     <RibbonTextBox Name="username" Label="Username" />
                     <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" />
+                    
                 </RibbonGroup>
+                <RibbonGroup Header="Server">
+                    <RibbonButton LargeImageSource="Resources/server.png" Label="Start Server" />
+                </RibbonGroup>
+                
             </RibbonTab>
         </Ribbon>
         <DockPanel x:Name="MainDockPanel" LastChildFill="True" Grid.Row="1">
