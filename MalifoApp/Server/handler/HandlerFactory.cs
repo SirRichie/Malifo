@@ -26,7 +26,7 @@ namespace Server.handler
         {
             if (RequestTypeIsHandled(handler.GetHandledType()))
             {
-                throw new HandlerFactoryException(String.Format("Handler for Type {0} is already registed", handler.GetHandledType().ToString()));
+                throw new BusinessException(String.Format("Handler for Type {0} is already registed", handler.GetHandledType().ToString()));
             }
             handlerList.Add(handler);
         }
@@ -36,7 +36,7 @@ namespace Server.handler
             var handler = GetHandlerByType(type);
             if (handler == null)
             {
-                throw new HandlerFactoryException(String.Format("Couldn't find Handler for Type {0}", handler.GetHandledType().ToString()));
+                throw new BusinessException(String.Format("Couldn't find Handler for Type {0}", handler.GetHandledType().ToString()));
             }
             return handler;
         }
@@ -75,21 +75,5 @@ namespace Server.handler
             }
             return null;
         }
-    }
-            
-    [Serializable]
-    public class HandlerFactoryException : BusinessException
-    {
-        public HandlerFactoryException(string msg)
-            : base(msg)
-        {
-
-        }
-
-        public HandlerFactoryException(string msg, Exception e)
-            : base(msg, e)
-        {
-
-        }
-    }
+    }      
 }

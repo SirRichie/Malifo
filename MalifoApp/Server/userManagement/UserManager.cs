@@ -34,7 +34,7 @@ namespace Server.userManagement
 			}else{
                 if (!UserNameAvailable(userInfo.UserName))
                 {
-                    throw new UserManagerException("UserNamer already taken");
+                    throw new BusinessException("UserNamer already taken");
                 }
 				userList.Add(userInfo);
 			}
@@ -78,21 +78,5 @@ namespace Server.userManagement
             }
             return userInfos[0];
 		}
-	}
-
-    [Serializable]
-    public class UserManagerException: BusinessException
-    {
-        public UserManagerException(string msg)
-            : base(msg)
-        {
-
-        }
-
-        public UserManagerException(string msg, Exception e)
-            : base(msg, e)
-        {
-
-        }   
-    }
+	}   
 }

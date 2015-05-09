@@ -10,5 +10,6 @@ namespace Common.types
     public class Request : ITransferableObject
     {
         public string ClientHash { get; set; }
+        public string MessageHash { get; set; }
     }
 }

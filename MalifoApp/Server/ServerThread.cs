@@ -32,10 +32,15 @@ namespace Server
           IFormatter formatter = new BinaryFormatter();
 
             while (!stop) {
+                if (!connection.Connected)
+                {
+                    stop = true;
+                }
                 lock (connection)
                 {
                     try
                     {
+                        string messageHash = null;
                         Object obj = formatter.Deserialize(connection.GetStream());
                         Response resp = null;
                         Request request = null;
@@ -51,20 +56,30 @@ namespace Server
 
                         if (obj is Request)
                         {
+                           
                             if (clientHash.Equals(((ITransferableObject)obj).ClientHash))
                             {
                                 request = (Request)obj;
+                                messageHash = request.MessageHash;
                                 var handler = HandlerFactory.Instance.GetHandlerForRequestType(request.GetType());
                                 resp = handler.HandleRequest(request);
                                 resp.ClientHash = clientHash;
+                                resp.MessageHash = messageHash;
                                 formatter.Serialize(connection.GetStream(), resp);
                             }
                         }
                     }
                     catch (Exception e)
                     {
-                        connection.Close();
-                        Console.WriteLine("Error: "+e.Message);
+                        if (e is BusinessException)
+                        {
+                            formatter.Serialize(connection.GetStream(), e);
+                        }
+                        else
+                        {
+                            connection.Close();
+                            Console.WriteLine("Error: " + e.Message);
+                        }                     
                     }
                 }
             }

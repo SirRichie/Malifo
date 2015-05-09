@@ -10,5 +10,6 @@ namespace Common.types
     public class Response : ITransferableObject
     {
         public string ClientHash { get; set; }
+        public string MessageHash { get; set; }
     }
 }

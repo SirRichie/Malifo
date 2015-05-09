@@ -17,93 +17,73 @@ namespace Client
 {
     public class ServerInterface
     {
+        private TcpClient _client;        
+        private string _clientHash;
+        private ServerMessageQueue _messageQueue;
+        private Response _response;
+        private bool _responseAvailable;
 
         public delegate void NotificationEventHandler(object sender, NotificationEventArgs a);
         public event NotificationEventHandler RaiseNotivicationEvent;
 
-        private TcpClient _client;       
-        private bool stopNotificationListener;
-        private string clientHash;
-
+        private NotificationEventHandler handler; 
         public ServerInterface(TcpClient client)
-        {
-            stopNotificationListener = false;
-            clientHash = null;
+        {         
+            _clientHash = null;
             _client = client;
-            
-            Thread th = new Thread(new ThreadStart(NotificationThread));
-
-            th.Start();
+            _response = null;
+            _responseAvailable = false;
+            _messageQueue = new ServerMessageQueue(_client); 
+            _messageQueue.RaiseResponseEvent += _messageQueue_RaiseResponseEvent;
+            _messageQueue.RaiseNotivicationEvent += _messageQueue_RaiseNotivicationEvent;
+            _messageQueue.StartMessageQueue();
         }
 
-        private void NotificationThread()
+        private void _messageQueue_RaiseNotivicationEvent(object sender, NotificationEventArgs a)
         {
-            NotificationEventHandler handler = RaiseNotivicationEvent;
-            IFormatter formatter = new BinaryFormatter();
-            if (!_client.Connected)
+            if (handler != null)
             {
-                return;
+                handler(this, a);
             }
-            while (!stopNotificationListener)
-            {
-                Object response = null;              
-                lock (_client)
-                {                  
-                    response = formatter.Deserialize(_client.GetStream());
-                }
-                if (!(response is ITransferableObject))
-                {
-                    continue;
-                }
-                ITransferableObject tranferableObj = response as ITransferableObject;
-                if (CheckClientHash(tranferableObj))
-                {
-                    continue;
-                }
-                if (handler == null)
-                {
-                    continue;
-                }
-                if (response is ServerNotification)
-                {
-                    ServerNotification notification = (ServerNotification)response;
-                    handler(this, new NotificationEventArgs(notification));
-                }
-                else
-                {
-                    Console.WriteLine("NotificationThread: Wrong type {0}", response.GetType().ToString());
-                }                                 
-            }            
         }
+
+        private void _messageQueue_RaiseResponseEvent(object sender, NotificationEventArgs a)
+        {
+            _response = a.Notification as Response;
+            _responseAvailable = true;
+        }        
 
         private bool CheckClientHash(ITransferableObject tranferableObj)
         {
-            return !(clientHash != null && clientHash.Equals(tranferableObj.ClientHash));
+            return !(_clientHash != null && _clientHash.Equals(tranferableObj.ClientHash));
         }
 
         public Response Execute(ITransferableObject request)
         {
             IFormatter formatter = new BinaryFormatter();
+          
             if (request == null)
             {
                 throw new ArgumentException(String.Format("Request couldn't be null"));
             }
-            Object response = null;
+            string messageHash = Guid.NewGuid().ToString();
+            (request as Request).MessageHash = messageHash;
             lock (_client)
             {
                 formatter.Serialize(_client.GetStream(), request);
-                response = formatter.Deserialize(_client.GetStream());               
             }
-            HandleResponse(ref response);
-            return (Response)response;
+
+            _messageQueue.WaitForResponse((request as Request).MessageHash);
+            while (!_responseAvailable) {
+                Thread.Sleep(50);
+            }
+            _responseAvailable = false;
+            HandleResponse(ref _response);
+            return (Response)_response;
         }
 
-        private void HandleResponse(ref Object response)
-        {
-            if (response is BusinessException)
-            {
-                throw (BusinessException)response;
-            }
+        private void HandleResponse(ref Response response)
+        {           
             if (response is Response)
             {
                 SpecialResponseHandling(response as Response);
@@ -114,7 +94,7 @@ namespace Client
         {
             if (response is LoginResponse)
             {
-                if (clientHash != null)
+                if (_clientHash != null)
                 {
                     throw new ServerInterfaceException("ClientHash already set. Something went wrong");
                 }
@@ -122,7 +102,7 @@ namespace Client
                 {
                     throw new ServerInterfaceException("Didn't recieve a ClientHash.");
                 }
-                clientHash = response.ClientHash;
+                _clientHash = response.ClientHash;
             }
         }
     }

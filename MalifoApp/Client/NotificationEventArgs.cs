@@ -1,4 +1,5 @@
-﻿using Common.types.serverNotifications;
+﻿using Common.types;
+using Common.types.serverNotifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace Client
 {
     public class NotificationEventArgs : EventArgs
     {
-        private ServerNotification _notification;
-        public NotificationEventArgs(ServerNotification notification)
+        private ITransferableObject _notification;
+        public NotificationEventArgs(ITransferableObject notification)
         {
             _notification = notification;
         }
 
-        public ServerNotification Notification
+        public ITransferableObject Notification
         {
             get { return _notification; }
         }
