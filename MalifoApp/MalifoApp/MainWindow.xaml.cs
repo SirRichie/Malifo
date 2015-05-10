@@ -62,8 +62,9 @@ namespace MalifoApp
         }
 
         public IList<PlayerViewModel> Players { get; set; }
-        
 
+        private GameState debugGameState;
+        public GameStateViewModel GameState { get; set; }
 
         public MainWindow()
         {
@@ -72,6 +73,10 @@ namespace MalifoApp
 
             // initialize view models
             GameLog = new GameLogViewModel(new GameLog(new List<GameLogEvent>()));
+
+            debugGameState = new GameState() { GameLog = GameLog.Model };
+            GameState = new GameStateViewModel(debugGameState);
+
             MainDeck = new DeckViewModel(new Deck(createTestDeck(54)));
             MainDeck.CardsDrawnEvent += MainDeck_CardsDrawnEvent;
             PersonalDeck = new DeckViewModel(new Deck(createTestDeck(13)));
@@ -95,7 +100,8 @@ namespace MalifoApp
                 text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
             }
 
-            GameLog.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+            debugGameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+            GameState.NewGameState(debugGameState);
 
             Players[0].LastPersonalDraw = cards.Select(c => new CardViewModel(c)).ToList();
         }
@@ -108,7 +114,8 @@ namespace MalifoApp
                 text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
             }
 
-            GameLog.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+            debugGameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+            GameState.NewGameState(debugGameState);
 
             Players[0].LastMainDraw = cards.Select(c => new CardViewModel(c)).ToList();
         }

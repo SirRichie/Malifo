@@ -61,9 +61,11 @@
     <Compile Include="Converters\SubConverter.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\DeckViewModel.cs" />
+    <Compile Include="ViewModels\GameStateViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\ServerViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +130,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c8006415-8a1c-4146-8c6d-aa6cbd12606c}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{b2d965b0-9443-4364-8ad7-d556df93e0a9}</Project>
+      <Name>Server</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
