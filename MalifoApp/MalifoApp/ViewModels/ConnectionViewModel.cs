@@ -107,5 +107,33 @@ namespace MalifoApp.ViewModels
 
             }
         }
+
+        //void PersonalDeck_CardsDrawnEvent(IList<Card> cards)
+        //{
+        //    String text = "zieht (personal) ";
+        //    foreach (Card card in cards)
+        //    {
+        //        text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
+        //    }
+
+        //    debugGameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+        //    debugGameState.Players[0].LastPersonalDraw = cards;
+
+        //    GameState.NewGameState(debugGameState);
+        //}
+
+        //void MainDeck_CardsDrawnEvent(IList<Card> cards)
+        //{
+        //    String text = "zieht ";
+        //    foreach (Card card in cards)
+        //    {
+        //        text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
+        //    }
+
+        //    debugGameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
+        //    GameState.NewGameState(debugGameState);
+
+        //    //Players[0].LastMainDraw = cards.Select(c => new CardViewModel(c)).ToList();
+        //}
     }
 }

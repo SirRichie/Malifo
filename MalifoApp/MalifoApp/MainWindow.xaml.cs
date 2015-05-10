@@ -22,53 +22,8 @@ namespace MalifoApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DeckViewModel mainDeck;
-        public DeckViewModel MainDeck
-        {
-            get
-            {
-                return mainDeck;
-            }
-            set
-            {
-                mainDeck = value;
-            }
-        }
-
-        private DeckViewModel personalDeck;
-        public DeckViewModel PersonalDeck
-        {
-            get
-            {
-                return personalDeck;
-            }
-            set
-            {
-                personalDeck = value;
-            }
-        }
-
-        private GameLogViewModel gameLog;
-        public GameLogViewModel GameLog
-        {
-            get
-            {
-                return gameLog;
-            }
-            set
-            {
-                gameLog = value;
-            }
-        }
-
-        public IList<PlayerViewModel> Players { get; set; }
 
         public ConnectionViewModel Connection { get; set; }
-
-        /// <summary>
-        /// DEBUG! should be removed later
-        /// </summary>
-        private GameState debugGameState;
 
         /// <summary>
         /// Reference to the complete game state, this includes players and decks
@@ -81,59 +36,13 @@ namespace MalifoApp
             this.DataContext = this;
 
             // initialize view models
-            GameLog = new GameLogViewModel(new GameLog(new List<GameLogEvent>()));
-
-            debugGameState = new GameState() { GameLog = GameLog.Model };
             GameState = new GameStateViewModel(null);
-
-            MainDeck = new DeckViewModel(new Deck(createTestDeck(54)));
-            MainDeck.CardsDrawnEvent += MainDeck_CardsDrawnEvent;
-            PersonalDeck = new DeckViewModel(new Deck(createTestDeck(13)));
-            PersonalDeck.CardsDrawnEvent += PersonalDeck_CardsDrawnEvent;
-            Players = createTestPlayers();
-
-            CardRegistry registry = CardRegistry.Instance;
-
-            //MalifoApp.Properties.Resources.ResourceManager.
-
+            Connection = new ConnectionViewModel(GameState);
 
             InitializeComponent();
 
         }
 
-        void PersonalDeck_CardsDrawnEvent(IList<Card> cards)
-        {
-            String text = "zieht (personal) ";
-            foreach (Card card in cards)
-            {
-                text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
-            }
-
-            debugGameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
-            debugGameState.Players[0].LastPersonalDraw = cards;
-
-            GameState.NewGameState(debugGameState);
-        }
-
-        void MainDeck_CardsDrawnEvent(IList<Card> cards)
-        {
-            String text = "zieht ";
-            foreach (Card card in cards)
-            {
-                text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
-            }
-
-            debugGameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = "Player 1", Timestamp = DateTime.Now });
-            GameState.NewGameState(debugGameState);
-
-            Players[0].LastMainDraw = cards.Select(c => new CardViewModel(c)).ToList();
-        }
-
-        private GameStateViewModel createEmptyGameState()
-        {
-            GameStateViewModel state = new GameStateViewModel(null);
-            return state;
-        }
 
         /// <summary>
         /// debug method to quickly create decks

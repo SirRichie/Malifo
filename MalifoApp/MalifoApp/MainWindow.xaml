@@ -16,22 +16,22 @@
 
             <RibbonTab Header="Malifo" KeyTip="H" >
                 <RibbonGroup Header="Drawing - General" Background="#FFA3CDFF">
-                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding MainDeck.DrawCommand}" CommandParameter="1" />
-                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding MainDeck.DrawCommand}" CommandParameter="2" />
-                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding MainDeck.DrawCommand}" CommandParameter="3" />
-                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding MainDeck.DrawCommand}" CommandParameter="4" />
+                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding Connection.DrawMainCommand}" CommandParameter="1" />
+                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding Connection.DrawMainCommand}" CommandParameter="2" />
+                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding Connection.DrawMainCommand}" CommandParameter="3" />
+                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding Connection.DrawMainCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonGroup Header="Drawing - Personal" Background="#FFECE9A4">
-                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="1" />
-                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="2" />
-                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="3" />
-                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding PersonalDeck.DrawCommand}" CommandParameter="4" />
+                    <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="1" />
+                    <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="2" />
+                    <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="3" />
+                    <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonSeparator Margin="50,0" />
                 <RibbonGroup Header="Client">
-                    <RibbonTextBox Name="serverAddress" Label="Server Address" />
-                    <RibbonTextBox Name="port" Label="Port" />
-                    <RibbonTextBox Name="username" Label="Username" />
+                    <RibbonTextBox Name="serverAddress" Label="Server Address" Text="{Binding Connection.ServerAddress}" />
+                    <RibbonTextBox Name="port" Label="Port" Text="{Binding Connection.ServerPort}"/>
+                    <RibbonTextBox Name="username" Label="Username" Text="{Binding Connection.Username}"/>
                     <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" />
                     
                 </RibbonGroup>
