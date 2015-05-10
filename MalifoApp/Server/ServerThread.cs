@@ -16,14 +16,16 @@ namespace Server
 {
 	public class ServerThread : IDisposable
 	{	
-		public bool stop = false;		
-		public bool running = false;		
+		public bool Stop {get; set;}
+        public bool Running { get; internal set; }		
 		private TcpClient connection = null;
         private string clientHash = null;
 		
 		public ServerThread(TcpClient connection)
 		{		
 			this.connection = connection;
+            Running = true;
+            Stop = false;
 			new Thread(new ThreadStart(Run)).Start();
 		}		
 		
@@ -31,10 +33,11 @@ namespace Server
 		{
           IFormatter formatter = new BinaryFormatter();
 
-            while (!stop) {
+          while (!Stop)
+          {
                 if (!connection.Connected)
                 {
-                    stop = true;
+                    Stop = true;
                 }              
                 try
                 {
@@ -68,6 +71,11 @@ namespace Server
                             request = (Request)obj;
                             messageHash = request.MessageHash;
                             var handler = HandlerFactory.Instance.GetHandlerForRequestType(request.GetType());
+                            if (request is AsyncRequest)
+                            {
+                                handler.HandleRequest(request);
+                                continue;
+                            }
                             resp = handler.HandleRequest(request);
                             resp.ClientHash = clientHash;
                             resp.MessageHash = messageHash;
@@ -88,7 +96,7 @@ namespace Server
                     }                     
                 }                
             }
-            running = false;
+            Running = false;
 		}
 
         public void Dispose()

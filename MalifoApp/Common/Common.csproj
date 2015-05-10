@@ -51,6 +51,7 @@
     <Compile Include="types\serverNotifications\DrawFromPersonalDeck.cs" />
     <Compile Include="types\serverNotifications\DrawFromMainDeck.cs" />
     <Compile Include="types\exceptions\BusinessException.cs" />
+    <Compile Include="types\AsyncRequest.cs" />
     <Compile Include="types\impl\LoginRequest.cs" />
     <Compile Include="types\impl\LoginResponse.cs" />
     <Compile Include="types\Request.cs" />

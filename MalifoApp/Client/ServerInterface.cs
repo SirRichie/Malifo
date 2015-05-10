@@ -58,7 +58,7 @@ namespace Client
             return !(_clientHash != null && _clientHash.Equals(tranferableObj.ClientHash));
         }
 
-        public Response Execute(ITransferableObject request)
+        public Response Execute(Request request)
         {
             IFormatter formatter = new BinaryFormatter();
           
@@ -67,13 +67,11 @@ namespace Client
                 throw new ArgumentException(String.Format("Request couldn't be null"));
             }
             string messageHash = Guid.NewGuid().ToString();
-            (request as Request).MessageHash = messageHash;
-            //lock (_client)
-            //{
-                formatter.Serialize(_client.GetStream(), request);
-            //}
+            (request).MessageHash = messageHash;
+  
+            formatter.Serialize(_client.GetStream(), request);
 
-            _messageQueue.WaitForResponse((request as Request).MessageHash);
+            _messageQueue.WaitForResponse((request).MessageHash);
             while (!_responseAvailable) {
                 Thread.Sleep(50);
             }
@@ -82,7 +80,7 @@ namespace Client
             return (Response)_response;
         }
 
-        public void ExecuteAsync(ITransferableObject request)
+        public void ExecuteAsync(AsyncRequest request)
         {
             IFormatter formatter = new BinaryFormatter();
 
@@ -91,7 +89,7 @@ namespace Client
                 throw new ArgumentException(String.Format("Request couldn't be null"));
             }
             string messageHash = Guid.NewGuid().ToString();
-            (request as Request).MessageHash = messageHash;
+            request.MessageHash = messageHash;
            
             formatter.Serialize(_client.GetStream(), request);
         }

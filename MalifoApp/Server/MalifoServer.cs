@@ -64,8 +64,8 @@ namespace Server
             for (IEnumerator e = _threads.GetEnumerator(); e.MoveNext(); )
             {
                 ServerThread serverThread = (ServerThread)e.Current;
-                serverThread.stop = true;
-                while (serverThread.running)
+                serverThread.Stop = true;
+                while (serverThread.Running)
                     Thread.Sleep(1000);
             }
         }
