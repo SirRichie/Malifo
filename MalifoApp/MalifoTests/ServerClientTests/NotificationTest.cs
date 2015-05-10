@@ -4,6 +4,7 @@ using Common.types.impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server;
 using Server.configuration;
+using Server.Services;
 using Server.userManagement;
 using System.Net;
 using System.Threading;
@@ -13,6 +14,11 @@ namespace MalifoTests.ServerClientTests
      [TestClass]
     public class NotificationTest
     {
+         [TestInitialize]
+         public void Setup()
+         {
+             ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));
+         }
 
         ITransferableObject notification;
         [TestMethod]

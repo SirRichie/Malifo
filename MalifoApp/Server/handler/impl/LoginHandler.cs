@@ -15,7 +15,7 @@ namespace Server.handler.impl
         UserService _userService;
         public LoginHandler()
         {
-            _userService = ServiceManager.Instance.UserService;
+            _userService = ServiceManager.Instance.GetServiceByType(typeof(LoginRequest)) as UserService;
         }
         public Response HandleRequest(Request request)
         {

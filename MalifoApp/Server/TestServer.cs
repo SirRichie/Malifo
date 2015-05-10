@@ -1,6 +1,9 @@
-﻿using Server.configuration;
+﻿using Common.types.impl;
+using Server.configuration;
 using Server.handler;
 using Server.handler.impl;
+using Server.Services;
+using Server.userManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +26,7 @@ namespace Server
                 Port = 4711,
                 MaxPlayer = 9
             };
-
+            ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));
             MalifoServer server = new MalifoServer(config);
             server.StartServer();
            

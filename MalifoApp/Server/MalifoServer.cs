@@ -21,8 +21,7 @@ namespace Server
 		
 		public MalifoServer(ServerConfiguration serverConfiguration)
 		{
-			_serverConfiguration = serverConfiguration;
-            ServiceManager.Instance.UserService = new UserService(UserManager.Instance, ClientManager.Instance);            
+			_serverConfiguration = serverConfiguration;                     
 		}
 
         public void StartServer()

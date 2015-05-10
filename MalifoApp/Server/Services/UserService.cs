@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Services
 {
-    public class UserService
+    public class UserService : IService
     {
         private UserManager _userManager;
         private ClientManager _clientManager;
