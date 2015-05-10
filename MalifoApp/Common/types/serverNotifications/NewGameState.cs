@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace Common.types.serverNotifications
 {
-    class NewGameState : ServerNotification
+    public class NewGameState : ServerNotification
     {
         public GameState NewState { get; set; }
+
+        public string ClientHash
+        {
+            get;
+            set;
+        }
     }
 }

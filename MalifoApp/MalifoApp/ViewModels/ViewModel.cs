@@ -58,6 +58,8 @@ namespace MalifoApp.ViewModels
         /// <remarks></remarks>
         protected virtual void OnPropertyChanged(string propertyName)
         {
+            // guard against null, may occurr if there is no view element bound to this
+            if (PropertyChanged == null) return;
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 

@@ -21,9 +21,12 @@ namespace MalifoApp.ViewModels
 
         private ServerInterface server;
 
-        public Communication()
+        private GameStateViewModel gameState;
+
+        public Communication(GameStateViewModel gameState)
         {
             Connected = false;
+            this.gameState = gameState;
         }
 
         private ICommand connectCommand;

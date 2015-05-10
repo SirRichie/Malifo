@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Common.models;
 using System.Collections.Generic;
+using MalifoApp;
 
 namespace MalifoTests
 {
@@ -72,9 +73,14 @@ namespace MalifoTests
         private Stack<Card> createTestDeck(int amount)
         {
             Stack<Card> deck = new Stack<Card>(amount);
+
+            IEnumerator<string> keyEnum = CardRegistry.Instance.ShortTexts.Keys.GetEnumerator();
+            keyEnum.Reset();
+
             for (int i = 0; i < amount; i++)
             {
-                Card card = new Card(i.ToString());
+                keyEnum.MoveNext();
+                Card card = new Card() { Key = keyEnum.Current };
                 deck.Push(card);
             }
 
