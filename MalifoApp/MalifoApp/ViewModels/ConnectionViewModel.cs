@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace MalifoApp.ViewModels
 {
-    public class Communication
+    public class ConnectionViewModel
     {
         public string ServerAddress { get; set; }
         public int ServerPort { get; set; }
@@ -23,7 +23,7 @@ namespace MalifoApp.ViewModels
 
         private GameStateViewModel gameState;
 
-        public Communication(GameStateViewModel gameState)
+        public ConnectionViewModel(GameStateViewModel gameState)
         {
             Connected = false;
             this.gameState = gameState;

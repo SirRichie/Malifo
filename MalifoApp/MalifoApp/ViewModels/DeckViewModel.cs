@@ -45,6 +45,7 @@ namespace MalifoApp.ViewModels
         {
             get
             {
+                if (deck == null) return 0;
                 return deck.Cards.Count;
             }
         }
@@ -53,6 +54,7 @@ namespace MalifoApp.ViewModels
         {
             get
             {
+                if (deck == null) return 0;
                 return deck.Discard.Count;
             }
         }

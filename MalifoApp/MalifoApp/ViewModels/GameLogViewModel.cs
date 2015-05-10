@@ -24,6 +24,9 @@ namespace MalifoApp.ViewModels
                 FlowDocument document = new FlowDocument();
                 document.Background = new SolidColorBrush(Color.FromArgb(0xff, 0xF9, 0xF7, 0xC2));
 
+                // guard against null and return empty document
+                if (Model == null) return document;
+
                 foreach (GameLogEvent gameEvent in Model.Events)
                 {
                     Paragraph p = new Paragraph();
@@ -50,6 +53,10 @@ namespace MalifoApp.ViewModels
 
         public void Add(GameLogEvent gameEvent)
         {
+            if (Model == null)
+            {
+                Model = new GameLog(new List<GameLogEvent>());
+            }
             Model.Events.Add(gameEvent);
             OnPropertyChanged("Document");
         }

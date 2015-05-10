@@ -82,18 +82,18 @@
                     <Label Content="Deck" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid>
                         <Image Source="Resources/facedown.jpg" Width="70" Margin="0,0,0,20" />
-                        <Label Content="{Binding MainDeck.CardsCount}" Margin="0,0,0,20" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Label Content="{Binding GameState.MainDeck.CardsCount}" Margin="0,0,0,20" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
 
                     <Label Content="Discard" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid>
                         <Image Source="Resources/faceup.png" Width="70" />
                         <!--<Image Source="Resources/Cards/card_p1_black_joker.png" Width="70" />-->
-                        <Label Content="{Binding MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Label Content="{Binding GameState.MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                 </StackPanel>
                 
-                <ListView ItemsSource="{Binding Players}">
+                <ListView ItemsSource="{Binding GameState.Players}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100" />

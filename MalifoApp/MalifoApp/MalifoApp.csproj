@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CardRegistry.cs" />
-    <Compile Include="ViewModels\Communication.cs" />
+    <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\GameLogViewModel.cs" />
     <Compile Include="Converters\SubConverter.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />

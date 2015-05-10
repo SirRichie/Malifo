@@ -13,6 +13,7 @@ namespace MalifoApp.ViewModels
         {
             get
             {
+                if (Model == null) return new GameLogViewModel(null);
                 return new GameLogViewModel(Model.GameLog);
             }
             private set
@@ -26,6 +27,7 @@ namespace MalifoApp.ViewModels
         {
             get
             {
+                if (Model == null) return new DeckViewModel(null);
                 return new DeckViewModel(Model.MainDeck);
             }
             private set
@@ -39,6 +41,7 @@ namespace MalifoApp.ViewModels
         {
             get
             {
+                if (Model == null) return new List<PlayerViewModel>();
                 return Model.Players.Select(p => new PlayerViewModel(p)).ToList();
             }
             private set
