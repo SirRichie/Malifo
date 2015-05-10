@@ -1,5 +1,6 @@
 ﻿using Client;
 using Common.types;
+using Common.types.clientNotifications;
 using Common.types.serverNotifications;
 using MalifoApp.Commands;
 using System;
@@ -69,7 +70,7 @@ namespace MalifoApp.ViewModels
                 throw new InvalidOperationException("Must be connected to execute this command");
             if (p is int)
             {
-                ITransferableObject notification = new DrawFromPersonalDeck() { NumberOfCards = (int)p };
+                AsyncRequest notification = new DrawFromPersonalDeck() { NumberOfCards = (int)p };
                 server.ExecuteAsync(notification);
             }
         }
@@ -80,7 +81,7 @@ namespace MalifoApp.ViewModels
                 throw new InvalidOperationException("Must be connected to execute this command");
             if (p is int)
             {
-                ITransferableObject notification = new DrawFromMainDeck() { NumberOfCards = (int)p };
+                AsyncRequest notification = new DrawFromMainDeck() { NumberOfCards = (int)p };
                 server.ExecuteAsync(notification);
             }
         }
@@ -95,6 +96,8 @@ namespace MalifoApp.ViewModels
         void server_RaiseNotivicationEvent(object sender, NotificationEventArgs a)
         {
             ITransferableObject notification = a.Notification;
+
+            System.Diagnostics.Debug.WriteLine("received notification: {0}", notification);
 
             if (notification is NewGameState)
             {
