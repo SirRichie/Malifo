@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientManagemer.cs" />
+    <Compile Include="ClientManager.cs" />
     <Compile Include="configuration\ServerConfiguration.cs" />
     <Compile Include="handler\HandlerFactory.cs" />
     <Compile Include="handler\IHandler.cs" />
