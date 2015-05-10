@@ -30,6 +30,7 @@
                 <RibbonSeparator Margin="50,0" />
                 <RibbonGroup Header="Client">
                     <RibbonTextBox Name="serverAddress" Label="Server Address" />
+                    <RibbonTextBox Name="port" Label="Port" />
                     <RibbonTextBox Name="username" Label="Username" />
                     <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" />
                     

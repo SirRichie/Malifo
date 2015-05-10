@@ -85,8 +85,6 @@ namespace MalifoApp
 
             InitializeComponent();
 
-            // debugImage.Source = CardRegistry.Instance.Images["BJ"];
-
         }
 
         void PersonalDeck_CardsDrawnEvent(IList<Card> cards)

@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CardRegistry.cs" />
+    <Compile Include="ViewModels\Communication.cs" />
     <Compile Include="ViewModels\GameLogViewModel.cs" />
     <Compile Include="Converters\SubConverter.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
@@ -120,6 +121,10 @@
     <Resource Include="Resources\disconnect_icon.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{bd1ef21b-9efe-4210-a3a6-c09e55001c26}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c8006415-8a1c-4146-8c6d-aa6cbd12606c}</Project>
       <Name>Common</Name>

@@ -48,17 +48,21 @@
     <Compile Include="models\GameState.cs" />
     <Compile Include="models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="types\serverNotifications\DrawFromPersonalDeck.cs" />
+    <Compile Include="types\serverNotifications\DrawFromMainDeck.cs" />
     <Compile Include="types\exceptions\BusinessException.cs" />
     <Compile Include="types\impl\LoginRequest.cs" />
     <Compile Include="types\impl\LoginResponse.cs" />
     <Compile Include="types\Request.cs" />
     <Compile Include="types\Response.cs" />
+    <Compile Include="types\serverNotifications\NewGameState.cs" />
     <Compile Include="types\serverNotifications\ServerNotification.cs" />
     <Compile Include="types\ITransferableObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
