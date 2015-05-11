@@ -8,12 +8,19 @@ using System.Windows.Input;
 
 namespace MalifoApp.ViewModels
 {
-    public class ServerViewModel
+    public class ServerViewModel : ViewModel
     {
         public bool Started { get; private set; }
+        public bool Stopped
+        {
+            get
+            {
+                return !Started;
+            }
+        }
 
         private ICommand startServerCommand;
-        public ICommand ConnectCommand
+        public ICommand StartServerCommand
         {
             get
             {
@@ -28,6 +35,9 @@ namespace MalifoApp.ViewModels
         private void ExecuteStartServerCommand(object p)
         {
             // todo: start server
+            Started = true;
+            OnPropertyChanged("Started");
+            OnPropertyChanged("Stopped");
         }
     }
 }

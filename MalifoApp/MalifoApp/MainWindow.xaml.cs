@@ -25,6 +25,8 @@ namespace MalifoApp
 
         public ConnectionViewModel Connection { get; set; }
 
+        public ServerViewModel Server { get; set; }
+
         /// <summary>
         /// Reference to the complete game state, this includes players and decks
         /// </summary>
@@ -38,6 +40,7 @@ namespace MalifoApp
             // initialize view models
             GameState = new GameStateViewModel(null);
             Connection = new ConnectionViewModel(GameState);
+            Server = new ServerViewModel();
 
             InitializeComponent();
 

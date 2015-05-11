@@ -12,12 +12,34 @@ using System.Windows.Input;
 
 namespace MalifoApp.ViewModels
 {
-    public class ConnectionViewModel
+    public class ConnectionViewModel : ViewModel
     {
         public string ServerAddress { get; set; }
         public int ServerPort { get; set; }
         public string Username { get; set; }
-        public bool Connected { get; set; }
+
+        private bool connected;
+        public bool Connected
+        {
+            get
+            {
+                return connected;
+            }
+            set
+            {
+                connected = value;
+                OnPropertyChanged("Connected");
+                OnPropertyChanged("NotConnected");
+            }
+        }
+
+        public bool NotConnected
+        {
+            get
+            {
+                return !Connected;
+            }
+        }
 
         private ServerInterface server;
 
@@ -48,7 +70,7 @@ namespace MalifoApp.ViewModels
             {
                 if (drawMainCommand == null)
                 {
-                    drawMainCommand = new RelayCommand(p => ExecuteDrawMainCommand(p));
+                    drawMainCommand = new RelayCommand(p => ExecuteDrawMainCommand(p), x => Connected);
                 }
                 return drawMainCommand;
             }
@@ -61,7 +83,7 @@ namespace MalifoApp.ViewModels
             {
                 if (drawPersonalCommand == null)
                 {
-                    drawPersonalCommand = new RelayCommand(p => ExecuteDrawPersonalCommand(p));
+                    drawPersonalCommand = new RelayCommand(p => ExecuteDrawPersonalCommand(p), x => Connected);
                 }
                 return drawPersonalCommand;
             }
@@ -91,8 +113,8 @@ namespace MalifoApp.ViewModels
 
         private void ExecuteConnectCommand(object p)
         {
-            server = ServerInterfaceFactory.GetServerInterface(ServerAddress, ServerPort);
-            server.RaiseNotivicationEvent += server_RaiseNotivicationEvent;
+            //server = ServerInterfaceFactory.GetServerInterface(ServerAddress, ServerPort);
+            //server.RaiseNotivicationEvent += server_RaiseNotivicationEvent;
             Connected = true;
         }
 

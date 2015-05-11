@@ -28,15 +28,29 @@
                     <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonSeparator Margin="50,0" />
-                <RibbonGroup Header="Client">
-                    <RibbonTextBox Name="serverAddress" Label="Server Address" Text="{Binding Connection.ServerAddress}" />
-                    <RibbonTextBox Name="port" Label="Port" Text="{Binding Connection.ServerPort}"/>
-                    <RibbonTextBox Name="username" Label="Username" Text="{Binding Connection.Username}"/>
-                    <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" />
-                    
+                <RibbonGroup Header="Client" IsEnabled="{Binding Server.Stopped}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Server Address" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                        <RibbonTextBox Name="serverAddress" Text="{Binding Connection.ServerAddress}" Grid.Column="1" Grid.Row="0" FontSize="11" VerticalAlignment="Center" Height="20"/>
+                        <TextBlock Text="Port" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                        <RibbonTextBox Name="port" Text="{Binding Connection.ServerPort}"  Grid.Column="1" Grid.Row="1" Margin="0,1,0,0" FontSize="11" VerticalAlignment="Center" Height="20"/>
+                        <TextBlock Text="Server Address" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                        <RibbonTextBox Name="username" Text="{Binding Connection.Username}"  Grid.Column="1" Grid.Row="2" Height="20" VerticalAlignment="Center" FontSize="11"/>
+                    </Grid>
+                    <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" Command="{Binding Connection.ConnectCommand}"/>
                 </RibbonGroup>
-                <RibbonGroup Header="Server">
-                    <RibbonButton LargeImageSource="Resources/server.png" Label="Start Server" />
+                
+                <RibbonGroup Header="Server" IsEnabled="{Binding Connection.NotConnected}">
+                    <RibbonButton LargeImageSource="Resources/server.png" Label="Start Server" Command="{Binding Server.StartServerCommand}" />
                 </RibbonGroup>
                 
             </RibbonTab>
