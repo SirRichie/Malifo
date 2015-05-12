@@ -96,12 +96,17 @@ namespace Server
                     }                     
                 }                
             }
-            Running = false;
+            Running = false;           
 		}
 
         public void Dispose()
         {
             connection.Close();
+        }
+
+        protected virtual void Finalize()
+        {
+            Dispose();
         }
     }
 }

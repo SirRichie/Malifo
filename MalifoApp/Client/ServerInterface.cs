@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class ServerInterface
+    public class ServerInterface: IDisposable
     {
         private TcpClient _client;        
         private string _clientHash;
@@ -117,6 +117,21 @@ namespace Client
                 _clientHash = response.ClientHash;
             }
         }
+
+        public void Dispose()
+        {
+            _messageQueue.RaiseResponseEvent -= _messageQueue_RaiseResponseEvent;
+            _messageQueue.RaiseNotivicationEvent -= _messageQueue_RaiseNotivicationEvent;
+            _messageQueue.StopMessageQueue();
+            _messageQueue.Dispose();
+        }
+
+        protected virtual void Finalize()
+        {
+            Dispose();
+        }
+
+        
     }
 
     public class ServerInterfaceException : Exception

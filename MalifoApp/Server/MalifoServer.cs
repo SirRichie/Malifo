@@ -39,7 +39,7 @@ namespace Server
             CheckConfiguration();
 
             _listener = new TcpListener(_serverConfiguration.LocalAddress, _serverConfiguration.Port.Value);
-			_listener.Start();
+           	_listener.Start();
 		
 			Thread th = new Thread(new ThreadStart(Run));
            
@@ -47,15 +47,15 @@ namespace Server
 
             while (!_stopServer)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
 			}
-			
-			th.Abort();
 
+            th.Abort();
             StopClientThreads();
-            _threads = null;		
-			_listener.Stop();
+            _threads = null;
+            _listener.Stop();
             _listener = null;
+			            
 		}
 
         private static void StopClientThreads()
@@ -65,7 +65,9 @@ namespace Server
                 ServerThread serverThread = (ServerThread)e.Current;
                 serverThread.Stop = true;
                 while (serverThread.Running)
-                    Thread.Sleep(1000);
+                {
+                    Thread.Sleep(500);
+                }
             }
         }
 
@@ -86,7 +88,8 @@ namespace Server
 		private void Run()		
 		{
             Console.WriteLine();
-			while (true) {				
+            while (!_stopServer)
+            {				
 				TcpClient clientThread = _listener.AcceptTcpClient();				
 				_threads.Add(new ServerThread(clientThread));
                 Thread.Sleep(100);
@@ -103,6 +106,11 @@ namespace Server
             {
                 StopClientThreads();
             }
+        }
+
+        protected virtual void Finalize()
+        {
+            Dispose();
         }
     }
 }
