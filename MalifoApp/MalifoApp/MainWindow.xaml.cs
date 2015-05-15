@@ -1,4 +1,5 @@
-﻿using Common.models;
+﻿using Common;
+using Common.models;
 using MalifoApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace MalifoApp
 
             // initialize view models
             GameState = new GameStateViewModel(null);
-            Connection = new ConnectionViewModel(GameState);
+            Connection = new ConnectionViewModel(GameState) { ServerPort = 35000, ServerAddress = "localhost", Username = "SirRichie" };
             Server = new ServerViewModel();
 
             InitializeComponent();
@@ -85,6 +86,17 @@ namespace MalifoApp
         {
             if (LogViewer.Document.Blocks.LastBlock != null)
                 (LogViewer.Document.Blocks.LastBlock as Paragraph).Inlines.LastInline.BringIntoView();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("closing");
+            Server.StopServerCommand.Execute(null);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("closed");
         }
     }
 }

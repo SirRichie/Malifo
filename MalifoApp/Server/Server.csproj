@@ -49,10 +49,12 @@
     <Compile Include="configuration\ServerConfiguration.cs" />
     <Compile Include="handler\HandlerFactory.cs" />
     <Compile Include="handler\IHandler.cs" />
+    <Compile Include="handler\impl\DrawMainDeckHandler.cs" />
     <Compile Include="handler\impl\LoginHandler.cs" />
     <Compile Include="MalifoServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerThread.cs" />
+    <Compile Include="Services\GameEngineService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\ServiceManager.cs" />
     <Compile Include="Services\UserService.cs" />

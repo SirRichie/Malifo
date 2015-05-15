@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.types.serverNotifications
 {
+    [Serializable]
     public class NewGameState : ServerNotification
     {
         public GameState NewState { get; set; }

@@ -51,6 +51,7 @@ namespace Server
                     {
                         continue;
                     }
+                    System.Diagnostics.Debug.WriteLine("obj = {0}", obj);
                     Response resp = null;
                     Request request = null;
                     if (obj is ITransferableObject)

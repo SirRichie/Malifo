@@ -1,7 +1,15 @@
-﻿using MalifoApp.Commands;
+﻿using Common.types.clientNotifications;
+using Common.types.impl;
+using MalifoApp.Commands;
+using Server;
+using Server.configuration;
+using Server.Services;
+using Server.userManagement;
+using Server.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,6 +18,8 @@ namespace MalifoApp.ViewModels
 {
     public class ServerViewModel : ViewModel
     {
+        private MalifoServer server;
+
         public bool Started { get; private set; }
         public bool Stopped
         {
@@ -32,9 +42,40 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        private ICommand stopServerCommand;
+        public ICommand StopServerCommand
+        {
+            get
+            {
+                if (stopServerCommand == null)
+                {
+                    stopServerCommand = new RelayCommand(p => ExecuteStopServerCommand(p));
+                }
+                return stopServerCommand;
+            }
+        }
+
+        private void ExecuteStopServerCommand(object p)
+        {
+            if (server != null)
+            {
+                server.StopServer();
+            }
+        }
+
         private void ExecuteStartServerCommand(object p)
         {
-            // todo: start server
+            ServerConfiguration config = new ServerConfiguration() { LocalAddress = IPAddress.Any, Port = 35000 };
+            server = new MalifoServer(config);
+
+            ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));
+            GameEngineService gameEngine = new GameEngineService();
+            ServiceManager.Instance.AddService(typeof(DrawFromMainDeck), gameEngine);
+            ServiceManager.Instance.AddService(typeof(NewPlayer), gameEngine);
+
+
+            server.StartServer();
+
             Started = true;
             OnPropertyChanged("Started");
             OnPropertyChanged("Stopped");

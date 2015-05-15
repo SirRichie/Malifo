@@ -20,12 +20,14 @@ namespace Server
         {
             //HandlerFactory factory = HandlerFactory.Instance;
             //factory.RegisterHandler(new LoginHandler());
+            
             ServerConfiguration config = new ServerConfiguration()
             {
-                LocalAddress = IPAddress.Parse("127.0.0.1"),
-                Port = 4711,
+                LocalAddress = IPAddress.Any,
+                Port = 35000,
                 MaxPlayer = 9
             };
+            Console.WriteLine("starting server at port {0}", config.Port);
             ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));
             MalifoServer server = new MalifoServer(config);
             server.StartServer();

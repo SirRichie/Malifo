@@ -42,13 +42,13 @@ namespace MalifoApp.ViewModels
             get
             {
                 if (Model == null) return new List<PlayerViewModel>();
-                return Model.Players.Select(p => new PlayerViewModel(p)).ToList();
+                return Model.Players.Values.Select(p => new PlayerViewModel(p)).ToList();
             }
-            private set
-            {
-                Model.Players = value.Select(pvm => pvm.Model).ToList();
-                OnPropertyChanged("Players");
-            }
+            //private set
+            //{
+            //    Model.Players = value.Select(pvm => pvm.Model).ToList();
+            //    OnPropertyChanged("Players");
+            //}
         }
 
         public GameStateViewModel(GameState model)

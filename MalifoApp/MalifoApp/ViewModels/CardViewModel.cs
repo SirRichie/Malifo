@@ -1,10 +1,12 @@
-﻿using Common.models;
+﻿using Common;
+using Common.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MalifoApp.ViewModels
 {
@@ -27,7 +29,11 @@ namespace MalifoApp.ViewModels
         {
             get
             {
-                return CardRegistry.Instance.Images[Model.Key];
+                String imagePath = CardRegistry.Instance.Images[Model.Key];
+                //ImageSource tempSource = new BitmapImage(new Uri(path, UriKind.Relative));
+                //path = Path.GetFullPath(path);
+                Uri uri = new Uri(imagePath, UriKind.Relative);
+                return new BitmapImage(uri);
             }
         }
 

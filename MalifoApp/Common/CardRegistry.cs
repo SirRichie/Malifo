@@ -4,18 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Xml;
 
-namespace MalifoApp
+namespace Common
 {
     /// <summary>
     /// singleton class to provide unified access to card resources such as images
     /// </summary>
     public class CardRegistry
     {
-        private Dictionary<string, ImageSource> images;
+        private Dictionary<string, string> images;
         private Dictionary<string, string> texts;
         private Dictionary<string, string> shortTexts;
 
@@ -26,20 +24,14 @@ namespace MalifoApp
             XmlDocument doc = new XmlDocument();
             doc.Load("Cards.xml");
 
-            images = new Dictionary<string, ImageSource>(doc.DocumentElement.ChildNodes.Count);
+            images = new Dictionary<string, string>(doc.DocumentElement.ChildNodes.Count);
             texts = new Dictionary<string, string>(doc.DocumentElement.ChildNodes.Count);
             shortTexts = new Dictionary<string, string>(doc.DocumentElement.ChildNodes.Count);
 
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
             {
                 string key = node.Attributes["key"].InnerText;
-                
-                string path = node.Attributes["imagePath"].InnerText;
-                //ImageSource tempSource = new BitmapImage(new Uri(path, UriKind.Relative));
-                //path = Path.GetFullPath(path);
-                Uri uri = new Uri(path, UriKind.Relative);
-                images.Add(key, new BitmapImage(uri));
-
+                images.Add(key, node.Attributes["imagePath"].InnerText);
                 texts.Add(key, node.Attributes["text"].InnerText);
                 shortTexts.Add(key, node.Attributes["shorttext"].InnerText);
 
@@ -59,7 +51,7 @@ namespace MalifoApp
             }
         }
 
-        public Dictionary<string, ImageSource> Images
+        public Dictionary<string, string> Images
         {
             get { return images; }
         }

@@ -1,6 +1,7 @@
 ﻿using Client;
 using Common.types;
 using Common.types.clientNotifications;
+using Common.types.impl;
 using Common.types.serverNotifications;
 using MalifoApp.Commands;
 using System;
@@ -17,6 +18,8 @@ namespace MalifoApp.ViewModels
         public string ServerAddress { get; set; }
         public int ServerPort { get; set; }
         public string Username { get; set; }
+
+        public string ClientHash { get; set; }
 
         private bool connected;
         public bool Connected
@@ -56,7 +59,8 @@ namespace MalifoApp.ViewModels
         {
             get
             {
-                if (connectCommand == null) {
+                if (connectCommand == null)
+                {
                     connectCommand = new RelayCommand(p => ExecuteConnectCommand(p));
                 }
                 return connectCommand;
@@ -93,28 +97,29 @@ namespace MalifoApp.ViewModels
         {
             if (!Connected)
                 throw new InvalidOperationException("Must be connected to execute this command");
-            if (p is int)
-            {
-                AsyncRequest notification = new DrawFromPersonalDeck() { NumberOfCards = (int)p };
-                server.ExecuteAsync(notification);
-            }
+            int numberOfCards = Convert.ToInt32(p);
+            AsyncRequest notification = new DrawFromPersonalDeck() { NumberOfCards = numberOfCards, ClientHash = ClientHash };
+            server.ExecuteAsync(notification);
         }
 
         private void ExecuteDrawMainCommand(object p)
         {
             if (!Connected)
                 throw new InvalidOperationException("Must be connected to execute this command");
-            if (p is int)
-            {
-                AsyncRequest notification = new DrawFromMainDeck() { NumberOfCards = (int)p };
-                server.ExecuteAsync(notification);
-            }
+            int numberOfCards = Convert.ToInt32(p);
+            AsyncRequest notification = new DrawFromMainDeck() { NumberOfCards = numberOfCards, ClientHash = ClientHash };
+            server.ExecuteAsync(notification);
         }
 
         private void ExecuteConnectCommand(object p)
         {
-            //server = ServerInterfaceFactory.GetServerInterface(ServerAddress, ServerPort);
-            //server.RaiseNotivicationEvent += server_RaiseNotivicationEvent;
+            server = ServerInterfaceFactory.GetServerInterface(ServerAddress, ServerPort);
+            server.RaiseNotivicationEvent += server_RaiseNotivicationEvent;
+
+            LoginResponse res = (LoginResponse)server.Execute(new LoginRequest() { ClientHash = null, UserName = Username });
+            ClientHash = res.ClientHash;
+            OnPropertyChanged("ClientHash");
+
             Connected = true;
         }
 

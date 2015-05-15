@@ -67,7 +67,7 @@ namespace Server.userManagement
 			return true;					
 		}
 		
-		private UserInfo GetUserInfoByHash(string userHash){
+		public UserInfo GetUserInfoByHash(string userHash){
             var userInfos = (from info in userList
                              where info.SessionHash.Equals(userHash)
                              select info).ToList<UserInfo>();

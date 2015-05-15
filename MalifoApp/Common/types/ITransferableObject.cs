@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common.types
 {
-   public interface ITransferableObject
+    public interface ITransferableObject
     {
-       string ClientHash { get; set; }
+        string ClientHash { get; set; }
     }
 }

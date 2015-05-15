@@ -14,7 +14,7 @@ namespace Common.models
     public class GameState
     {
         public GameLog GameLog { get; set; }
-        public IList<Player> Players { get; set; }
+        public Dictionary<string, Player> Players { get; set; }
         public Deck MainDeck { get; set; }
 
         // that is all we need

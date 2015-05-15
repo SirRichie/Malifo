@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Common.models;
 using System.Collections.Generic;
 using MalifoApp;
+using Common;
 
 namespace MalifoTests
 {
