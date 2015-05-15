@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Common.types.serverNotifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +36,21 @@ namespace Server
                 return clientHashToTcpClient[clientHash];
             }
             return null;
+        }
+
+        /// <summary>
+        /// send a ServerNotification to all connected clients
+        /// </summary>
+        /// <param name="notification">the notification to send</param>
+        public void BroadcastToAllClients(ServerNotification notification)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            string messageHash = Guid.NewGuid().ToString();
+
+            foreach (KeyValuePair<string, TcpClient> entry in clientHashToTcpClient) {
+                notification.ClientHash = entry.Key;
+                formatter.Serialize(entry.Value.GetStream(), notification);
+            }
         }
     }
 }

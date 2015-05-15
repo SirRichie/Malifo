@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.models;
+using Common.types.serverNotifications;
 using Server.userManagement;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace Server.Services
             }
             // add the player with an empty deck, decks are edited separately
             gameState.Players.Add(name, new Player() { Name = name, Deck = new Deck() });
+            ClientManager.Instance.BroadcastToAllClients(new NewGameState() { NewState = gameState });
         }
 
         public void DrawFromMainDeck(int amount, UserInfo user)

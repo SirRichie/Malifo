@@ -45,6 +45,10 @@ namespace Client
             {
                 handler(this, a);
             }
+            if (RaiseNotivicationEvent != null)
+            {
+                RaiseNotivicationEvent(sender, a);
+            }
         }
 
         private void _messageQueue_RaiseResponseEvent(object sender, NotificationEventArgs a)

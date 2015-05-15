@@ -135,12 +135,13 @@ namespace Client
                 }
                 else
                 {
-                    while (notificationQueue.Count > 0)
-                    {
-                        handleServerNotification(_notificationhandler, notificationQueue.Dequeue());
-                    }
-                    handleServerNotification(_notificationhandler, tmpObj);
-                }   
+                    notificationQueue.Enqueue(tmpObj);
+                    //handleServerNotification(_notificationhandler, tmpObj);
+                }
+                while (notificationQueue.Count > 0)
+                {
+                    handleServerNotification(_notificationhandler, notificationQueue.Dequeue());
+                }
             }
         }
 
