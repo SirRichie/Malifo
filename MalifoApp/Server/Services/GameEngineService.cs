@@ -41,7 +41,7 @@ namespace Server.Services
             }
             // add the player with an empty deck, decks are edited separately
             gameState.Players.Add(name, new Player() { Name = name, Deck = new Deck() });
-            ClientManager.Instance.BroadcastToAllClients(new NewGameState() { NewState = gameState });
+            broadcastNewState();
         }
 
         public void DrawFromMainDeck(int amount, UserInfo user)
@@ -53,8 +53,7 @@ namespace Server.Services
             // gameState.Players.Where(p => p.Name.Equals(user.UserName)).First().LastMainDraw = drawnCards;
             gameState.Players[user.UserName].LastMainDraw = drawnCards;
             
-            // TODO send new state to all clients
-
+            broadcastNewState();
 
             return;
         }
@@ -71,6 +70,11 @@ namespace Server.Services
             }
 
             return new Deck(deck);
+        }
+
+        private void broadcastNewState()
+        {
+            ClientManager.Instance.BroadcastToAllClients(new NewGameState() { NewState = gameState });
         }
     }
 }

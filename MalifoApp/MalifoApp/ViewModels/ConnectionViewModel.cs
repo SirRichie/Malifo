@@ -131,7 +131,8 @@ namespace MalifoApp.ViewModels
 
             if (notification is NewGameState)
             {
-
+                NewGameState gameStateNotification = notification as NewGameState;
+                gameState.NewGameState(gameStateNotification.NewState);
             }
         }
 
