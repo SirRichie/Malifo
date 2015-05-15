@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class ServerMessageQueue
+    public class ServerMessageQueue: IDisposable
     {
         public delegate void NotificationEventHandler(object sender, NotificationEventArgs a);
         public event NotificationEventHandler RaiseNotivicationEvent;
@@ -34,6 +34,8 @@ namespace Client
 
         private ResponseEventHandler _responsehandler;
         private NotificationEventHandler _notificationhandler;
+        private Thread _enqueueThread;
+        private Thread _dequeueThread;
 
         public ServerMessageQueue(TcpClient tcpClient)
         {
@@ -61,10 +63,10 @@ namespace Client
             _stopMessageQueue = false;
             _waitForResponse = false;
             _incommingMessages = new ConcurrentQueue<ITransferableObject>();
-            Thread enqueueThread = new Thread(new ThreadStart(RunEnqueue));
-            enqueueThread.Start();
-            Thread dequeueThread = new Thread(new ThreadStart(RunDequeue));
-            dequeueThread.Start();
+            _enqueueThread = new Thread(new ThreadStart(RunEnqueue));
+            _enqueueThread.Start();
+            _dequeueThread = new Thread(new ThreadStart(RunDequeue));
+            _dequeueThread.Start();
         }
 
         public void RunEnqueue()
@@ -76,10 +78,9 @@ namespace Client
                 _notificationhandler = RaiseNotivicationEvent;
                 Thread.Sleep(200);
                 Object response = null;
-                //lock (_tcpClient)
-                //{
-                    response = formatter.Deserialize(_tcpClient.GetStream());
-                //}
+              
+                response = formatter.Deserialize(_tcpClient.GetStream());
+               
                 if (!(response is ITransferableObject))
                 {
                     continue;
@@ -90,7 +91,8 @@ namespace Client
                 }
                  ITransferableObject tranferableObj = response as ITransferableObject;              
                 _incommingMessages.Enqueue(tranferableObj);            
-            }        
+            }
+            _enqueueThread.Abort();
         }
 
         private bool handlerSubcribed()
@@ -143,6 +145,7 @@ namespace Client
                     handleServerNotification(_notificationhandler, notificationQueue.Dequeue());
                 }
             }
+            _dequeueThread.Abort();
         }
 
         private void handleServerNotification(NotificationEventHandler handler, ITransferableObject tmpObj)
@@ -159,11 +162,7 @@ namespace Client
         }
 
         private void handleResponse(ResponseEventHandler handler, ITransferableObject tmpObj)
-        {                   
-            //if (_timer.ElapsedMilliseconds > _timeout)
-            //{
-            //    throw new MessageQueueException("Timeout for Response is reached");
-            //}
+        {              
             if (!(tmpObj is Response))
             {
                 return;
@@ -179,6 +178,27 @@ namespace Client
             _waitForResponse = false;
             _messageHash = null;
             handler(this, new NotificationEventArgs(tmpObj));
+        }
+
+        public void Dispose()
+        {
+            if (_enqueueThread.IsAlive)
+            {
+                _enqueueThread.Abort();
+            }
+            _enqueueThread = null;
+
+            if (_dequeueThread.IsAlive)
+            {
+                _dequeueThread.Abort();
+            }
+            _dequeueThread = null;
+            _tcpClient.Close();
+        }
+
+        protected virtual void Finalize()
+        {
+            Dispose();
         }
     }
 

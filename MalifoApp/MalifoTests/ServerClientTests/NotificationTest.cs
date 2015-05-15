@@ -24,12 +24,17 @@ namespace MalifoTests.ServerClientTests
         [TestMethod]
         public void TestMethod1()
         {
-            MalifoServer server = StartServer();
-            ServerInterface client1 = StartClient();
-            LoginClient(client1, "client1");
-            UserManager userManager = UserManager.Instance;
-            Assert.AreEqual(1, userManager.UserList.Count);
-            server.StopServer();
+            using (MalifoServer server = StartServer())
+            {                
+                ServerInterface client1 = StartClient();
+                LoginClient(client1, "client1");
+                UserManager userManager = UserManager.Instance;
+                Assert.AreEqual(1, userManager.UserList.Count);
+                client1.Dispose();
+                client1 = null;
+                server.StopServer();
+                server.Dispose();
+            }
         }
 
 
