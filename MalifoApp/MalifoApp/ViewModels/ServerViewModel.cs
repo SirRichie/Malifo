@@ -71,6 +71,7 @@ namespace MalifoApp.ViewModels
             ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));
             GameEngineService gameEngine = new GameEngineService();
             ServiceManager.Instance.AddService(typeof(DrawFromMainDeck), gameEngine);
+            ServiceManager.Instance.AddService(typeof(DrawFromPersonalDeck), gameEngine);
             ServiceManager.Instance.AddService(typeof(NewPlayer), gameEngine);
 
 

@@ -58,6 +58,21 @@ namespace Server.Services
             return;
         }
 
+        public void DrawFromPersonalDeck(int amount, UserInfo user)
+        {
+            // draw the cards
+            Player player = gameState.Players[user.UserName];
+            IList<Card> drawnCards = player.Deck.Draw(amount);
+
+            // update player state
+            // gameState.Players.Where(p => p.Name.Equals(user.UserName)).First().LastMainDraw = drawnCards;
+            player.LastPersonalDraw = drawnCards;
+
+            broadcastNewState();
+
+            return;
+        }
+
         private Deck LoadDefaultDeck()
         {
             int cardCount = CardRegistry.Instance.ShortTexts.Count;
