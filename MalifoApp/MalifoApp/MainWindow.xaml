@@ -28,7 +28,8 @@
                     <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="4" />
                 </RibbonGroup>
                 <RibbonSeparator Margin="50,0" />
-                <RibbonGroup Header="Client" IsEnabled="{Binding Server.Stopped}">
+                <RibbonGroup Header="Client"  >
+                    <!--IsEnabled="{Binding Server.Stopped}" -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
