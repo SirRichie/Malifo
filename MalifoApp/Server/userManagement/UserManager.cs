@@ -34,7 +34,7 @@ namespace Server.userManagement
 			}else{
                 if (!UserNameAvailable(userInfo.UserName))
                 {
-                    throw new BusinessException("UserNamer already taken");
+                    throw new BusinessException(String.Format("UserNamer already taken: {}", userInfo.UserName));
                 }
 				userList.Add(userInfo);
 			}

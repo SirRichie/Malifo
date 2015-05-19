@@ -26,8 +26,14 @@ namespace Common.types.exceptions
         {
 
         }
+  
+        protected BusinessException(System.Runtime.Serialization.SerializationInfo info,
+        System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+
 
         public string ClientHash
         { get; set;}
+
+
     }
 }
