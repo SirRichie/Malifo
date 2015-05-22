@@ -57,6 +57,11 @@ namespace MalifoApp.ViewModels
             
         }
 
+        public PlayerViewModel GetPlayer(string playername)
+        {
+            return new PlayerViewModel(Model.Players[playername]);
+        }
+
         public void NewGameState(GameState newGameState)
         {
             Model = newGameState;

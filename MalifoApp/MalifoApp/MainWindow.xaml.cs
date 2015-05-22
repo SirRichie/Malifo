@@ -1,8 +1,10 @@
 ﻿using Common;
 using Common.models;
 using MalifoApp.ViewModels;
+using MvvmDialogs.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +25,17 @@ namespace MalifoApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// MVVM compatible reference to dialogs
+        /// </summary>
+        private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
 
         public ConnectionViewModel Connection { get; set; }
 
         public ServerViewModel Server { get; set; }
+
+        public FatemasterViewModel Fatemaster { get; set; }
 
         /// <summary>
         /// Reference to the complete game state, this includes players and decks
@@ -40,8 +49,10 @@ namespace MalifoApp
 
             // initialize view models
             GameState = new GameStateViewModel(null);
+            GameState.Players.Add(new PlayerViewModel(new Player() { Name = "dummy" }));
             Connection = new ConnectionViewModel(GameState) { ServerPort = 35000, ServerAddress = "localhost", Username = "SirRichie" };
             Server = new ServerViewModel();
+            Fatemaster = new FatemasterViewModel(GameState, Dialogs);
 
             InitializeComponent();
 

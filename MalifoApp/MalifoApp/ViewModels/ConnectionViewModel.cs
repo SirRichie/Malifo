@@ -19,6 +19,8 @@ namespace MalifoApp.ViewModels
         public int ServerPort { get; set; }
         public string Username { get; set; }
 
+        public bool Fatemaster { get; set; }
+
         public string ClientHash { get; set; }
 
         private bool connected;
