@@ -1,63 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- comment at the root level -->
 <Cards>
-  <Card key="BJ" imagePath="Resources/Cards/card_p1_black_joker.png" text="Black Joker" shorttext="BJ" />
+  <Card key="1C" imagePath="/Resources/Cards/card_p1_crows_1.png" text="1 of Crows " shorttext="1C" />
+  <Card key="2C" imagePath="/Resources/Cards/card_p1_crows_2.png" text="2 of Crows " shorttext="2C" />
+  <Card key="3C" imagePath="/Resources/Cards/card_p1_crows_3.png" text="3 of Crows " shorttext="3C" />
+  <Card key="4C" imagePath="/Resources/Cards/card_p1_crows_4.png" text="4 of Crows " shorttext="4C" />
+  <Card key="5C" imagePath="/Resources/Cards/card_p1_crows_5.png" text="5 of Crows " shorttext="5C" />
+  <Card key="6C" imagePath="/Resources/Cards/card_p1_crows_6.png" text="6 of Crows " shorttext="6C" />
+  <Card key="7C" imagePath="/Resources/Cards/card_p1_crows_7.png" text="7 of Crows " shorttext="7C" />
+  <Card key="8C" imagePath="/Resources/Cards/card_p1_crows_8.png" text="8 of Crows " shorttext="8C" />
+  <Card key="9C" imagePath="/Resources/Cards/card_p1_crows_9.png" text="9 of Crows " shorttext="9C" />
+  <Card key="10C" imagePath="/Resources/Cards/card_p1_crows_10.png" text="10 of Crows " shorttext="10C" />
+  <Card key="11C" imagePath="/Resources/Cards/card_p1_crows_11.png" text="Jack of Crows " shorttext="11C" />
+  <Card key="12C" imagePath="/Resources/Cards/card_p1_crows_12.png" text="Queen of Crows " shorttext="12C" />
+  <Card key="13C" imagePath="/Resources/Cards/card_p1_crows_13.png" text="King of Crows " shorttext="13C" />
 
-  <Card key="1C" imagePath="Resources/Cards/card_p1_crows_1.png" text="1 of Crows " shorttext="1C" />
-  <Card key="2C" imagePath="Resources/Cards/card_p1_crows_2.png" text="2 of Crows " shorttext="2C" />
-  <Card key="3C" imagePath="Resources/Cards/card_p1_crows_3.png" text="3 of Crows " shorttext="3C" />
-  <Card key="4C" imagePath="Resources/Cards/card_p1_crows_4.png" text="4 of Crows " shorttext="4C" />
-  <Card key="5C" imagePath="Resources/Cards/card_p1_crows_5.png" text="5 of Crows " shorttext="5C" />
-  <Card key="6C" imagePath="Resources/Cards/card_p1_crows_6.png" text="6 of Crows " shorttext="6C" />
-  <Card key="7C" imagePath="Resources/Cards/card_p1_crows_7.png" text="7 of Crows " shorttext="7C" />
-  <Card key="8C" imagePath="Resources/Cards/card_p1_crows_8.png" text="8 of Crows " shorttext="8C" />
-  <Card key="9C" imagePath="Resources/Cards/card_p1_crows_9.png" text="9 of Crows " shorttext="9C" />
-  <Card key="10C" imagePath="Resources/Cards/card_p1_crows_10.png" text="10 of Crows " shorttext="10C" />
-  <Card key="11C" imagePath="Resources/Cards/card_p1_crows_11.png" text="Jack of Crows " shorttext="11C" />
-  <Card key="12C" imagePath="Resources/Cards/card_p1_crows_12.png" text="Queen of Crows " shorttext="12C" />
-  <Card key="13C" imagePath="Resources/Cards/card_p1_crows_13.png" text="King of Crows " shorttext="13C" />
+  <Card key="1M" imagePath="/Resources/Cards/card_p1_masks_1.png" text="1 of Masks " shorttext="1M" />
+  <Card key="2M" imagePath="/Resources/Cards/card_p1_masks_2.png" text="2 of Masks " shorttext="2M" />
+  <Card key="3M" imagePath="/Resources/Cards/card_p1_masks_3.png" text="3 of Masks " shorttext="3M" />
+  <Card key="4M" imagePath="/Resources/Cards/card_p1_masks_4.png" text="4 of Masks " shorttext="4M" />
+  <Card key="5M" imagePath="/Resources/Cards/card_p1_masks_5.png" text="5 of Masks " shorttext="5M" />
+  <Card key="6M" imagePath="/Resources/Cards/card_p1_masks_6.png" text="6 of Masks " shorttext="6M" />
+  <Card key="7M" imagePath="/Resources/Cards/card_p1_masks_7.png" text="7 of Masks " shorttext="7M" />
+  <Card key="8M" imagePath="/Resources/Cards/card_p1_masks_8.png" text="8 of Masks " shorttext="8M" />
+  <Card key="9M" imagePath="/Resources/Cards/card_p1_masks_9.png" text="9 of Masks " shorttext="9M" />
+  <Card key="10M" imagePath="/Resources/Cards/card_p1_masks_10.png" text="10 of Masks " shorttext="10M" />
+  <Card key="11M" imagePath="/Resources/Cards/card_p1_masks_11.png" text="Jack of Masks " shorttext="11M" />
+  <Card key="12M" imagePath="/Resources/Cards/card_p1_masks_12.png" text="Queen of Masks " shorttext="12M" />
+  <Card key="13M" imagePath="/Resources/Cards/card_p1_masks_13.png" text="King of Masks " shorttext="13M" />
 
-  <Card key="1M" imagePath="Resources/Cards/card_p1_masks_1.png" text="1 of Masks " shorttext="1M" />
-  <Card key="2M" imagePath="Resources/Cards/card_p1_masks_2.png" text="2 of Masks " shorttext="2M" />
-  <Card key="3M" imagePath="Resources/Cards/card_p1_masks_3.png" text="3 of Masks " shorttext="3M" />
-  <Card key="4M" imagePath="Resources/Cards/card_p1_masks_4.png" text="4 of Masks " shorttext="4M" />
-  <Card key="5M" imagePath="Resources/Cards/card_p1_masks_5.png" text="5 of Masks " shorttext="5M" />
-  <Card key="6M" imagePath="Resources/Cards/card_p1_masks_6.png" text="6 of Masks " shorttext="6M" />
-  <Card key="7M" imagePath="Resources/Cards/card_p1_masks_7.png" text="7 of Masks " shorttext="7M" />
-  <Card key="8M" imagePath="Resources/Cards/card_p1_masks_8.png" text="8 of Masks " shorttext="8M" />
-  <Card key="9M" imagePath="Resources/Cards/card_p1_masks_9.png" text="9 of Masks " shorttext="9M" />
-  <Card key="10M" imagePath="Resources/Cards/card_p1_masks_10.png" text="10 of Masks " shorttext="10M" />
-  <Card key="11M" imagePath="Resources/Cards/card_p1_masks_11.png" text="Jack of Masks " shorttext="11M" />
-  <Card key="12M" imagePath="Resources/Cards/card_p1_masks_12.png" text="Queen of Masks " shorttext="12M" />
-  <Card key="13M" imagePath="Resources/Cards/card_p1_masks_13.png" text="King of Masks " shorttext="13M" />
+  <Card key="1R" imagePath="/Resources/Cards/card_p1_ram_1.png" text="1 of Rams " shorttext="1R" />
+  <Card key="2R" imagePath="/Resources/Cards/card_p1_ram_2.png" text="2 of Rams " shorttext="2R" />
+  <Card key="3R" imagePath="/Resources/Cards/card_p1_ram_3.png" text="3 of Rams " shorttext="3R" />
+  <Card key="4R" imagePath="/Resources/Cards/card_p1_ram_4.png" text="4 of Rams " shorttext="4R" />
+  <Card key="5R" imagePath="/Resources/Cards/card_p1_ram_5.png" text="5 of Rams " shorttext="5R" />
+  <Card key="6R" imagePath="/Resources/Cards/card_p1_ram_6.png" text="6 of Rams " shorttext="6R" />
+  <Card key="7R" imagePath="/Resources/Cards/card_p1_ram_7.png" text="7 of Rams " shorttext="7R" />
+  <Card key="8R" imagePath="/Resources/Cards/card_p1_ram_8.png" text="8 of Rams " shorttext="8R" />
+  <Card key="9R" imagePath="/Resources/Cards/card_p1_ram_9.png" text="9 of Rams " shorttext="9R" />
+  <Card key="10R" imagePath="/Resources/Cards/card_p1_ram_10.png" text="10 of Rams " shorttext="10R" />
+  <Card key="11R" imagePath="/Resources/Cards/card_p1_ram_11.png" text="Jack of Rams " shorttext="11R" />
+  <Card key="12R" imagePath="/Resources/Cards/card_p1_ram_12.png" text="Queen of Rams " shorttext="12R" />
+  <Card key="13R" imagePath="/Resources/Cards/card_p1_ram_13.png" text="King of Rams " shorttext="13R" />
 
-  <Card key="1R" imagePath="Resources/Cards/card_p1_ram_1.png" text="1 of Rams " shorttext="1R" />
-  <Card key="2R" imagePath="Resources/Cards/card_p1_ram_2.png" text="2 of Rams " shorttext="2R" />
-  <Card key="3R" imagePath="Resources/Cards/card_p1_ram_3.png" text="3 of Rams " shorttext="3R" />
-  <Card key="4R" imagePath="Resources/Cards/card_p1_ram_4.png" text="4 of Rams " shorttext="4R" />
-  <Card key="5R" imagePath="Resources/Cards/card_p1_ram_5.png" text="5 of Rams " shorttext="5R" />
-  <Card key="6R" imagePath="Resources/Cards/card_p1_ram_6.png" text="6 of Rams " shorttext="6R" />
-  <Card key="7R" imagePath="Resources/Cards/card_p1_ram_7.png" text="7 of Rams " shorttext="7R" />
-  <Card key="8R" imagePath="Resources/Cards/card_p1_ram_8.png" text="8 of Rams " shorttext="8R" />
-  <Card key="9R" imagePath="Resources/Cards/card_p1_ram_9.png" text="9 of Rams " shorttext="9R" />
-  <Card key="10R" imagePath="Resources/Cards/card_p1_ram_10.png" text="10 of Rams " shorttext="10R" />
-  <Card key="11R" imagePath="Resources/Cards/card_p1_ram_11.png" text="Jack of Rams " shorttext="11R" />
-  <Card key="12R" imagePath="Resources/Cards/card_p1_ram_12.png" text="Queen of Rams " shorttext="12R" />
-  <Card key="13R" imagePath="Resources/Cards/card_p1_ram_13.png" text="King of Rams " shorttext="13R" />
-
-  <Card key="1T" imagePath="Resources/Cards/card_p1_tomes_1.png" text="1 of Tomes " shorttext="1T" />
-  <Card key="2T" imagePath="Resources/Cards/card_p1_tomes_2.png" text="2 of Tomes " shorttext="2T" />
-  <Card key="3T" imagePath="Resources/Cards/card_p1_tomes_3.png" text="3 of Tomes " shorttext="3T" />
-  <Card key="4T" imagePath="Resources/Cards/card_p1_tomes_4.png" text="4 of Tomes " shorttext="4T" />
-  <Card key="5T" imagePath="Resources/Cards/card_p1_tomes_5.png" text="5 of Tomes " shorttext="5T" />
-  <Card key="6T" imagePath="Resources/Cards/card_p1_tomes_6.png" text="6 of Tomes " shorttext="6T" />
-  <Card key="7T" imagePath="Resources/Cards/card_p1_tomes_7.png" text="7 of Tomes " shorttext="7T" />
-  <Card key="8T" imagePath="Resources/Cards/card_p1_tomes_8.png" text="8 of Tomes " shorttext="8T" />
-  <Card key="9T" imagePath="Resources/Cards/card_p1_tomes_9.png" text="9 of Tomes " shorttext="9T" />
-  <Card key="10T" imagePath="Resources/Cards/card_p1_tomes_10.png" text="10 of Tomes " shorttext="10T" />
-  <Card key="11T" imagePath="Resources/Cards/card_p1_tomes_11.png" text="Jack of Tomes " shorttext="11T" />
-  <Card key="12T" imagePath="Resources/Cards/card_p1_tomes_12.png" text="Queen of Tomes " shorttext="12T" />
-  <Card key="13T" imagePath="Resources/Cards/card_p1_tomes_13.png" text="King of Tomes " shorttext="13T" />
+  <Card key="1T" imagePath="/Resources/Cards/card_p1_tomes_1.png" text="1 of Tomes " shorttext="1T" />
+  <Card key="2T" imagePath="/Resources/Cards/card_p1_tomes_2.png" text="2 of Tomes " shorttext="2T" />
+  <Card key="3T" imagePath="/Resources/Cards/card_p1_tomes_3.png" text="3 of Tomes " shorttext="3T" />
+  <Card key="4T" imagePath="/Resources/Cards/card_p1_tomes_4.png" text="4 of Tomes " shorttext="4T" />
+  <Card key="5T" imagePath="/Resources/Cards/card_p1_tomes_5.png" text="5 of Tomes " shorttext="5T" />
+  <Card key="6T" imagePath="/Resources/Cards/card_p1_tomes_6.png" text="6 of Tomes " shorttext="6T" />
+  <Card key="7T" imagePath="/Resources/Cards/card_p1_tomes_7.png" text="7 of Tomes " shorttext="7T" />
+  <Card key="8T" imagePath="/Resources/Cards/card_p1_tomes_8.png" text="8 of Tomes " shorttext="8T" />
+  <Card key="9T" imagePath="/Resources/Cards/card_p1_tomes_9.png" text="9 of Tomes " shorttext="9T" />
+  <Card key="10T" imagePath="/Resources/Cards/card_p1_tomes_10.png" text="10 of Tomes " shorttext="10T" />
+  <Card key="11T" imagePath="/Resources/Cards/card_p1_tomes_11.png" text="Jack of Tomes " shorttext="11T" />
+  <Card key="12T" imagePath="/Resources/Cards/card_p1_tomes_12.png" text="Queen of Tomes " shorttext="12T" />
+  <Card key="13T" imagePath="/Resources/Cards/card_p1_tomes_13.png" text="King of Tomes " shorttext="13T" />
   
-  <Card key="RJ" imagePath="Resources/Cards/card_p1_red_joker.png" text="Red Joker" shorttext="RJ" />
+  <Card key="RJ" imagePath="/Resources/Cards/card_p1_red_joker.png" text="Red Joker" shorttext="RJ" />
+  <Card key="BJ" imagePath="/Resources/Cards/card_p1_black_joker.png" text="Black Joker" shorttext="BJ" />
 </Cards>

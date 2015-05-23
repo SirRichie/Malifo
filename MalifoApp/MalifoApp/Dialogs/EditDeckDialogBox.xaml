@@ -1,8 +1,57 @@
 ﻿<Window x:Class="MalifoApp.Dialogs.EditDeckDialogBox"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Minimal Dialog Box" Height="160" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="Minimal Dialog Box" Height="550" Width="950">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Command="{Binding OkCommand}" Margin="0,10,10,10" Width="50" Height="25"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="0,10" Width="50"/>
+        </StackPanel>
+        <StackPanel Margin="0,10,0,0">
+            <Label Content="Available Cards" HorizontalAlignment="Center" Margin="0,20,0,0" />
+            <ListView ItemsSource="{Binding Deck.AllCardsSorted}" Height="130">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClickMainDeck" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding Image}"
+                                   Margin="1,0,1,0"
+                                   Height="100" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Content="Player Deck" HorizontalAlignment="Center" Margin="0,20,0,0" />
+            <ListView ItemsSource="{Binding PlayerDeck.AllCardsSorted}" Height="130">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClickPlayerDeck" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding Image}"
+                                   Margin="1,0,1,0"
+                                   Height="100" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </DockPanel>
 </Window>

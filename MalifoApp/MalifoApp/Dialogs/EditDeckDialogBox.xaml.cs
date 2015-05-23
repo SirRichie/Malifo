@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MalifoApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,16 @@ namespace MalifoApp.Dialogs
         public EditDeckDialogBox()
         {
             InitializeComponent();
+        }
+
+        protected void HandleDoubleClickMainDeck(object sender, MouseButtonEventArgs e)
+        {
+            ((EditDeckDialogViewModel)DataContext).AddToPlayerDeckCommand.Execute(((ListViewItem)sender).Content as CardViewModel);
+        }
+
+        protected void HandleDoubleClickPlayerDeck(object sender, MouseButtonEventArgs e)
+        {
+            ((EditDeckDialogViewModel)DataContext).RemoveFromPlayerDeckCommand.Execute(((ListViewItem)sender).Content as CardViewModel);
         }
     }
 }

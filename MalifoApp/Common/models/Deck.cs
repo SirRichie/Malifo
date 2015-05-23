@@ -10,7 +10,7 @@ namespace Common.models
     /// Represents a card stack
     /// </summary>
     [Serializable]
-    public class Deck
+    public class Deck : ICloneable
     {
         public Stack<Card> Cards { get; private set; }
         public Stack<Card> Discard { get; private set; }
@@ -87,7 +87,12 @@ namespace Common.models
 
             // finally, recreate piles
             Cards = new Stack<Card>(list);
-            Discard = new Stack<Card>();
+            Discard.Clear();
+        }
+
+        public object Clone()
+        {
+            return ObjectCloner.Clone(this);
         }
     }
 

@@ -19,8 +19,6 @@ namespace MalifoApp.ViewModels
         public int ServerPort { get; set; }
         public string Username { get; set; }
 
-        public bool Fatemaster { get; set; }
-
         public string ClientHash { get; set; }
 
         private bool connected;
@@ -93,6 +91,14 @@ namespace MalifoApp.ViewModels
                 }
                 return drawPersonalCommand;
             }
+        }
+
+        public void PlayerDeckChange(string playername, DeckViewModel playerDeck)
+        {
+            if (!Connected)
+                throw new InvalidOperationException("Must be connected to execute this command");
+            AsyncRequest notification = new PlayerDeckChange() { PlayerName = playername, PlayerDeck = playerDeck.Deck, ClientHash = ClientHash };
+            server.ExecuteAsync(notification);
         }
 
         private void ExecuteDrawPersonalCommand(object p)

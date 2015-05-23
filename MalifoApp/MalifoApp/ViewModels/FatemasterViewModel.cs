@@ -25,11 +25,14 @@ namespace MalifoApp.ViewModels
                 gameState = value;
             }
         }
-        private ICollection<IDialogViewModel> dialogs;
 
-        public FatemasterViewModel(GameStateViewModel gameState, ICollection<IDialogViewModel> dialogs)
+        private ICollection<IDialogViewModel> dialogs;
+        private ConnectionViewModel connection;
+
+        public FatemasterViewModel(GameStateViewModel gameState, ConnectionViewModel connection, ICollection<IDialogViewModel> dialogs)
         {
             GameState = gameState;
+            this.connection = connection;
             this.dialogs = dialogs;
         }
 
@@ -91,7 +94,7 @@ namespace MalifoApp.ViewModels
             {
                 OnOk = sender =>
                 {
-                    System.Diagnostics.Debug.WriteLine("OK pressed");
+                    connection.PlayerDeckChange(playername, sender.PlayerDeck);
                 }
             });
         }

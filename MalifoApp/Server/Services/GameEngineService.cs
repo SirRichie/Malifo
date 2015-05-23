@@ -26,7 +26,7 @@ namespace Server.Services
             return new GameState()
             {
                 GameLog = new GameLog(new List<GameLogEvent>()),
-                MainDeck = LoadDefaultDeck(),
+                MainDeck = CardRegistry.Instance.LoadDefaultDeck(),
                 Players = new Dictionary<string, Player>()
             };
         }
@@ -73,19 +73,26 @@ namespace Server.Services
             return;
         }
 
-        private Deck LoadDefaultDeck()
+        public void PlayerDeckChange(string playername, Deck playerDeck)
         {
-            int cardCount = CardRegistry.Instance.ShortTexts.Count;
-
-            Stack<Card> deck = new Stack<Card>(cardCount);
-            for (int i = 0; i < cardCount; i++)
-            {
-                Card card = new Card() { Key = CardRegistry.Instance.ShortTexts.Keys.ToList()[i] };
-                deck.Push(card);
-            }
-
-            return new Deck(deck);
+            playerDeck.ReShuffle();
+            gameState.Players[playername].Deck = playerDeck;
+            broadcastNewState();
         }
+
+        //private Deck LoadDefaultDeck()
+        //{
+        //    int cardCount = CardRegistry.Instance.ShortTexts.Count;
+
+        //    Stack<Card> deck = new Stack<Card>(cardCount);
+        //    for (int i = 0; i < cardCount; i++)
+        //    {
+        //        Card card = new Card() { Key = CardRegistry.Instance.ShortTexts.Keys.ToList()[i] };
+        //        deck.Push(card);
+        //    }
+
+        //    return new Deck(deck);
+        //}
 
         private void broadcastNewState()
         {

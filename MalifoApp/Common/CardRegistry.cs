@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -64,6 +65,24 @@ namespace Common
         public Dictionary<string, string> ShortTexts
         {
             get { return shortTexts; }
+        }
+
+        /// <summary>
+        /// return the default deck, that is a deck with all cards where no cards have been drawn
+        /// </summary>
+        /// <returns></returns>
+        public Deck LoadDefaultDeck()
+        {
+            int cardCount = CardRegistry.Instance.ShortTexts.Count;
+
+            Stack<Card> deck = new Stack<Card>(cardCount);
+            for (int i = 0; i < cardCount; i++)
+            {
+                Card card = new Card() { Key = CardRegistry.Instance.ShortTexts.Keys.ToList()[i] };
+                deck.Push(card);
+            }
+
+            return new Deck(deck);
         }
     }
 }
