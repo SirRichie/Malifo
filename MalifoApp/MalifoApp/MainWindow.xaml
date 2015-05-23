@@ -73,29 +73,11 @@
             </RibbonTab>
             <RibbonTab Header="Fatemaster" DataContext="{Binding Fatemaster}">
                 <RibbonGroup Header="DeckManagement">
-                    <RibbonButton Label="Open Dialog" Command="{Binding OpenDialogCommand}" />
                     <RibbonMenuButton Label="Edit Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource EditDeckItemTemplate}">
 
                     </RibbonMenuButton>
-                    <RibbonMenuButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource EditDeckItemTemplate}">
+                    <RibbonMenuButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource ShuffleDeckItemTemplate}">
                         
-                    </RibbonMenuButton>
-                    <RibbonMenuButton
-        Label="Clicking"
-        SmallImageSource="Resources/onecard.png"
-        LargeImageSource="Resources/onecard.png">
-                        <RibbonMenuItem 
-                Header="Click Me 1"
-                ImageSource="Resources/onecard.png"/>
-                        <RibbonMenuItem 
-                Header="Click Me 2"
-                ImageSource="Resources/twocards.png"/>
-                        <RibbonMenuItem 
-                Header="Click Me 3"
-                ImageSource="Resources/threecards.png"/>
-                        <RibbonMenuItem 
-                Header="Click Me 4"
-                ImageSource="Resources/fourcards.png"/>
                     </RibbonMenuButton>
                 </RibbonGroup>
             </RibbonTab>

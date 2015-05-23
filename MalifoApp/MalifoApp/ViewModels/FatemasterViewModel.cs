@@ -75,9 +75,10 @@ namespace MalifoApp.ViewModels
             }
         }
 
-        private object ExecuteShufflePlayerDeckCommand(object p)
+        private void ExecuteShufflePlayerDeckCommand(object p)
         {
-            throw new NotImplementedException();
+            string playername = p as string;
+            connection.ShufflePlayerDeck(playername);
         }
 
         private void ExecuteEditPlayerDeckCommand(object p)

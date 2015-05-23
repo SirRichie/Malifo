@@ -49,6 +49,7 @@
     <Compile Include="configuration\ServerConfiguration.cs" />
     <Compile Include="handler\HandlerFactory.cs" />
     <Compile Include="handler\IHandler.cs" />
+    <Compile Include="handler\impl\ShufflePlayerDeckHandler.cs" />
     <Compile Include="handler\impl\PlayerDeckChangeHandler.cs" />
     <Compile Include="handler\impl\DrawPersonalDeckHandler.cs" />
     <Compile Include="handler\impl\DrawMainDeckHandler.cs" />

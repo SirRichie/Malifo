@@ -49,6 +49,8 @@ namespace Server.Services
             // draw the cards
             IList<Card> drawnCards = gameState.MainDeck.Draw(amount);
 
+            // TODO add to game log
+
             // update player state
             // gameState.Players.Where(p => p.Name.Equals(user.UserName)).First().LastMainDraw = drawnCards;
             gameState.Players[user.UserName].LastMainDraw = drawnCards;
@@ -80,23 +82,17 @@ namespace Server.Services
             broadcastNewState();
         }
 
-        //private Deck LoadDefaultDeck()
-        //{
-        //    int cardCount = CardRegistry.Instance.ShortTexts.Count;
-
-        //    Stack<Card> deck = new Stack<Card>(cardCount);
-        //    for (int i = 0; i < cardCount; i++)
-        //    {
-        //        Card card = new Card() { Key = CardRegistry.Instance.ShortTexts.Keys.ToList()[i] };
-        //        deck.Push(card);
-        //    }
-
-        //    return new Deck(deck);
-        //}
+        public void ShufflePlayerDeck(string playername)
+        {
+            gameState.Players[playername].Deck.ReShuffle();
+            broadcastNewState();
+        }
 
         private void broadcastNewState()
         {
             ClientManager.Instance.BroadcastToAllClients(new NewGameState() { NewState = gameState });
         }
+
+        
     }
 }

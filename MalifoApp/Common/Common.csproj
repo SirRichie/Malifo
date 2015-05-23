@@ -50,6 +50,7 @@
     <Compile Include="models\Player.cs" />
     <Compile Include="ObjectCloner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="types\clientNotifications\ShufflePlayerDeck.cs" />
     <Compile Include="types\clientNotifications\PlayerDeckChange.cs" />
     <Compile Include="types\clientNotifications\DrawFromPersonalDeck.cs" />
     <Compile Include="types\clientNotifications\DrawFromMainDeck.cs" />
