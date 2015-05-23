@@ -75,6 +75,24 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        private ICommand shuffleMainDeckCommand;
+        public ICommand ShuffleMainDeckCommand
+        {
+            get
+            {
+                if (shuffleMainDeckCommand == null)
+                {
+                    shuffleMainDeckCommand = new RelayCommand(p => ExecuteShuffleMainDeckCommand(p));
+                }
+                return shuffleMainDeckCommand;
+            }
+        }
+
+        private void ExecuteShuffleMainDeckCommand(object p)
+        {
+            connection.ShuffleMainDeck();
+        }
+
         private void ExecuteShufflePlayerDeckCommand(object p)
         {
             string playername = p as string;

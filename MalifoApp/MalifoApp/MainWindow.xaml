@@ -72,7 +72,10 @@
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Fatemaster" DataContext="{Binding Fatemaster}">
-                <RibbonGroup Header="DeckManagement">
+                <RibbonGroup Header="Server Deck" Background="#FFA3CDFF">
+                    <RibbonButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" Command="{Binding ShuffleMainDeckCommand}" />
+                </RibbonGroup>
+                <RibbonGroup Header="Player Deck Management" Background="#FFECE9A4">
                     <RibbonMenuButton Label="Edit Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource EditDeckItemTemplate}">
 
                     </RibbonMenuButton>

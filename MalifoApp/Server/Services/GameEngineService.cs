@@ -88,6 +88,12 @@ namespace Server.Services
             broadcastNewState();
         }
 
+        public void ShuffleMainDeck()
+        {
+            gameState.MainDeck.ReShuffle();
+            broadcastNewState();
+        }
+
         private void broadcastNewState()
         {
             ClientManager.Instance.BroadcastToAllClients(new NewGameState() { NewState = gameState });

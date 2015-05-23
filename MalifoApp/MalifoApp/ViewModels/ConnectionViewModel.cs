@@ -109,6 +109,14 @@ namespace MalifoApp.ViewModels
             server.ExecuteAsync(notification);
         }
 
+        public void ShuffleMainDeck()
+        {
+            if (!Connected)
+                throw new InvalidOperationException("Must be connected to execute this command");
+            AsyncRequest notification = new ShuffleMainDeck() { ClientHash = ClientHash };
+            server.ExecuteAsync(notification);
+        }
+
         private void ExecuteDrawPersonalCommand(object p)
         {
             if (!Connected)
