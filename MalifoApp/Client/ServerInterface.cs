@@ -15,39 +15,58 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class ServerInterface: IDisposable
+    public class ServerInterface : IDisposable
     {
-        private TcpClient _client;        
+        private TcpClient _client;
         private string _clientHash;
         private ServerMessageQueue _messageQueue;
         private Response _response;
         private bool _responseAvailable;
 
         public delegate void NotificationEventHandler(object sender, NotificationEventArgs a);
-        public event NotificationEventHandler RaiseNotivicationEvent;
+        public event NotificationEventHandler RaiseNotificationEvent;
 
-        private NotificationEventHandler handler; 
+        public delegate void ExceptionEventHandler(object sender, NotificationEventArgs a);
+        public event ExceptionEventHandler RaiseExceptionEvent;
+
+        //private NotificationEventHandler handler; 
         public ServerInterface(TcpClient client)
-        {         
+        {
             _clientHash = null;
             _client = client;
             _response = null;
             _responseAvailable = false;
-            _messageQueue = new ServerMessageQueue(_client); 
+            _messageQueue = new ServerMessageQueue(_client);
             _messageQueue.RaiseResponseEvent += _messageQueue_RaiseResponseEvent;
-            _messageQueue.RaiseNotivicationEvent += _messageQueue_RaiseNotivicationEvent;
+            _messageQueue.RaiseNotificationEvent += _messageQueue_RaiseNotificationEvent;
+            _messageQueue.RaiseExceptionEvent += _messageQueue_RaiseExceptionEvent;
             _messageQueue.StartMessageQueue();
         }
 
-        private void _messageQueue_RaiseNotivicationEvent(object sender, NotificationEventArgs a)
+        void _messageQueue_RaiseExceptionEvent(object sender, NotificationEventArgs a)
         {
-            if (handler != null)
+            if (RaiseExceptionEvent != null)
             {
-                handler(this, a);
+                RaiseExceptionEvent(sender, a);
             }
-            if (RaiseNotivicationEvent != null)
+            else
             {
-                RaiseNotivicationEvent(sender, a);
+                if (a.Notification is Exception)
+                {
+                    throw new InvalidOperationException("Exception occurred but no handler is defined", (Exception)a.Notification);
+                }
+            }
+        }
+
+        private void _messageQueue_RaiseNotificationEvent(object sender, NotificationEventArgs a)
+        {
+            //if (handler != null)
+            //{
+            //    handler(this, a);
+            //}
+            if (RaiseNotificationEvent != null)
+            {
+                RaiseNotificationEvent(sender, a);
             }
         }
 
@@ -55,7 +74,7 @@ namespace Client
         {
             _response = a.Notification as Response;
             _responseAvailable = true;
-        }        
+        }
 
         private bool CheckClientHash(ITransferableObject tranferableObj)
         {
@@ -65,18 +84,19 @@ namespace Client
         public Response Execute(Request request)
         {
             IFormatter formatter = new BinaryFormatter();
-          
+
             if (request == null)
             {
                 throw new ArgumentException(String.Format("Request couldn't be null"));
             }
             string messageHash = Guid.NewGuid().ToString();
             (request).MessageHash = messageHash;
-  
+
             formatter.Serialize(_client.GetStream(), request);
 
             _messageQueue.WaitForResponse((request).MessageHash);
-            while (!_responseAvailable) {
+            while (!_responseAvailable)
+            {
                 Thread.Sleep(50);
             }
             _responseAvailable = false;
@@ -94,16 +114,16 @@ namespace Client
             }
             string messageHash = Guid.NewGuid().ToString();
             request.MessageHash = messageHash;
-           
+
             formatter.Serialize(_client.GetStream(), request);
         }
 
         private void HandleResponse(ref Response response)
-        {           
+        {
             if (response is Response)
             {
                 SpecialResponseHandling(response as Response);
-            }           
+            }
         }
 
         private void SpecialResponseHandling(Response response)
@@ -125,7 +145,7 @@ namespace Client
         public void Dispose()
         {
             _messageQueue.RaiseResponseEvent -= _messageQueue_RaiseResponseEvent;
-            _messageQueue.RaiseNotivicationEvent -= _messageQueue_RaiseNotivicationEvent;
+            _messageQueue.RaiseNotificationEvent -= _messageQueue_RaiseNotificationEvent;
             _messageQueue.StopMessageQueue();
             _messageQueue.Dispose();
         }
@@ -135,7 +155,7 @@ namespace Client
             Dispose();
         }
 
-        
+
     }
 
     public class ServerInterfaceException : Exception
@@ -147,7 +167,7 @@ namespace Client
         }
 
         public ServerInterfaceException(string msg, Exception e)
-            :base(msg, e)
+            : base(msg, e)
         {
 
         }

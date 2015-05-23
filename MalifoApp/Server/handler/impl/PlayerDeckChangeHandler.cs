@@ -27,10 +27,7 @@ namespace Server.handler.impl
         {
             PlayerDeckChange req = request as PlayerDeckChange;
 
-            // TODO make change if sender is fatemaster
-            //UserManager.Instance.GetUserInfoByHash(req.ClientHash)
-
-            gameEngine.PlayerDeckChange(req.PlayerName, req.PlayerDeck);
+            gameEngine.PlayerDeckChange(req.PlayerName, req.PlayerDeck, UserManager.Instance.GetUserInfoByHash(req.ClientHash));
 
             return null;
         }

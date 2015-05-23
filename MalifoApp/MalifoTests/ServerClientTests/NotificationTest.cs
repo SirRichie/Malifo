@@ -43,7 +43,7 @@ namespace MalifoTests.ServerClientTests
         {
             LoginRequest req = new LoginRequest() { UserName = userName };
             LoginResponse resp = client1.Execute(req) as LoginResponse;
-            client1.RaiseNotivicationEvent += client_RaiseNotivicationEvent;
+            client1.RaiseNotificationEvent += client_RaiseNotivicationEvent;
             Assert.IsNotNull(resp.ClientHash);
             Assert.AreEqual(resp.MessageHash, req.MessageHash);
         }

@@ -25,12 +25,9 @@ namespace Server.handler.impl
 
         public Response HandleRequest(Request request)
         {
-            ShufflePlayerDeck req = request as ShufflePlayerDeck;
+            ShuffleMainDeck req = request as ShuffleMainDeck;
 
-            // TODO make change if sender is fatemaster
-            //UserManager.Instance.GetUserInfoByHash(req.ClientHash)
-
-            gameEngine.ShuffleMainDeck();
+            gameEngine.ShuffleMainDeck(UserManager.Instance.GetUserInfoByHash(req.ClientHash));
 
             return null;
         }

@@ -7,38 +7,52 @@ using System.Threading.Tasks;
 
 namespace Server.userManagement
 {
-	public sealed class UserManager
-	{
-		private static readonly Lazy<UserManager> _lazy =
-			new Lazy<UserManager>(() => new UserManager());
-	    
-		public static UserManager Instance { get { return _lazy.Value; } }
-		
-		private List<UserInfo> userList;
+    public sealed class UserManager
+    {
+        private static readonly Lazy<UserManager> _lazy =
+            new Lazy<UserManager>(() => new UserManager());
 
-		public List<UserInfo> UserList {
-			get {
-				return userList;
-			}
-		}
-	
-		private UserManager()
-		{
-			userList = new List<UserInfo>();
-		}
-		
-		public void AddUser(UserInfo userInfo)
-		{
-			if (UserHashIsPersistend(userInfo)) {
-				var tmpUserInfo = GetUserInfoByHash(userInfo.SessionHash);               
-			}else{
+        public static UserManager Instance { get { return _lazy.Value; } }
+
+        private List<UserInfo> userList;
+
+        public List<UserInfo> UserList
+        {
+            get
+            {
+                return userList;
+            }
+        }
+
+        private UserManager()
+        {
+            userList = new List<UserInfo>();
+        }
+
+        public void AddUser(UserInfo userInfo)
+        {
+            if (UserHashIsPersistend(userInfo))
+            {
+                var tmpUserInfo = GetUserInfoByHash(userInfo.SessionHash);
+            }
+            else
+            {
                 if (!UserNameAvailable(userInfo.UserName))
                 {
-                    throw new BusinessException(String.Format("UserNamer already taken: {}", userInfo.UserName));
+                    throw new BusinessException(String.Format("UserName already taken: {}", userInfo.UserName));
                 }
-				userList.Add(userInfo);
-			}
-		}
+                if (userInfo.IsFatemaster && FatemasterPresent())
+                {
+                    throw new BusinessException("Cannot have more than one fatemaster");
+                }
+                userList.Add(userInfo);
+            }
+        }
+
+        private bool FatemasterPresent()
+        {
+            return userList.Where(user => user.IsFatemaster).Count() > 0;
+        }
 
         private bool UserNameAvailable(string userName)
         {
@@ -52,31 +66,34 @@ namespace Server.userManagement
             return true;
         }
 
-		private bool UserHashIsPersistend(UserInfo userInfo)
-		{
-			if (userInfo.SessionHash == null) {
-				return false;
-			}
-			
-			var tmpUserInfo = GetUserInfoByHash(userInfo.SessionHash);
-			
-			if(tmpUserInfo == null){
-				return false;
-			}
-			
-			return true;					
-		}
-		
-		public UserInfo GetUserInfoByHash(string userHash){
+        private bool UserHashIsPersistend(UserInfo userInfo)
+        {
+            if (userInfo.SessionHash == null)
+            {
+                return false;
+            }
+
+            var tmpUserInfo = GetUserInfoByHash(userInfo.SessionHash);
+
+            if (tmpUserInfo == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public UserInfo GetUserInfoByHash(string userHash)
+        {
             var userInfos = (from info in userList
                              where info.SessionHash.Equals(userHash)
                              select info).ToList<UserInfo>();
             if (userInfos.Count != 1)
             {
                 return null;
-                
+
             }
             return userInfos[0];
-		}
-	}   
+        }
+    }
 }

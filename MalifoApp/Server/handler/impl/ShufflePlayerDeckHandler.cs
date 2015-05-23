@@ -27,10 +27,7 @@ namespace Server.handler.impl
         {
             ShufflePlayerDeck req = request as ShufflePlayerDeck;
 
-            // TODO make change if sender is fatemaster
-            //UserManager.Instance.GetUserInfoByHash(req.ClientHash)
-
-            gameEngine.ShufflePlayerDeck(req.PlayerName);
+            gameEngine.ShufflePlayerDeck(req.PlayerName, UserManager.Instance.GetUserInfoByHash(req.ClientHash));
 
             return null;
         }

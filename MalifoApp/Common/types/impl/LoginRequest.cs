@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 namespace Common.types.impl
 {
     [Serializable]
-    public class LoginRequest: Request
+    public class LoginRequest : Request
     {       
         public string UserName { get; set; }
+        public bool AsFatemaster { get; set; }
     }  
 }

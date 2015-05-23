@@ -18,10 +18,13 @@ namespace Client
     public class ServerMessageQueue: IDisposable
     {
         public delegate void NotificationEventHandler(object sender, NotificationEventArgs a);
-        public event NotificationEventHandler RaiseNotivicationEvent;
+        public event NotificationEventHandler RaiseNotificationEvent;
 
         public delegate void ResponseEventHandler(object sender, NotificationEventArgs a);
         public event ResponseEventHandler RaiseResponseEvent;
+
+        public delegate void ExceptionEventHandler(object sender, NotificationEventArgs a);
+        public event ExceptionEventHandler RaiseExceptionEvent;
 
         private bool _stopMessageQueue;
         private bool _waitForResponse;
@@ -34,6 +37,7 @@ namespace Client
 
         private ResponseEventHandler _responsehandler;
         private NotificationEventHandler _notificationhandler;
+        private ExceptionEventHandler _exceptionhandler;
         private Thread _enqueueThread;
         private Thread _dequeueThread;
 
@@ -75,7 +79,7 @@ namespace Client
             while (!_stopMessageQueue)
             {
                 _responsehandler = RaiseResponseEvent;
-                _notificationhandler = RaiseNotivicationEvent;
+                _notificationhandler = RaiseNotificationEvent;
                 Thread.Sleep(200);
                 Object response = null;
               
@@ -107,7 +111,8 @@ namespace Client
             while (!_stopMessageQueue)
             {
                 _responsehandler = RaiseResponseEvent;
-                _notificationhandler = RaiseNotivicationEvent;
+                _notificationhandler = RaiseNotificationEvent;
+                _exceptionhandler = RaiseExceptionEvent;
                 Thread.Sleep(200);  
                 if (!handlerSubcribed())
                 {
@@ -122,7 +127,8 @@ namespace Client
                 }
                 if (tmpObj is BusinessException)
                 {
-                    throw tmpObj as BusinessException;
+                    //throw tmpObj as BusinessException;
+                    handleException(_exceptionhandler, tmpObj as BusinessException);
                 }
                 else if (_waitForResponse)
                 {
@@ -178,6 +184,17 @@ namespace Client
             _waitForResponse = false;
             _messageHash = null;
             handler(this, new NotificationEventArgs(tmpObj));
+        }
+
+        private void handleException(ExceptionEventHandler handler, BusinessException e)
+        {
+            if (handler == null)
+            {
+                throw new InvalidOperationException("Exception occurred but no handler is defined", e);
+            }
+            _waitForResponse = false;
+            _messageHash = null;
+            handler(this, new NotificationEventArgs(e));
         }
 
         public void Dispose()

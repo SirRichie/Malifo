@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Common.types.impl
 {
     [Serializable]
-    public class LoginResponse :Response
+    public class LoginResponse : Response
     {
-       
+        public bool IsFatemaster { get; set; }
     }
 }

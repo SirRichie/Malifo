@@ -24,17 +24,18 @@ namespace Server.handler.impl
         public Response HandleRequest(Request request)
         {
             LoginRequest req = request as LoginRequest;
-            _userService.UserLogin(req.ClientHash, req.UserName);
-            _gameEngine.PlayerConnected(req.UserName);
+            _userService.UserLogin(req.ClientHash, req.UserName, req.AsFatemaster);
+            _gameEngine.PlayerConnected(req.UserName, req.AsFatemaster);
             return new LoginResponse()
             {
-               
+                // noone objects, so we assume that if we wanted to be fatemaster, that worked
+                IsFatemaster = req.AsFatemaster
             };
         }
 
         public Type GetHandledType()
         {
-            return typeof (LoginRequest);
+            return typeof(LoginRequest);
         }
     }
 }

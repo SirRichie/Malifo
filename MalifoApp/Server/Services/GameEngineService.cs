@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.models;
+using Common.types.exceptions;
 using Common.types.serverNotifications;
 using Server.userManagement;
 using System;
@@ -31,8 +32,14 @@ namespace Server.Services
             };
         }
 
-        public void PlayerConnected(string name)
+        public void PlayerConnected(string name, bool asFatemaster)
         {
+            if (asFatemaster)
+            {
+                // do not add the fatemaster to the list of players... yet
+                return;
+            }
+
             if (gameState.Players.ContainsKey(name))
             {
                 // we already know the player, so don't do anything
@@ -54,7 +61,7 @@ namespace Server.Services
             // update player state
             // gameState.Players.Where(p => p.Name.Equals(user.UserName)).First().LastMainDraw = drawnCards;
             gameState.Players[user.UserName].LastMainDraw = drawnCards;
-            
+
             broadcastNewState();
 
             return;
@@ -75,23 +82,34 @@ namespace Server.Services
             return;
         }
 
-        public void PlayerDeckChange(string playername, Deck playerDeck)
+        public void PlayerDeckChange(string playername, Deck playerDeck, UserInfo requester)
         {
+            EnsureFatemasterStatusOrThrowException(requester);
             playerDeck.ReShuffle();
             gameState.Players[playername].Deck = playerDeck;
             broadcastNewState();
         }
 
-        public void ShufflePlayerDeck(string playername)
+        public void ShufflePlayerDeck(string playername, UserInfo requester)
         {
+            EnsureFatemasterStatusOrThrowException(requester);
             gameState.Players[playername].Deck.ReShuffle();
             broadcastNewState();
         }
 
-        public void ShuffleMainDeck()
+        public void ShuffleMainDeck(UserInfo requester)
         {
+            EnsureFatemasterStatusOrThrowException(requester);
             gameState.MainDeck.ReShuffle();
             broadcastNewState();
+        }
+
+        private void EnsureFatemasterStatusOrThrowException(UserInfo requester)
+        {
+            if (!(requester.IsFatemaster))
+            {
+                throw new BusinessException("This operation can only be done by the fatemaster");
+            }
         }
 
         private void broadcastNewState()
@@ -99,6 +117,6 @@ namespace Server.Services
             ClientManager.Instance.BroadcastToAllClients(new NewGameState() { NewState = gameState });
         }
 
-        
+
     }
 }

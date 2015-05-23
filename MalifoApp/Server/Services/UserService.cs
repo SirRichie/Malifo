@@ -17,9 +17,9 @@ namespace Server.Services
             _clientManager = clientManager;
         }
 
-        public void UserLogin(string clientHash, string userName)
+        public void UserLogin(string clientHash, string userName, bool asFatemaster)
         {
-            UserInfo userInfo = new UserInfo() { UserName = userName, SessionHash = clientHash };
+            UserInfo userInfo = new UserInfo() { UserName = userName, SessionHash = clientHash, IsFatemaster = asFatemaster };
             _userManager.AddUser(userInfo);
         }
 

@@ -14,21 +14,22 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Server.userManagement
 {
-	public class UserInfo
-	{
+    public class UserInfo
+    {
         public string UserName { get; set; }
-		public string SessionHash{ get; set; }       
-      
-		public UserInfo()
-		{
-            
-		}
+        public string SessionHash { get; set; }
+        public bool IsFatemaster { get; set; }
 
-        public void SendNotification(ServerNotification notivication , TcpClient client)
+        public UserInfo()
+        {
+
+        }
+
+        public void SendNotification(ServerNotification notivication, TcpClient client)
         {
             IFormatter formatter = new BinaryFormatter();
             if (CheckClientIsConnected(client))
-            {               
+            {
                 formatter.Serialize(client.GetStream(), notivication);
             }
         }
@@ -37,5 +38,5 @@ namespace Server.userManagement
         {
             return client != null && client.Connected;
         }
-	}
+    }
 }

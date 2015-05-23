@@ -19,7 +19,19 @@ namespace MalifoApp.ViewModels
         public int ServerPort { get; set; }
         public string Username { get; set; }
 
+        /// <summary>
+        /// indicates if we are trying to connect as the fatemaster
+        /// </summary>
+        public bool AsFatemaster { get; set; }
+
+        /// <summary>
+        /// indicates if the server confirmed that we are the fatemaster
+        /// </summary>
+        public bool IsFatemaster { get; set; }
+
         public string ClientHash { get; set; }
+
+        public ErrorState ErrorState { get; set; }
 
         private bool connected;
         public bool Connected
@@ -52,6 +64,7 @@ namespace MalifoApp.ViewModels
         {
             Connected = false;
             this.gameState = gameState;
+            ErrorState = new ErrorState() { Message = "", Visible = false };
         }
 
         private ICommand connectCommand;
@@ -138,16 +151,28 @@ namespace MalifoApp.ViewModels
         private void ExecuteConnectCommand(object p)
         {
             server = ServerInterfaceFactory.GetServerInterface(ServerAddress, ServerPort);
-            server.RaiseNotivicationEvent += server_RaiseNotivicationEvent;
+            server.RaiseNotificationEvent += server_RaiseNotificationEvent;
+            server.RaiseExceptionEvent += server_RaiseExceptionEvent;
 
-            LoginResponse res = (LoginResponse)server.Execute(new LoginRequest() { ClientHash = null, UserName = Username });
+            LoginResponse res = (LoginResponse)server.Execute(new LoginRequest() { ClientHash = null, UserName = Username, AsFatemaster = AsFatemaster });
             ClientHash = res.ClientHash;
             OnPropertyChanged("ClientHash");
 
             Connected = true;
         }
 
-        void server_RaiseNotivicationEvent(object sender, NotificationEventArgs a)
+        void server_RaiseExceptionEvent(object sender, NotificationEventArgs a)
+        {
+            if (a.Notification is Exception)
+            {
+                Exception e = a.Notification as Exception;
+                ErrorState.Message = e.Message;
+                ErrorState.Visible = true;
+            }
+
+        }
+
+        void server_RaiseNotificationEvent(object sender, NotificationEventArgs a)
         {
             ITransferableObject notification = a.Notification;
 
@@ -187,5 +212,44 @@ namespace MalifoApp.ViewModels
 
         //    //Players[0].LastMainDraw = cards.Select(c => new CardViewModel(c)).ToList();
         //}
+    }
+
+    public class ErrorState : ViewModel
+    {
+        private string message;
+        public string Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                message = value;
+                OnPropertyChanged("Message");
+            }
+        }
+
+        private bool visible;
+        public bool Visible
+        {
+            get { return visible; }
+            set
+            {
+                if (value)
+                {
+                    // set a timer to automatically hide this message after a few seconds
+                    hide();
+                }
+                visible = value;
+                OnPropertyChanged("Visible");
+            }
+        }
+
+        private async void hide()
+        {
+            await Task.Delay(5000);
+            Visible = false;
+        }
     }
 }
