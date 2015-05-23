@@ -37,6 +37,7 @@ namespace Server.Services
             if (asFatemaster)
             {
                 // do not add the fatemaster to the list of players... yet
+                broadcastNewState();    // broadcast state nonetheless so fatemaster gets a list of players
                 return;
             }
 
