@@ -56,15 +56,14 @@ namespace Server.Services
             // draw the cards
             IList<Card> drawnCards = gameState.MainDeck.Draw(amount);
 
-            // TODO add to game log
-
             // update player state
-            // gameState.Players.Where(p => p.Name.Equals(user.UserName)).First().LastMainDraw = drawnCards;
             gameState.Players[user.UserName].LastMainDraw = drawnCards;
 
-            broadcastNewState();
+            // update game log
+            UpdateGameLogWithDrawnCards(drawnCards, user.UserName, false);
 
-            return;
+            // broadcast
+            broadcastNewState();
         }
 
         public void DrawFromPersonalDeck(int amount, UserInfo user)
@@ -74,34 +73,68 @@ namespace Server.Services
             IList<Card> drawnCards = player.Deck.Draw(amount);
 
             // update player state
-            // gameState.Players.Where(p => p.Name.Equals(user.UserName)).First().LastMainDraw = drawnCards;
             player.LastPersonalDraw = drawnCards;
 
-            broadcastNewState();
+            // update game log
+            UpdateGameLogWithDrawnCards(drawnCards, user.UserName, false);
 
-            return;
+            // broadcast
+            broadcastNewState();
         }
 
         public void PlayerDeckChange(string playername, Deck playerDeck, UserInfo requester)
         {
+            // update deck
             EnsureFatemasterStatusOrThrowException(requester);
             playerDeck.ReShuffle();
             gameState.Players[playername].Deck = playerDeck;
+
+            // update game log
+            string text = "changes deck of " + playername;
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+
+            // broadcast
             broadcastNewState();
         }
 
         public void ShufflePlayerDeck(string playername, UserInfo requester)
         {
+            // shuffle deck
             EnsureFatemasterStatusOrThrowException(requester);
             gameState.Players[playername].Deck.ReShuffle();
+            
+            // update game log
+            string text = "shuffles the deck of " + playername;
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+
+            // broadcast
             broadcastNewState();
         }
 
         public void ShuffleMainDeck(UserInfo requester)
         {
+            // shuffle deck
             EnsureFatemasterStatusOrThrowException(requester);
             gameState.MainDeck.ReShuffle();
+
+            // update game log
+            string text = "shuffles the main deck";
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+
+            // broadcast
             broadcastNewState();
+        }
+
+        private void UpdateGameLogWithDrawnCards(IList<Card> drawnCards, string playername, bool personalDraw)
+        {
+            string deckText = personalDraw ? "personal deck" : "main deck";
+            string text = "draws (" + deckText + ") ";
+            foreach (Card card in drawnCards)
+            {
+                text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
+            }
+            text = text.Substring(0, text.Length - 2);
+            gameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = playername, Timestamp = DateTime.Now });
         }
 
         private void EnsureFatemasterStatusOrThrowException(UserInfo requester)
