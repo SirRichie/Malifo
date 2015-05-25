@@ -81,7 +81,7 @@
 
                     </RibbonMenuButton>
                     <RibbonMenuButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource ShuffleDeckItemTemplate}">
-                        
+
                     </RibbonMenuButton>
                 </RibbonGroup>
             </RibbonTab>
@@ -114,19 +114,8 @@
                    Visibility="{Binding Connection.ErrorState.Visible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"
                    DockPanel.Dock="Bottom" Foreground="#FFB60000" />
             <DockPanel LastChildFill="True">
-                <!--
-                <Grid.Width>
-                    <MultiBinding Converter="{StaticResource subConverter}">
-                        <Binding ElementName="MainDockPanel" Path="ActualWidth" />
-                        <Binding ElementName="LogViewer" Path="ActualWidth" />
-                    </MultiBinding>
-                </Grid.Width>
-                -->
-
                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0">
 
-
-                    <Image Name="debugImage" Width="70" />
                     <Label Content="Deck" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid>
                         <Image Source="Resources/facedown.jpg" Width="70" Margin="0,0,0,20" />
@@ -136,12 +125,16 @@
                     <Label Content="Discard" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid>
                         <Image Source="Resources/faceup.png" Width="70" />
-                        <!--<Image Source="Resources/Cards/card_p1_black_joker.png" Width="70" />-->
                         <Label Content="{Binding GameState.MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                 </StackPanel>
 
                 <ListView ItemsSource="{Binding GameState.Players}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100" />
@@ -175,11 +168,18 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Personal Draw" Width="220">
+                            <GridViewColumn Header="Control Hand" Width="220">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <ItemsControl ItemsSource="{Binding Path=LastPersonalDraw}">
+                                            <ItemsControl ItemsSource="{Binding Path=Deck.Hand}">
+                                                <!--
+                                                <ItemsControl.Resources>
+                                                    <Style TargetType="{x:Type ListViewItem}">
+                                                        <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClickMainDeck" />
+                                                    </Style>
+                                                </ItemsControl.Resources>
+                                                -->
                                                 <ItemsControl.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <WrapPanel Orientation="Horizontal"/>
@@ -188,10 +188,19 @@
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <StackPanel>
-                                                            <Image ToolTip="{Binding Path=Text}"
-                                                          Source="{Binding Path=Image}"
-                                                          Margin="1,0,1,0"
-                                                          Height="80" Width="50" />
+                                                            <!--<Button MouseDoubleClick="ControlHandCard_MouseDoubleClick" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">-->
+                                                            <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                                                <Button.InputBindings>
+                                                                    <MouseBinding 
+                                                                        Gesture="LeftDoubleClick" 
+                                                                        Command="{Binding Path=DataContext.Connection.DiscardCommand , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                                                                        CommandParameter="{Binding }"/>
+                                                                </Button.InputBindings>
+                                                                <Image ToolTip="{Binding Path=Text}"
+                                                                       Source="{Binding Path=Image}"
+                                                                       Margin="1,0,1,0"
+                                                                       Height="80" Width="50" />
+                                                            </Button>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>

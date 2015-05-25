@@ -17,5 +17,19 @@ namespace Common.models
         /// the card's key, used to access all other, static resources like images and texts
         /// </summary>
         public string Key { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Card))
+                return false;
+
+            Card card = obj as Card;
+            return Key.Equals(card.Key);
+        }
+
+        public override int GetHashCode()
+        {
+            return Key.GetHashCode();
+        }
     }
 }

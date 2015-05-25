@@ -86,7 +86,7 @@ namespace Server.Services
         public void PlayerDeckChange(string playername, Deck playerDeck, UserInfo requester)
         {
             // update deck
-            EnsureFatemasterStatusOrThrowException(requester);
+            //EnsureFatemasterStatusOrThrowException(requester);
             playerDeck.ReShuffle();
             gameState.Players[playername].Deck = playerDeck;
 
@@ -121,6 +121,19 @@ namespace Server.Services
             // update game log
             string text = "shuffles the main deck";
             gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+
+            // broadcast
+            broadcastNewState();
+        }
+
+        public void DiscardCard(Card card, UserInfo user)
+        {
+            // update deck
+            gameState.Players[user.UserName].Deck.DiscardCardFromHand(card);
+
+            // update game log
+            string text = "discards " + CardRegistry.Instance.ShortTexts[card.Key];
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = user.UserName, Text = text, Timestamp = DateTime.Now });
 
             // broadcast
             broadcastNewState();

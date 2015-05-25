@@ -42,12 +42,21 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        public List<CardViewModel> Hand
+        {
+            get
+            {
+                return Deck.Hand.Select(c => new CardViewModel(c)).ToList();
+            }
+        }
+
         public IList<CardViewModel> AllCardsSorted
         {
             get
             {
                 if (Deck == null) return new CardViewModel[0];
                 List<Card> cards = Deck.Cards.ToList();
+                cards.AddRange(Deck.Hand);
                 cards.AddRange(Deck.Discard);
                 cards.Sort(new CardComparer());
                 return cards.Select(card => new CardViewModel(card)).ToList();

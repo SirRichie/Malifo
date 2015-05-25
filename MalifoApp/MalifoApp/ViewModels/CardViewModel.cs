@@ -44,5 +44,13 @@ namespace MalifoApp.ViewModels
                 return CardRegistry.Instance.ShortTexts[Model.Key];
             }
         }
+
+        public string Key
+        {
+            get
+            {
+                return Model.Key;
+            }
+        }
     }
 }

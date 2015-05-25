@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.types.exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,13 @@ namespace Common.models
     {
         public Stack<Card> Cards { get; private set; }
         public Stack<Card> Discard { get; private set; }
+        public IList<Card> Hand { get; private set; }
 
         public Deck()
         {
             Cards = new Stack<Card>();
             Discard = new Stack<Card>();
+            Hand = new List<Card>(5);
         }
 
         public Deck(Stack<Card> cards)
@@ -50,10 +53,37 @@ namespace Common.models
             {
                 Card card = Cards.Pop();
                 result.Add(card);
-                Discard.Push(card);
+                Hand.Add(card);
+                //Discard.Push(card);
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// move a specific card from the hand to the discard pile
+        /// </summary>
+        /// <param name="card"></param>
+        public void DiscardCardFromHand(Card card)
+        {
+            if (!Hand.Contains(card))
+            {
+                throw new CardNotInHandException("This card is not in the hand");
+            }
+            Hand.Remove(card);
+            Discard.Push(card);
+        }
+
+        /// <summary>
+        /// move the entire hand to the discard pile
+        /// </summary>
+        public void CardcardHand()
+        {
+            foreach (Card card in Hand)
+            {
+                Discard.Push(card);
+            }
+            Hand.Clear();
         }
 
         /// <summary>
@@ -96,17 +126,24 @@ namespace Common.models
         }
     }
 
-    public class IllegalDrawAmountException : Exception
+    public class IllegalDrawAmountException : BusinessException
     {
         public IllegalDrawAmountException() : base() { }
         public IllegalDrawAmountException(string msg) : base(msg) { }
         public IllegalDrawAmountException(string msg, Exception e) : base(msg, e) { }
     }
 
-    public class NotEnoughCardsLeftException : Exception
+    public class NotEnoughCardsLeftException : BusinessException
     {
         public NotEnoughCardsLeftException() : base() { }
         public NotEnoughCardsLeftException(string msg) : base(msg) { }
         public NotEnoughCardsLeftException(string msg, Exception e) : base(msg, e) { }
+    }
+
+    public class CardNotInHandException : BusinessException
+    {
+        public CardNotInHandException() : base() { }
+        public CardNotInHandException(string msg) : base(msg) { }
+        public CardNotInHandException(string msg, Exception e) : base(msg, e) { }
     }
 }

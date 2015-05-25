@@ -106,6 +106,19 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        private ICommand discardCommand;
+        public ICommand DiscardCommand
+        {
+            get
+            {
+                if (discardCommand == null)
+                {
+                    discardCommand = new RelayCommand(p => ExecuteDiscardCommand(p));
+                }
+                return discardCommand;
+            }
+        }
+
         public void PlayerDeckChange(string playername, DeckViewModel playerDeck)
         {
             if (!Connected)
@@ -145,6 +158,16 @@ namespace MalifoApp.ViewModels
                 throw new InvalidOperationException("Must be connected to execute this command");
             int numberOfCards = Convert.ToInt32(p);
             AsyncRequest notification = new DrawFromMainDeck() { NumberOfCards = numberOfCards, ClientHash = ClientHash };
+            server.ExecuteAsync(notification);
+        }
+
+        private void ExecuteDiscardCommand(object p)
+        {
+            if (!Connected)
+                throw new InvalidOperationException("Must be connected to execute this command");
+            if (!(p is CardViewModel))
+                throw new InvalidOperationException("Can only work with CardViewModels");
+            AsyncRequest notification = new DiscardCard() { Card = ((CardViewModel)p).Model, ClientHash = ClientHash };
             server.ExecuteAsync(notification);
         }
 

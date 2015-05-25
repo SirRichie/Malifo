@@ -109,5 +109,11 @@ namespace MalifoApp
         {
             System.Diagnostics.Debug.WriteLine("closed");
         }
+
+        private void ControlHandCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("control hand double click: " + sender);
+        }
+
     }
 }
