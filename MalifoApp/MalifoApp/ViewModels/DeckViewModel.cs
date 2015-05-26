@@ -46,6 +46,8 @@ namespace MalifoApp.ViewModels
         {
             get
             {
+                if (Deck == null)
+                    return new List<CardViewModel>();
                 return Deck.Hand.Select(c => new CardViewModel(c)).ToList();
             }
         }

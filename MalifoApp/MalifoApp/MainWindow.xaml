@@ -128,91 +128,106 @@
                         <Label Content="{Binding GameState.MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                 </StackPanel>
-
-                <ListView ItemsSource="{Binding GameState.Players}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="Focusable" Value="False"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Deck.CardsCount}" Header="Deck Size" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Deck.DiscardCount}" Header="Discard Size" />
-
-                            <GridViewColumn Header="Main Draw" Width="220">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <ItemsControl ItemsSource="{Binding Path=LastMainDraw}">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <WrapPanel Orientation="Horizontal"/>
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel>
-                                                            <!--Source="Resources/dummycard.png"-->
-                                                            <Image ToolTip="{Binding Path=Text}"
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0">
+                        <Label Content="Last Draw" HorizontalAlignment="Center" />
+                        <ListView ItemsSource="{Binding GameState.MainDeck.Hand}" Height="340" Width="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <Image Source="{Binding Image}"
+                                   Margin="0,1,0,0"
+                                   Height="80" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Label Content="SirRichie" HorizontalAlignment="Center" />
+                        <Button Content="OK" Command="{Binding Connection.AcknowledgeMainDrawCommand}" Margin="0,5,0,0" Height="25" />
+                    </StackPanel>
+                    <ListView ItemsSource="{Binding GameState.Players}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Deck.CardsCount}" Header="Deck Size" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Deck.DiscardCount}" Header="Discard Size" />
+                                <!--
+                                <GridViewColumn Header="Main Draw" Width="220">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <ItemsControl ItemsSource="{Binding Path=LastMainDraw}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel>
+                                                                <Image ToolTip="{Binding Path=Text}"
                                                           Source="{Binding Path=Image}"
                                                           Margin="1,0,1,0"
                                                           Height="80" Width="50" />
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn Header="Control Hand" Width="220">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <ItemsControl ItemsSource="{Binding Path=Deck.Hand}">
-                                                <!--
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                -->
+                                <GridViewColumn Header="Control Hand" Width="270">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <ItemsControl ItemsSource="{Binding Path=Deck.Hand}">
+                                                    <!--
                                                 <ItemsControl.Resources>
                                                     <Style TargetType="{x:Type ListViewItem}">
                                                         <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClickMainDeck" />
                                                     </Style>
                                                 </ItemsControl.Resources>
                                                 -->
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <WrapPanel Orientation="Horizontal"/>
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel>
-                                                            <!--<Button MouseDoubleClick="ControlHandCard_MouseDoubleClick" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">-->
-                                                            <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
-                                                                <Button.InputBindings>
-                                                                    <MouseBinding 
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel Orientation="Horizontal"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel>
+                                                                <!--<Button MouseDoubleClick="ControlHandCard_MouseDoubleClick" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">-->
+                                                                <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                                                    <Button.InputBindings>
+                                                                        <MouseBinding 
                                                                         Gesture="LeftDoubleClick" 
                                                                         Command="{Binding Path=DataContext.Connection.DiscardCommand , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                                                         CommandParameter="{Binding }"/>
-                                                                </Button.InputBindings>
-                                                                <Image ToolTip="{Binding Path=Text}"
+                                                                    </Button.InputBindings>
+                                                                    <Image ToolTip="{Binding Path=Text}"
                                                                        Source="{Binding Path=Image}"
                                                                        Margin="1,0,1,0"
                                                                        Height="80" Width="50" />
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-
+                                                                </Button>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
 
             </DockPanel>
         </DockPanel>
