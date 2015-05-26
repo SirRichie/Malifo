@@ -77,6 +77,7 @@ namespace MalifoApp.ViewModels
             ServiceManager.Instance.AddService(typeof(ShufflePlayerDeck), gameEngine);
             ServiceManager.Instance.AddService(typeof(ShuffleMainDeck), gameEngine);
             ServiceManager.Instance.AddService(typeof(DiscardCard), gameEngine);
+            ServiceManager.Instance.AddService(typeof(AcknowledgeMainDraw), gameEngine);
 
 
             server.StartServer();

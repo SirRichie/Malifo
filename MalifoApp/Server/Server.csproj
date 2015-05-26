@@ -49,6 +49,7 @@
     <Compile Include="configuration\ServerConfiguration.cs" />
     <Compile Include="handler\HandlerFactory.cs" />
     <Compile Include="handler\IHandler.cs" />
+    <Compile Include="handler\impl\AcknowledgeMainDrawHandler.cs" />
     <Compile Include="handler\impl\DiscardCardHandler.cs" />
     <Compile Include="handler\impl\ShuffleMainDeckHandler.cs" />
     <Compile Include="handler\impl\ShufflePlayerDeckHandler.cs" />

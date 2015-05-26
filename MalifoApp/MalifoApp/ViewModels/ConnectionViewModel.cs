@@ -119,6 +119,19 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        private ICommand acknowledgeMainDrawCommand;
+        public ICommand AcknowledgeMainDrawCommand
+        {
+            get
+            {
+                if (acknowledgeMainDrawCommand == null)
+                {
+                    acknowledgeMainDrawCommand = new RelayCommand(p => ExecuteAcknowledgeMainDrawCommand(p));
+                }
+                return acknowledgeMainDrawCommand;
+            }
+        }
+
         public void PlayerDeckChange(string playername, DeckViewModel playerDeck)
         {
             if (!Connected)
@@ -168,6 +181,14 @@ namespace MalifoApp.ViewModels
             if (!(p is CardViewModel))
                 throw new InvalidOperationException("Can only work with CardViewModels");
             AsyncRequest notification = new DiscardCard() { Card = ((CardViewModel)p).Model, ClientHash = ClientHash };
+            server.ExecuteAsync(notification);
+        }
+
+        private void ExecuteAcknowledgeMainDrawCommand(object p)
+        {
+            if (!Connected)
+                throw new InvalidOperationException("Must be connected to execute this command");
+            AsyncRequest notification = new AcknowledgeMainDraw() { ClientHash = ClientHash };
             server.ExecuteAsync(notification);
         }
 

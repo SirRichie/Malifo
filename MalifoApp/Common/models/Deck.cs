@@ -77,7 +77,7 @@ namespace Common.models
         /// <summary>
         /// move the entire hand to the discard pile
         /// </summary>
-        public void CardcardHand()
+        public void DiscardHand()
         {
             foreach (Card card in Hand)
             {

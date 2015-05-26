@@ -86,7 +86,7 @@ namespace Server.Services
         public void PlayerDeckChange(string playername, Deck playerDeck, UserInfo requester)
         {
             // update deck
-            //EnsureFatemasterStatusOrThrowException(requester);
+            EnsureFatemasterStatusOrThrowException(requester);
             playerDeck.ReShuffle();
             gameState.Players[playername].Deck = playerDeck;
 
@@ -139,6 +139,15 @@ namespace Server.Services
             broadcastNewState();
         }
 
+        public void AcknowledgeMainDraw(UserInfo user)
+        {
+            // update deck
+            gameState.MainDeck.DiscardHand();
+
+            // broadcast
+            broadcastNewState();
+        }
+
         private void UpdateGameLogWithDrawnCards(IList<Card> drawnCards, string playername, bool personalDraw)
         {
             string deckText = personalDraw ? "personal deck" : "main deck";
@@ -153,6 +162,8 @@ namespace Server.Services
 
         private void EnsureFatemasterStatusOrThrowException(UserInfo requester)
         {
+            // debug - allow everything for now
+            return;
             if (!(requester.IsFatemaster))
             {
                 throw new BusinessException("This operation can only be done by the fatemaster");
