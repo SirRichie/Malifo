@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MalifoApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -95,7 +96,15 @@ namespace MalifoApp.Commands
         /// <remarks></remarks>
         public void Execute(object parameter)
         {
-            execute(parameter);
+            try
+            {
+                execute(parameter);
+            }
+            catch (Exception e)
+            {
+                ErrorStateViewModel.Instance.Message = e.Message;
+            }
+            
         }
 
         #endregion // ICommand Members

@@ -60,6 +60,7 @@ namespace MalifoApp.ViewModels
             if (server != null)
             {
                 server.StopServer();
+                server.Dispose();
             }
         }
 

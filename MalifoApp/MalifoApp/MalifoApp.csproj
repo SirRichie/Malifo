@@ -59,6 +59,7 @@
       <DependentUpon>EditDeckDialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ViewModels\ErrorStateViewModel.cs" />
     <Compile Include="ViewModels\FatemasterViewModel.cs" />
     <Compile Include="ViewModels\GameLogViewModel.cs" />
     <Compile Include="Converters\SubConverter.cs" />

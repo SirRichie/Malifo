@@ -31,7 +31,7 @@ namespace MalifoApp.ViewModels
 
         public string ClientHash { get; set; }
 
-        public ErrorState ErrorState { get; set; }
+        private ErrorStateViewModel ErrorState { get { return ErrorStateViewModel.Instance; } }
 
         private bool connected;
         public bool Connected
@@ -64,7 +64,6 @@ namespace MalifoApp.ViewModels
         {
             Connected = false;
             this.gameState = gameState;
-            ErrorState = new ErrorState() { Message = "", Visible = false };
         }
 
         private ICommand connectCommand;
@@ -258,6 +257,7 @@ namespace MalifoApp.ViewModels
         //}
     }
 
+    /*
     public class ErrorState : ViewModel
     {
         private string message;
@@ -296,4 +296,5 @@ namespace MalifoApp.ViewModels
             Visible = false;
         }
     }
+     * */
 }

@@ -42,6 +42,17 @@ namespace MalifoApp
         /// </summary>
         public GameStateViewModel GameState { get; set; }
 
+        /// <summary>
+        /// Keeps track of possible errors and displays them for some time
+        /// </summary>
+        public ErrorStateViewModel ErrorState
+        {
+            get
+            {
+                return ErrorStateViewModel.Instance;
+            }
+        }
+
         public MainWindow()
         {
             // register ourselves as the data context so we can use bindings

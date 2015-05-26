@@ -126,24 +126,33 @@ namespace Common.models
         }
     }
 
+    [Serializable]
     public class IllegalDrawAmountException : BusinessException
     {
         public IllegalDrawAmountException() : base() { }
         public IllegalDrawAmountException(string msg) : base(msg) { }
         public IllegalDrawAmountException(string msg, Exception e) : base(msg, e) { }
+        protected IllegalDrawAmountException(System.Runtime.Serialization.SerializationInfo info,
+        System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 
+    [Serializable]
     public class NotEnoughCardsLeftException : BusinessException
     {
         public NotEnoughCardsLeftException() : base() { }
         public NotEnoughCardsLeftException(string msg) : base(msg) { }
         public NotEnoughCardsLeftException(string msg, Exception e) : base(msg, e) { }
+        protected NotEnoughCardsLeftException(System.Runtime.Serialization.SerializationInfo info,
+        System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 
+    [Serializable]
     public class CardNotInHandException : BusinessException
     {
         public CardNotInHandException() : base() { }
         public CardNotInHandException(string msg) : base(msg) { }
         public CardNotInHandException(string msg, Exception e) : base(msg, e) { }
+        protected CardNotInHandException(System.Runtime.Serialization.SerializationInfo info,
+        System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }

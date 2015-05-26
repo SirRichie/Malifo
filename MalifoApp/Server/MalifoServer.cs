@@ -90,7 +90,7 @@ namespace Server
             Console.WriteLine();
             while (!_stopServer)
             {				
-				TcpClient clientThread = _listener.AcceptTcpClient();				
+				TcpClient clientThread = _listener.AcceptTcpClient();	
 				_threads.Add(new ServerThread(clientThread));
                 Thread.Sleep(100);
 			}
