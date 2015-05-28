@@ -57,8 +57,9 @@ namespace Server.Services
             // draw the cards
             IList<Card> drawnCards = gameState.MainDeck.Draw(amount);
 
-            // update player state
+            // update game state
             gameState.Players[user.UserName].LastMainDraw = drawnCards;
+            gameState.LastDrawPlayer = user.UserName;
 
             // update game log
             UpdateGameLogWithDrawnCards(drawnCards, user.UserName, false);

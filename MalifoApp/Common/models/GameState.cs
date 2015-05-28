@@ -16,6 +16,7 @@ namespace Common.models
         public GameLog GameLog { get; set; }
         public Dictionary<string, Player> Players { get; set; }
         public Deck MainDeck { get; set; }
+        public string LastDrawPlayer { get; set; }
 
         // that is all we need
     }

@@ -145,7 +145,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Label Content="SirRichie" HorizontalAlignment="Center" />
+                        <Label Content="{Binding GameState.LastDrawPlayer}" HorizontalAlignment="Center" Height="26" />
                         <Button Content="OK" Command="{Binding Connection.AcknowledgeMainDrawCommand}" Margin="0,5,0,0" Height="25" />
                     </StackPanel>
                     <DockPanel LastChildFill="True">

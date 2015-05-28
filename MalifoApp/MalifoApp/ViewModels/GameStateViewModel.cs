@@ -51,6 +51,20 @@ namespace MalifoApp.ViewModels
             //}
         }
 
+        public string LastDrawPlayer
+        {
+            get
+            {
+                if (Model == null) return "";
+                return Model.LastDrawPlayer;
+            }
+            set
+            {
+                Model.LastDrawPlayer = value;
+                OnPropertyChanged("LastDrawPlayer");
+            }
+        }
+
         public GameStateViewModel(GameState model)
             : base(model)
         {
@@ -69,10 +83,12 @@ namespace MalifoApp.ViewModels
             Model.GameLog = newGameState.GameLog;
             Model.MainDeck = newGameState.MainDeck;
             Model.Players = newGameState.Players;
+            Model.LastDrawPlayer = newGameState.LastDrawPlayer;
 
             OnPropertyChanged("GameLog");
             OnPropertyChanged("MainDeck");
             OnPropertyChanged("Players");
+            OnPropertyChanged("LastDrawPlayer");
             OnPropertyChanged("Model");
         }
     }
