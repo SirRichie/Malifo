@@ -110,7 +110,7 @@
                 </FlowDocument>
                 -->
             </FlowDocumentScrollViewer>
-            
+
             <DockPanel LastChildFill="True">
                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0">
 
@@ -127,9 +127,13 @@
                     </Grid>
                 </StackPanel>
                 <DockPanel>
-                    <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0">
-                        <Label Content="Last Draw" HorizontalAlignment="Center" />
-                        <ListView ItemsSource="{Binding GameState.MainDeck.Hand}" Height="340" Width="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+                    <DockPanel DockPanel.Dock="Right" VerticalAlignment="Center"  LastChildFill="True" Margin="10,0,10,10">
+                        <Label DockPanel.Dock="Top" Content="Last Draw" HorizontalAlignment="Center" />
+                        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
+                            <Label Content="{Binding GameState.LastDrawPlayer}" HorizontalAlignment="Center" Height="26" />
+                            <Button Content="OK" Command="{Binding Connection.AcknowledgeMainDrawCommand}" Margin="0,5,0,0" Height="25" />
+                        </StackPanel>
+                        <ListView ItemsSource="{Binding GameState.MainDeck.Hand}" MinHeight="340" Width="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -145,9 +149,8 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Label Content="{Binding GameState.LastDrawPlayer}" HorizontalAlignment="Center" Height="26" />
-                        <Button Content="OK" Command="{Binding Connection.AcknowledgeMainDrawCommand}" Margin="0,5,0,0" Height="25" />
-                    </StackPanel>
+
+                    </DockPanel>
                     <DockPanel LastChildFill="True">
                         <Label Content="{Binding ErrorState.Message}"
                    Visibility="{Binding ErrorState.Visible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}"
@@ -168,55 +171,29 @@
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100" />
                                     <!--<GridViewColumn DisplayMemberBinding="{Binding Path=Deck.CardsCount}" Header="Deck Size" />-->
-                                    <GridViewColumn Header="Deck">
+                                    <GridViewColumn Header="Deck" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid Margin="15,0,0,0">
                                                     <Image Source="Resources/facedown.jpg" Width="60" />
                                                     <Label Content="{Binding Path=Deck.CardsCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                 </Grid>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <!--<GridViewColumn DisplayMemberBinding="{Binding Path=Deck.DiscardCount}" Header="Discard Size" />-->
+                                    
                                     <GridViewColumn Header="Discard">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Grid>
-                                                    <Image Source="Resources/faceup.png" Width="60" />
+                                                <Grid Margin="0,0,15,0">
+                                                    <Image Source="{Binding Path=Deck.TopCardOnDiscard.Image}" Width="60" />
                                                     <Label Content="{Binding Path=Deck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                 </Grid>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <!--
-                                <GridViewColumn Header="Main Draw" Width="220">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <ItemsControl ItemsSource="{Binding Path=LastMainDraw}">
-                                                    <ItemsControl.ItemsPanel>
-                                                        <ItemsPanelTemplate>
-                                                            <WrapPanel Orientation="Horizontal"/>
-                                                        </ItemsPanelTemplate>
-                                                    </ItemsControl.ItemsPanel>
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel>
-                                                                <Image ToolTip="{Binding Path=Text}"
-                                                          Source="{Binding Path=Image}"
-                                                          Margin="1,0,1,0"
-                                                          Height="80" Width="50" />
-                                                            </StackPanel>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                -->
-                                    <GridViewColumn Header="Control Hand" Width="270">
+                                   
+                                    <GridViewColumn Header="Control Hand" Width="300">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
@@ -247,7 +224,7 @@
                                                                         <Image ToolTip="{Binding Path=Text}"
                                                                        Source="{Binding Path=Image}"
                                                                        Margin="1,0,1,0"
-                                                                       Height="80" Width="50" />
+                                                                       Width="60" />
                                                                     </Button>
                                                                 </StackPanel>
                                                             </DataTemplate>

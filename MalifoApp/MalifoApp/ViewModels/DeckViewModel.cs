@@ -82,6 +82,15 @@ namespace MalifoApp.ViewModels
                 return deck.Discard.Count;
             }
         }
+        public CardViewModel TopCardOnDiscard
+        {
+            get
+            {
+                if (deck == null) return null;
+                if (deck.Discard.Count == 0) return null;
+                return new CardViewModel(deck.Discard.Peek());
+            }
+        }
 
         //private ICommand drawCommand;
         //public ICommand DrawCommand

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MalifoApp.ViewModels
@@ -25,8 +26,10 @@ namespace MalifoApp.ViewModels
         public EditDeckDialogViewModel(DeckViewModel playerDeck)
         {
             this.deck = new DeckViewModel(CardRegistry.Instance.LoadDefaultDeck());
-            this.playerDeck = (DeckViewModel) playerDeck.Clone();
+            this.playerDeck = (DeckViewModel)playerDeck.Clone();
         }
+
+        #region commands
 
         private ICommand addToPlayerDeckCommand;
         public ICommand AddToPlayerDeckCommand
@@ -54,6 +57,26 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        private ICommand previewDropCommand;
+        public ICommand PreviewDropCommand
+        {
+            get { return previewDropCommand ?? (previewDropCommand = new RelayCommand(ExecutePreviewDrop)); }
+            set
+            {
+                previewDropCommand = value;
+                OnPropertyChanged("PreviewDropCommand");
+            }
+        } 
+
+        #endregion
+
+        #region Command execution methods
+
+        private void ExecutePreviewDrop(object p)
+        {
+            System.Diagnostics.Debug.WriteLine("dropped object: " + p);
+        }
+
         private void ExecuteAddToPlayerDeckCommand(object p)
         {
             if (!(p is CardViewModel))
@@ -71,6 +94,8 @@ namespace MalifoApp.ViewModels
             PlayerDeck.RemoveCard(card);
             OnPropertyChanged("PlayerDeck");
         }
+
+        #endregion
 
         public ICommand OkCommand { get { return new RelayCommand(p => Ok(p)); } }
         protected virtual void Ok(object parameter)
