@@ -6,5 +6,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <dialog:EditDeckDialogBox x:Key="{x:Type vm:EditDeckDialogViewModel}" x:Shared="False" />
+        <dialog:OpenFileDialogPresenter x:Key="{x:Type vm:OpenFileDialogViewModel}" />
     </Application.Resources>
 </Application>

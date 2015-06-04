@@ -122,8 +122,9 @@
 
                     <Label Content="Discard" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid>
-                        <Image Source="Resources/faceup.png" Width="70" />
+                        <Image Source="{Binding Path=GameState.MainDeck.TopCardOnDiscard.Image, FallbackValue=Resources/faceup.png}" Width="70" />
                         <Label Content="{Binding GameState.MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Button Content="Button" HorizontalAlignment="Left" Margin="0,54,0,-50" VerticalAlignment="Top" Width="70" MouseDoubleClick="Button_MouseDoubleClick"/>
                     </Grid>
                 </StackPanel>
                 <DockPanel>

@@ -126,5 +126,10 @@ namespace MalifoApp
             System.Diagnostics.Debug.WriteLine("control hand double click: " + sender);
         }
 
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Dialogs.Add(new OpenFileDialogViewModel() { DefaultExt = ".txt", InitialDirectory="c:\\" });
+        }
+
     }
 }
