@@ -3,6 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dd="clr-namespace:MalifoApp.DragAndDrop"
         Title="Minimal Dialog Box" Height="550" Width="950">
+    <Window.Resources>
+        <DataTemplate x:Key="cardTemplateDrag">
+            <!--<DataTemplate.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Width" Value="50" />
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </DataTemplate.Resources>-->
+            <StackPanel>
+                <Image Source="{Binding Path=Image}" Height="100" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="OK" Command="{Binding OkCommand}" Margin="0,10,10,10" Width="50" Height="25"/>
@@ -10,7 +24,7 @@
         </StackPanel>
         <StackPanel Margin="0,10,0,0">
             <Label Content="Available Cards" HorizontalAlignment="Center" Margin="0,20,0,0" />
-            <ListView ItemsSource="{Binding Deck.AllCardsSorted}" Height="130">
+            <ListView ItemsSource="{Binding Deck.AllCardsSorted}" Height="130" dd:DragAndDropHelper.IsDropTarget="True" dd:DragAndDropHelper.DropCommand="{Binding RemoveFromPlayerDeckCommand}">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClickMainDeck" />
@@ -23,7 +37,7 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel dd:DragAndDropHelper.IsDragSource="True">
+                        <StackPanel dd:DragAndDropHelper.IsDragSource="True" dd:DragAndDropHelper.DragDropTemplate="{StaticResource cardTemplateDrag}">
                             <Image Source="{Binding Image}"
                                    Margin="1,0,1,0"
                                    Height="100" />
@@ -32,7 +46,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Label Content="Player Deck" HorizontalAlignment="Center" Margin="0,20,0,0" />
-            <ListView ItemsSource="{Binding PlayerDeck.AllCardsSorted}" Height="130" dd:DragAndDropHelper.IsDropTarget="True" dd:DragAndDropHelper.DropCommand="{Binding PreviewDropCommand}">
+            <ListView ItemsSource="{Binding PlayerDeck.AllCardsSorted}" Height="130" dd:DragAndDropHelper.IsDropTarget="True" dd:DragAndDropHelper.DropCommand="{Binding AddToPlayerDeckCommand}">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClickPlayerDeck" />
@@ -45,7 +59,7 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
+                        <StackPanel dd:DragAndDropHelper.IsDragSource="True">
                             <Image Source="{Binding Image}"
                                    Margin="1,0,1,0"
                                    Height="100" />

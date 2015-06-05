@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace MalifoApp.DragAndDrop
@@ -16,8 +17,11 @@ namespace MalifoApp.DragAndDrop
         public static DragAndDropHelper Instance { get { return _lazy.Value; } }
 
         private DataFormat format = DataFormats.GetDataFormat("DragAndDropFormat");
+        private DraggedAdorner draggedAdorner;
         private Window topWindow;
+        private FrameworkElement sourceFrameworkElement;
         private Point initialMousePosition;
+        private Point initialMouseOffset;
         private object draggedDataContext;
 
 
@@ -142,9 +146,9 @@ namespace MalifoApp.DragAndDrop
             FrameworkElement control = sender as FrameworkElement;
             if (control != null)
             {
+                sourceFrameworkElement = control;
                 topWindow = Window.GetWindow(control);
 
-                // save the position of the mouse relative to the current window, so we can compare later
                 initialMousePosition = e.GetPosition(topWindow);
 
                 // we want to pass to the data context to the command later
@@ -165,16 +169,16 @@ namespace MalifoApp.DragAndDrop
                 // Only drag when user moved the mouse by a reasonable amount.
                 if (IsMovementBigEnough(initialMousePosition, e.GetPosition(topWindow)))
                 {
-                    //this.initialMouseOffset = this.initialMousePosition - this.sourceItemContainer.TranslatePoint(new Point(0, 0), this.topWindow);
+                    initialMouseOffset = e.GetPosition(sourceFrameworkElement);
 
                     DataObject data = new DataObject(format.Name, draggedDataContext);
 
                     // Adding events to the window to make sure dragged adorner comes up when mouse is not over a drop target.
-                    //bool previousAllowDrop = this.topWindow.AllowDrop;
-                    //this.topWindow.AllowDrop = true;
-                    //this.topWindow.DragEnter += TopWindow_DragEnter;
-                    //this.topWindow.DragOver += TopWindow_DragOver;
-                    //this.topWindow.DragLeave += TopWindow_DragLeave;
+                    bool previousAllowDrop = this.topWindow.AllowDrop;
+                    topWindow.AllowDrop = true;
+                    topWindow.DragEnter += TopWindow_DragEnter;
+                    topWindow.DragOver += TopWindow_DragOver;
+                    topWindow.DragLeave += TopWindow_DragLeave;
 
                     // synchronous call to initiate a drag and drop operation, this blocks until drag and drop is complete
                     DragDropEffects effects = DragDrop.DoDragDrop((DependencyObject)sender, data, DragDropEffects.Move);
@@ -184,12 +188,12 @@ namespace MalifoApp.DragAndDrop
                     // the Window leave event, and the dragged adorner is left behind.
                     // With this call, the dragged adorner will disappear when we release the mouse outside of the window,
                     // which is when the DoDragDrop synchronous method returns.
-                    //RemoveDraggedAdorner();
+                    RemoveAdorner();
 
-                    //this.topWindow.AllowDrop = previousAllowDrop;
-                    //this.topWindow.DragEnter -= TopWindow_DragEnter;
-                    //this.topWindow.DragOver -= TopWindow_DragOver;
-                    //this.topWindow.DragLeave -= TopWindow_DragLeave;
+                    topWindow.AllowDrop = previousAllowDrop;
+                    topWindow.DragEnter -= TopWindow_DragEnter;
+                    topWindow.DragOver -= TopWindow_DragOver;
+                    topWindow.DragLeave -= TopWindow_DragLeave;
 
                     draggedDataContext = null;
                 }
@@ -204,16 +208,48 @@ namespace MalifoApp.DragAndDrop
 
         #endregion
 
+        #region window handlers
+
+        private void TopWindow_DragEnter(object sender, DragEventArgs e)
+        {
+            ShowAdorner(e.GetPosition(topWindow));
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+        }
+
+        private void TopWindow_DragOver(object sender, DragEventArgs e)
+        {
+            ShowAdorner(e.GetPosition(topWindow));
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+        }
+
+        private void TopWindow_DragLeave(object sender, DragEventArgs e)
+        {
+            RemoveAdorner();
+            e.Handled = true;
+        }
+
+        #endregion
+
         #region drop handlers
 
         private void DropTarget_PreviewDragEnter(object sender, DragEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (draggedDataContext != null)
+            {
+                ShowAdorner(e.GetPosition(topWindow));
+                e.Handled = true;
+            }
         }
 
         private void DropTarget_PreviewDragOver(object sender, DragEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (draggedDataContext != null)
+            {
+                ShowAdorner(e.GetPosition(topWindow));
+                e.Handled = true;
+            }
         }
 
         private void DropTarget_PreviewDragLeave(object sender, DragEventArgs e)
@@ -233,11 +269,38 @@ namespace MalifoApp.DragAndDrop
                 {
                     cmd.Execute(draggedDataContext);
                 }
-                
+                RemoveAdorner();
             }
         }
 
         #endregion
+
+        #endregion
+
+        #region adorners
+
+        private void ShowAdorner(Point currentPosition)
+        {
+            if (this.draggedAdorner == null)
+            {
+                UIElement adornedElement = topWindow.Content as UIElement;
+                if (adornedElement == null)
+                    return;
+
+                var adornerLayer = AdornerLayer.GetAdornerLayer(adornedElement);
+                this.draggedAdorner = new DraggedAdorner(draggedDataContext, GetDragDropTemplate(sourceFrameworkElement), adornerLayer, adornedElement);
+            }
+            draggedAdorner.SetPosition(currentPosition.X - initialMouseOffset.X, currentPosition.Y - initialMouseOffset.Y);
+        }
+
+        private void RemoveAdorner()
+        {
+            if (this.draggedAdorner != null)
+            {
+                this.draggedAdorner.Detach();
+                this.draggedAdorner = null;
+            }
+        }
 
         #endregion
     }

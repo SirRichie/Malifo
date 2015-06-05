@@ -55,11 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviors\DropBehavior.cs" />
     <Compile Include="Dialogs\EditDeckDialogBox.xaml.cs">
       <DependentUpon>EditDeckDialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="DragAndDrop\DragAndDropHelper.cs" />
+    <Compile Include="DragAndDrop\DraggedAdorner.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\ErrorStateViewModel.cs" />
     <Compile Include="ViewModels\FatemasterViewModel.cs" />
