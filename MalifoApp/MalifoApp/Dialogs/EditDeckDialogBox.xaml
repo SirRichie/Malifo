@@ -5,13 +5,6 @@
         Title="Minimal Dialog Box" Height="550" Width="950">
     <Window.Resources>
         <DataTemplate x:Key="cardTemplateDrag">
-            <!--<DataTemplate.Resources>
-                <Style TargetType="Image">
-                    <Setter Property="Width" Value="50" />
-                    <Setter Property="Height" Value="50" />
-                    <Setter Property="Margin" Value="5" />
-                </Style>
-            </DataTemplate.Resources>-->
             <StackPanel>
                 <Image Source="{Binding Path=Image}" Height="100" />
             </StackPanel>
