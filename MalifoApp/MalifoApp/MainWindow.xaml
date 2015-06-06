@@ -28,6 +28,7 @@
             </StackPanel>
         </DataTemplate>
         <conv:BoolToImage x:Key="BoolToConnectionImage" TrueImage="{StaticResource ConnectedImage}" FalseImage="{StaticResource DisconnectedImage}" />
+        <conv:BoolToString x:Key="BoolToConnectionString" TrueString="Connect" FalseString="Disconnect" />
     </Window.Resources>
 
     <Grid>
@@ -73,13 +74,13 @@
                         <TextBlock Text="Fatemaster?" Grid.Column="2" Grid.Row="1" />
                         <RibbonCheckBox IsChecked="{Binding Connection.AsFatemaster}" Grid.Column="3" Grid.Row="1" />
                     </Grid>
-                    <RibbonButton LargeImageSource="Resources/connect_icon.jpg" Label="Connect" Command="{Binding Connection.ConnectCommand}"/>
+                    <RibbonButton 
+                        LargeImageSource="{Binding Path=Connection.Connected, Converter={StaticResource BoolToConnectionImage}, FallbackValue={StaticResource DisconnectedImage}}" 
+                        Label="{Binding Path=Connection.Connected, Converter={StaticResource BoolToConnectionString}, FallbackValue=Connect}" 
+                        Command="{Binding Connection.ConnectCommand}"/>
                     <!--<RibbonTextBox Text="{Binding Connection.ClientHash}" />-->
                     <!--<RibbonButton LargeImageSource="Resources/connected.png" IsEnabled="False" />-->
                     
-                </RibbonGroup>
-                <RibbonGroup>
-                    <Image Source="{Binding Path=Connection.Connected, Converter={StaticResource BoolToConnectionImage}, FallbackValue={StaticResource DisconnectedImage}}" Margin="1,10,1,1" Width="50"/>
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Fatemaster" DataContext="{Binding Fatemaster}">

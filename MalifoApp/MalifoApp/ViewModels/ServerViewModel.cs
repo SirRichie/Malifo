@@ -69,7 +69,7 @@ namespace MalifoApp.ViewModels
 
         private void ExecuteStartServerCommand(object p)
         {
-            ServerConfiguration config = new ServerConfiguration() { LocalAddress = IPAddress.Any, Port = 35000 };
+            ServerConfiguration config = new ServerConfiguration() { LocalAddress = IPAddress.Any, Port = Port };
             server = new MalifoServer(config);
 
             ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));

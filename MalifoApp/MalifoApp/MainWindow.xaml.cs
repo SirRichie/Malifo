@@ -62,7 +62,7 @@ namespace MalifoApp
             GameState = new GameStateViewModel(null);
             GameState.Players.Add(new PlayerViewModel(new Player() { Name = "dummy" }));
             Connection = new ConnectionViewModel(GameState) { ServerPort = 35000, ServerAddress = "localhost", Username = "SirRichie" };
-            Server = new ServerViewModel();
+            Server = new ServerViewModel() { Port = 35000 };
             Fatemaster = new FatemasterViewModel(GameState, Connection, Dialogs);
 
             InitializeComponent();

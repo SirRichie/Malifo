@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToString.cs" />
     <Compile Include="Converters\BoolToImage.cs" />
     <Compile Include="Dialogs\EditDeckDialogBox.xaml.cs">
       <DependentUpon>EditDeckDialogBox.xaml</DependentUpon>
