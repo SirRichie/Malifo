@@ -151,7 +151,7 @@ namespace Server.Services
 
         private void UpdateGameLogWithDrawnCards(IList<Card> drawnCards, string playername, bool personalDraw)
         {
-            string deckText = personalDraw ? "personal deck" : "main deck";
+            string deckText = personalDraw ? "twist deck" : "fate deck";
             string text = "draws (" + deckText + ") ";
             foreach (Card card in drawnCards)
             {
