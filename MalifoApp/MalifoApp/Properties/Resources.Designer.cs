@@ -613,6 +613,26 @@ namespace MalifoApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deck_fate {
+            get {
+                object obj = ResourceManager.GetObject("deck_fate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deck_twisted {
+            get {
+                object obj = ResourceManager.GetObject("deck_twisted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap disconnect_icon {
             get {
                 object obj = ResourceManager.GetObject("disconnect_icon", resourceCulture);

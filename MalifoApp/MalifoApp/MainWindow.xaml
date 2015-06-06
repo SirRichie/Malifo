@@ -18,7 +18,7 @@
                       Command="{Binding Path=DataContext.ShufflePlayerDeckCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RibbonTab}}}"
                       CommandParameter="{Binding Name}"/>
         </DataTemplate>
-        <BitmapImage x:Key="DefaultFacedownImage" UriSource="Resources/faceup.png" />
+        <BitmapImage x:Key="DefaultFaceupImage" UriSource="Resources/faceup.png" />
         <DataTemplate x:Key="cardTemplateDrag">
             <StackPanel>
                 <Image Source="{Binding Path=Image}" Height="100" />
@@ -35,13 +35,13 @@
         <Ribbon x:Name="RibbonWin" SelectedIndex="0">
 
             <RibbonTab Header="Malifo" KeyTip="H" >
-                <RibbonGroup Header="Drawing - General" Background="#FFA3CDFF">
+                <RibbonGroup Header="Drawing - Fate Deck" Background="#FFA3CDFF">
                     <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding Connection.DrawMainCommand}" CommandParameter="1" />
                     <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding Connection.DrawMainCommand}" CommandParameter="2" />
                     <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding Connection.DrawMainCommand}" CommandParameter="3" />
                     <RibbonButton LargeImageSource="Resources/fourcards.png" Label="Draw 4" Command="{Binding Connection.DrawMainCommand}" CommandParameter="4" />
                 </RibbonGroup>
-                <RibbonGroup Header="Drawing - Personal" Background="#FFECE9A4">
+                <RibbonGroup Header="Drawing - Twist Deck" Background="#FFECE9A4">
                     <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="1" />
                     <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="2" />
                     <RibbonButton LargeImageSource="Resources/threecards.png" Label="Draw 3" Command="{Binding Connection.DrawPersonalCommand}" CommandParameter="3" />
@@ -121,13 +121,13 @@
 
                     <Label Content="Deck" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Grid>
-                        <Image Source="Resources/facedown.jpg" Width="70" Margin="0,0,0,20" />
+                        <Image Source="Resources/deck_fate.png" Width="70" Margin="0,0,0,20" />
                         <Label Content="{Binding GameState.MainDeck.CardsCount}" Margin="0,0,0,20" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
 
                     <Label Content="Discard" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid>
-                        <Image Source="{Binding Path=GameState.MainDeck.TopCardOnDiscard.Image, FallbackValue={StaticResource DefaultFacedownImage}}" Width="70" />
+                        <Image Source="{Binding Path=GameState.MainDeck.TopCardOnDiscard.Image, FallbackValue={StaticResource DefaultFaceupImage}}" Width="70" />
                         <Label Content="{Binding GameState.MainDeck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Button Content="Button" HorizontalAlignment="Left" Margin="0,54,0,-50" VerticalAlignment="Top" Width="70" MouseDoubleClick="Button_MouseDoubleClick"/>
                     </Grid>
@@ -181,7 +181,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Grid Margin="15,0,0,0">
-                                                    <Image Source="Resources/facedown.jpg" Width="60" />
+                                                    <Image Source="Resources/deck_twisted.png" Width="60" />
                                                     <Label Content="{Binding Path=Deck.CardsCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                 </Grid>
                                             </DataTemplate>
@@ -192,7 +192,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Grid Margin="0,0,15,0" dd:DragAndDropHelper.IsDropTarget="True" dd:DragAndDropHelper.DropCommand="{Binding Path=DataContext.Connection.DiscardCommand , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
-                                                    <Image Source="{Binding Path=Deck.TopCardOnDiscard.Image}" Width="60" />
+                                                    <Image Source="{Binding Path=Deck.TopCardOnDiscard.Image, FallbackValue={StaticResource DefaultFaceupImage}}" Width="60" />
                                                     <Label Content="{Binding Path=Deck.DiscardCount}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                 </Grid>
                                             </DataTemplate>
