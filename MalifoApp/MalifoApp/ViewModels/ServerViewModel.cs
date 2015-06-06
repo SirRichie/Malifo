@@ -18,7 +18,10 @@ namespace MalifoApp.ViewModels
 {
     public class ServerViewModel : ViewModel
     {
+        
         private MalifoServer server;
+
+        public int Port { get; set; }
 
         public bool Started { get; private set; }
         public bool Stopped

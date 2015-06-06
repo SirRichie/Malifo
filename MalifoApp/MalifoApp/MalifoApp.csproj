@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToImage.cs" />
     <Compile Include="Dialogs\EditDeckDialogBox.xaml.cs">
       <DependentUpon>EditDeckDialogBox.xaml</DependentUpon>
     </Compile>
@@ -336,6 +337,10 @@
   <ItemGroup>
     <Resource Include="Resources\deck_fate.png" />
     <Resource Include="Resources\deck_twisted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\connected.png" />
+    <Resource Include="Resources\disconnected.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
