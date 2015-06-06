@@ -11,10 +11,12 @@ namespace MalifoApp.ViewModels
 {
     public class GameLogViewModel : ViewModel<GameLog>
     {
-        public GameLogViewModel(GameLog model)
+        private bool showSensitive;
+
+        public GameLogViewModel(GameLog model, bool showSensitive)
             : base(model)
         {
-             
+            this.showSensitive = showSensitive;
         }
 
         public FlowDocument Document
@@ -29,6 +31,10 @@ namespace MalifoApp.ViewModels
 
                 foreach (GameLogEvent gameEvent in Model.Events)
                 {
+                    // do not show events that only the fatemaster should see
+                    if (!showSensitive && gameEvent.IsSensitive)
+                        continue;
+
                     Paragraph p = new Paragraph();
                     p.FontSize = 10;
                     

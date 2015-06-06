@@ -13,8 +13,8 @@ namespace MalifoApp.ViewModels
         {
             get
             {
-                if (Model == null) return new GameLogViewModel(null);
-                return new GameLogViewModel(Model.GameLog);
+                if (Model == null) return new GameLogViewModel(null, false);
+                return new GameLogViewModel(Model.GameLog, ConnectedAsFatemaster());
             }
             private set
             {
@@ -65,10 +65,18 @@ namespace MalifoApp.ViewModels
             }
         }
 
+        public ConnectionViewModel Connection { private get; set; }
+
         public GameStateViewModel(GameState model)
             : base(model)
         {
-            
+
+        }
+
+        private bool ConnectedAsFatemaster()
+        {
+            if (Connection == null) return false;
+            return !Model.Players.ContainsKey(Connection.Username);
         }
 
         public PlayerViewModel GetPlayer(string playername)

@@ -28,5 +28,6 @@ namespace Common.models
         public DateTime Timestamp { get; set; }
         public string Playername { get; set; }
         public string Text { get; set; }
+        public bool IsSensitive { get; set; }
     }
 }

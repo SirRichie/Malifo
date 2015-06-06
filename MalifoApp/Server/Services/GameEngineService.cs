@@ -49,6 +49,11 @@ namespace Server.Services
             }
             // add the player with an empty deck, decks are edited separately
             gameState.Players.Add(name, new Player() { Name = name, Deck = new Deck() });
+
+            // update game state
+            string text = "connected";
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = name, Text = text, Timestamp = DateTime.Now, IsSensitive = false });
+
             broadcastNewState();
         }
 
@@ -93,7 +98,7 @@ namespace Server.Services
 
             // update game log
             string text = "changes deck of " + playername;
-            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now, IsSensitive = false });
 
             // broadcast
             broadcastNewState();
@@ -107,7 +112,7 @@ namespace Server.Services
             
             // update game log
             string text = "shuffles the deck of " + playername;
-            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now, IsSensitive = false });
 
             // broadcast
             broadcastNewState();
@@ -121,7 +126,7 @@ namespace Server.Services
 
             // update game log
             string text = "shuffles the main deck";
-            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now });
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = "Fatemaster", Text = text, Timestamp = DateTime.Now, IsSensitive = false });
 
             // broadcast
             broadcastNewState();
@@ -134,7 +139,7 @@ namespace Server.Services
 
             // update game log
             string text = "discards " + CardRegistry.Instance.ShortTexts[card.Key];
-            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = user.UserName, Text = text, Timestamp = DateTime.Now });
+            gameState.GameLog.Events.Add(new GameLogEvent() { Playername = user.UserName, Text = text, Timestamp = DateTime.Now, IsSensitive = true });
 
             // broadcast
             broadcastNewState();
@@ -158,7 +163,7 @@ namespace Server.Services
                 text += CardRegistry.Instance.ShortTexts[card.Key] + ", ";
             }
             text = text.Substring(0, text.Length - 2);
-            gameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = playername, Timestamp = DateTime.Now });
+            gameState.GameLog.Events.Add(new GameLogEvent() { Text = text, Playername = playername, Timestamp = DateTime.Now, IsSensitive = true });
         }
 
         private void EnsureFatemasterStatusOrThrowException(UserInfo requester)
