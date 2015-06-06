@@ -28,7 +28,7 @@
             </StackPanel>
         </DataTemplate>
         <conv:BoolToImage x:Key="BoolToConnectionImage" TrueImage="{StaticResource ConnectedImage}" FalseImage="{StaticResource DisconnectedImage}" />
-        <conv:BoolToString x:Key="BoolToConnectionString" TrueString="Connect" FalseString="Disconnect" />
+        <conv:BoolToString x:Key="BoolToConnectionString" TrueString="Disconnect" FalseString="Connect" />
     </Window.Resources>
 
     <Grid>
@@ -84,10 +84,10 @@
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Fatemaster" DataContext="{Binding Fatemaster}">
-                <RibbonGroup Header="Server Deck" Background="#FFA3CDFF">
+                <RibbonGroup Header="Fate Deck Management" Background="#FFA3CDFF">
                     <RibbonButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" Command="{Binding ShuffleMainDeckCommand}" />
                 </RibbonGroup>
-                <RibbonGroup Header="Player Deck Management" Background="#FFECE9A4">
+                <RibbonGroup Header="Twist Deck Management" Background="#FFECE9A4">
                     <RibbonMenuButton Label="Edit Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource EditDeckItemTemplate}">
 
                     </RibbonMenuButton>
