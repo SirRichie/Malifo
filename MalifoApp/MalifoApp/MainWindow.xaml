@@ -37,7 +37,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Ribbon x:Name="RibbonWin" SelectedIndex="0">
+        <Ribbon x:Name="RibbonWin" SelectedIndex="1">
 
             <RibbonTab Header="Malifaux" KeyTip="H" >
                 <RibbonGroup Header="Drawing - Fate Deck" Background="#FFA3CDFF">
@@ -85,13 +85,13 @@
             </RibbonTab>
             <RibbonTab Header="Fatemaster" DataContext="{Binding Fatemaster}">
                 <RibbonGroup Header="Fate Deck Management" Background="#FFA3CDFF">
-                    <RibbonButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" Command="{Binding ShuffleMainDeckCommand}" />
+                    <RibbonButton Label="Shuffle Deck" LargeImageSource="Resources/shuffle.png" Command="{Binding ShuffleMainDeckCommand}" />
                 </RibbonGroup>
                 <RibbonGroup Header="Twist Deck Management" Background="#FFECE9A4">
                     <RibbonMenuButton Label="Edit Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource EditDeckItemTemplate}">
 
                     </RibbonMenuButton>
-                    <RibbonMenuButton Label="Shuffle Deck" LargeImageSource="Resources/onecard.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource ShuffleDeckItemTemplate}">
+                    <RibbonMenuButton Label="Shuffle Deck" LargeImageSource="Resources/shuffle.png" ItemsSource="{Binding GameState.Players}" ItemTemplate="{StaticResource ShuffleDeckItemTemplate}">
 
                     </RibbonMenuButton>
                 </RibbonGroup>
