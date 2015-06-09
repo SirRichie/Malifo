@@ -13,13 +13,27 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
+using MvvmDialogs.ViewModels;
+using DataPersistor;
+using Common.models;
+
 
 namespace MalifoApp.ViewModels
 {
     public class ServerViewModel : ViewModel
     {
-        
+
+        private ObservableCollection<IDialogViewModel> _dialogs;        
         private MalifoServer server;
+        private Persistor<GameState> persitor;
+
+
+        public ServerViewModel(ObservableCollection<IDialogViewModel> dialogs)
+        {
+            persitor = new Persistor<GameState>();
+            _dialogs = dialogs;
+        }
 
         public int Port { get; set; }
 
@@ -66,6 +80,68 @@ namespace MalifoApp.ViewModels
                 server.Dispose();
             }
         }
+
+        private ICommand openFileDialogCommand;
+        public ICommand OpenFileDialogCommand
+        {
+            get
+            {
+                if (openFileDialogCommand == null)
+                {
+                    openFileDialogCommand = new RelayCommand(p => ExecuteOpenFileDialogCommand(p));
+                }
+                return openFileDialogCommand;
+            }
+        }
+
+        private void ExecuteOpenFileDialogCommand(object p)
+        {          
+            var openFiledialog = new OpenFileDialogViewModel() {
+                DefaultExtension = ".mres", 
+                InitialDirectory = "c:\\",
+                Filter = "MalifoResources (*.mres) | *.mres"
+            };
+            _dialogs.Add(openFiledialog);
+            if (openFiledialog.Result)
+            {
+                string fileName = openFiledialog.FileName;
+            }
+        }
+
+        private ICommand saveFileDialogCommand;
+        public ICommand SaveFileDialogCommand
+        {
+            get
+            {
+                if (saveFileDialogCommand == null)
+                {
+                    saveFileDialogCommand = new RelayCommand(p => ExecuteSaveFileDialogCommand(p));
+                }
+                return saveFileDialogCommand;
+            }
+        }
+
+        private void ExecuteSaveFileDialogCommand(object p)
+        {
+            var openFiledialog = new SaveFileDialogViewModel()
+            {
+                DefaultExtension = ".mres",
+                InitialDirectory = "c:\\",
+                Filter = "MalifoResources (*.mres) | *.mres",
+                OverwritePrompt = true
+            };
+            _dialogs.Add(openFiledialog);
+            if (openFiledialog.Result)
+            {               
+                string fileName = openFiledialog.FileName;
+                var gameEngineService = ServiceManager.Instance.GetServiceByType(typeof(NewPlayer))as GameEngineService;
+                var gameState = gameEngineService.GameState;
+                if (gameState != null)
+                {
+                    persitor.Save(gameState, fileName);
+                }
+            }
+        }        
 
         private void ExecuteStartServerCommand(object p)
         {

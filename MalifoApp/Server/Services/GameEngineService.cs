@@ -16,6 +16,11 @@ namespace Server.Services
 
         private GameState gameState;
 
+        public GameState GameState
+        {
+            get { return gameState; }
+        }
+
         public GameEngineService()
         {
             // TODO later, we want to load the model

@@ -9,30 +9,25 @@ using System.Threading.Tasks;
 
 namespace MalifoApp.Dialogs
 {
-    public class OpenFileDialogPresenter : IDialogBoxPresenter<OpenFileDialogViewModel>
+    public class SaveFileDialogPresenter : IDialogBoxPresenter<SaveFileDialogViewModel>
     {
         public string FileExtension { get; set; }
 
-        public void Show(OpenFileDialogViewModel viewModel)
+        public void Show(SaveFileDialogViewModel viewModel)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = viewModel.Multiselect;
-            dlg.ReadOnlyChecked = viewModel.ReadOnlyChecked;
-            dlg.ShowReadOnly = viewModel.ShowReadOnly;
+            SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = viewModel.FileName;
             dlg.Filter = viewModel.Filter;
             dlg.InitialDirectory = viewModel.InitialDirectory;
             dlg.RestoreDirectory = viewModel.RestoreDirectory;
             dlg.Title = viewModel.Title;
             dlg.ValidateNames = viewModel.ValidateNames;
-            dlg.DefaultExt = viewModel.DefaultExtension;            
+            dlg.DefaultExt = viewModel.DefaultExtension;
+            dlg.OverwritePrompt = viewModel.OverwritePrompt;
 
             var result = dlg.ShowDialog();
             viewModel.Result = (result != null) && result.Value;
 
-            viewModel.Multiselect = dlg.Multiselect;
-            viewModel.ReadOnlyChecked = dlg.ReadOnlyChecked;
-            viewModel.ShowReadOnly = dlg.ShowReadOnly;
             viewModel.FileName = dlg.FileName;
             viewModel.FileNames = dlg.FileNames;
             viewModel.Filter = dlg.Filter;
@@ -42,6 +37,7 @@ namespace MalifoApp.Dialogs
             viewModel.SafeFileNames = dlg.SafeFileNames;
             viewModel.Title = dlg.Title;
             viewModel.ValidateNames = dlg.ValidateNames;
+            viewModel.OverwritePrompt = dlg.OverwritePrompt;
         }
     }
 }

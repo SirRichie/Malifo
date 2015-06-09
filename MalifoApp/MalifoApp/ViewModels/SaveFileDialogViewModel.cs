@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace MalifoApp.ViewModels
 {
-    public class OpenFileDialogViewModel : ViewModel, IDialogViewModel
-    {        
-        public bool Multiselect { get; set; }
-        public bool ReadOnlyChecked { get; set; }
-        public bool ShowReadOnly { get; set; }
+    public class SaveFileDialogViewModel : ViewModel, IDialogViewModel
+    {              
         public string FileName { get; set; }
         public string[] FileNames { get; set; }
         public string Filter { get; set; }
@@ -23,5 +20,6 @@ namespace MalifoApp.ViewModels
         public bool ValidateNames { get; set; }
         public bool Result { get; set; }
         public string DefaultExtension { get; set; }
+        public bool OverwritePrompt { get; set; }
     }
 }

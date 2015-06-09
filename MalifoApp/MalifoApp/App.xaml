@@ -7,5 +7,6 @@
     <Application.Resources>
         <dialog:EditDeckDialogBox x:Key="{x:Type vm:EditDeckDialogViewModel}" x:Shared="False" />
         <dialog:OpenFileDialogPresenter x:Key="{x:Type vm:OpenFileDialogViewModel}" />
+        <dialog:SaveFileDialogPresenter x:Key="{x:Type vm:SaveFileDialogViewModel}" />
     </Application.Resources>
 </Application>

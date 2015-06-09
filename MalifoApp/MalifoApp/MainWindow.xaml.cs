@@ -63,7 +63,7 @@ namespace MalifoApp
             GameState.Players.Add(new PlayerViewModel(new Player() { Name = "dummy" }));
             Connection = new ConnectionViewModel(GameState) { ServerPort = 35000, ServerAddress = "localhost", Username = "SirRichie" };
             GameState.Connection = Connection;  // we need to have a reference to know if we are the gamemaster
-            Server = new ServerViewModel() { Port = 35000 };
+            Server = new ServerViewModel(Dialogs) { Port = 35000 };
             Fatemaster = new FatemasterViewModel(GameState, Connection, Dialogs);
 
             InitializeComponent();
@@ -125,12 +125,6 @@ namespace MalifoApp
         private void ControlHandCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("control hand double click: " + sender);
-        }
-
-        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            Dialogs.Add(new OpenFileDialogViewModel() { DefaultExt = ".txt", InitialDirectory="c:\\" });
-        }
-
+        } 
     }
 }
