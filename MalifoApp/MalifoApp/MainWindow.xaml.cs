@@ -60,10 +60,15 @@ namespace MalifoApp
 
             // initialize view models
             GameState = new GameStateViewModel(null);
-            GameState.Players.Add(new PlayerViewModel(new Player() { Name = "dummy" }));
-            Connection = new ConnectionViewModel(GameState) { ServerPort = 35000, ServerAddress = "localhost", Username = "SirRichie" };
+            GameState.Players.Add(new PlayerViewModel(new Player() { Name = Properties.Settings.Default.username }));
+            Connection = new ConnectionViewModel(GameState)
+            {
+                ServerPort = Properties.Settings.Default.serverPort,
+                ServerAddress = Properties.Settings.Default.serverAddress,
+                Username = Properties.Settings.Default.username
+            };
             GameState.Connection = Connection;  // we need to have a reference to know if we are the gamemaster
-            Server = new ServerViewModel(Dialogs) { Port = 35000 };
+            Server = new ServerViewModel() { Port = 35000 };
             Fatemaster = new FatemasterViewModel(GameState, Connection, Dialogs);
 
             InitializeComponent();
@@ -115,6 +120,7 @@ namespace MalifoApp
         {
             System.Diagnostics.Debug.WriteLine("closing");
             Server.StopServerCommand.Execute(null);
+            Properties.Settings.Default.Save();
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -125,6 +131,12 @@ namespace MalifoApp
         private void ControlHandCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("control hand double click: " + sender);
-        } 
+        }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Dialogs.Add(new OpenFileDialogViewModel() { DefaultExt = ".txt", InitialDirectory = "c:\\" });
+        }
+
     }
 }

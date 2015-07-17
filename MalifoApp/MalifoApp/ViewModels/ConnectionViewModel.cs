@@ -15,14 +15,64 @@ namespace MalifoApp.ViewModels
 {
     public class ConnectionViewModel : ViewModel
     {
-        public string ServerAddress { get; set; }
-        public int ServerPort { get; set; }
-        public string Username { get; set; }
+        private string serverAddress;
+        public string ServerAddress
+        {
+            get
+            {
+                return serverAddress;
+            }
+            set
+            {
+                serverAddress = value;
+                Properties.Settings.Default.serverAddress = serverAddress;
+            }
+        }
+
+        private int serverPort;
+        public int ServerPort
+        {
+            get
+            {
+                return serverPort;
+            }
+            set
+            {
+                serverPort = value;
+                Properties.Settings.Default.serverPort = serverPort;
+            }
+        }
+
+        private string username;
+        public string Username
+        {
+            get
+            {
+                return username;
+            }
+            set
+            {
+                username = value;
+                Properties.Settings.Default.username = username;
+            }
+        }
 
         /// <summary>
         /// indicates if we are trying to connect as the fatemaster
         /// </summary>
-        public bool AsFatemaster { get; set; }
+        private bool asFatemaster;
+        public bool AsFatemaster
+        {
+            get
+            {
+                return asFatemaster;
+            }
+            set
+            {
+                asFatemaster = value;
+                Properties.Settings.Default.asFatemaster = asFatemaster;
+            }
+        }
 
         /// <summary>
         /// indicates if the server confirmed that we are the fatemaster

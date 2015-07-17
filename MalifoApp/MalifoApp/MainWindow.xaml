@@ -72,11 +72,11 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Text="Server Address" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-                        <RibbonTextBox Name="serverAddress" Text="{Binding Connection.ServerAddress, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0"/>
-                        <TextBlock Text="Port" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                        <RibbonTextBox Name="port" Text="{Binding Connection.ServerPort, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Grid.Row="1" />
-                        <TextBlock Grid.Column="2" Grid.Row="0" Text="Username"/>
-                        <RibbonTextBox Name="username" Text="{Binding Connection.Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="0" />
+                        <RibbonTextBox Name="serverAddress" Text="{Binding Connection.ServerAddress, UpdateSourceTrigger=PropertyChanged, FallbackValue=sirrichie.no-ip.org}" Grid.Column="1" Grid.Row="0" TextBoxWidth="120"/>
+                        <TextBlock Text="Port" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/> 
+                        <RibbonTextBox Name="port" Text="{Binding Connection.ServerPort, UpdateSourceTrigger=PropertyChanged, FallbackValue=35000}"  Grid.Column="3" Grid.Row="0" TextBoxWidth="40"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Username"/>
+                        <RibbonTextBox Name="username" Text="{Binding Connection.Username, UpdateSourceTrigger=PropertyChanged, FallbackValue=localhost}" Grid.Column="1" Grid.Row="1" TextBoxWidth="120"/>
                         <TextBlock Text="Fatemaster?" Grid.Column="2" Grid.Row="1" />
                         <RibbonCheckBox IsChecked="{Binding Connection.AsFatemaster}" Grid.Column="3" Grid.Row="1" />
                     </Grid>
