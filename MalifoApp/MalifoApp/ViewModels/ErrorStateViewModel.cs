@@ -23,6 +23,7 @@ namespace MalifoApp.ViewModels
             set
             {
                 message = value;
+                Visible = true;
                 OnPropertyChanged("Message");
             }
         }

@@ -1,5 +1,7 @@
 ﻿using Common;
 using Common.models;
+using DataPersistor;
+using MalifoApp.Commands;
 using MalifoApp.ViewModels;
 using MvvmDialogs.ViewModels;
 using System;
@@ -25,11 +27,14 @@ namespace MalifoApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Persistor<GameState> persitor;
+        private GameState loadedGameState;
+
         /// <summary>
         /// MVVM compatible reference to dialogs
         /// </summary>
-        private ObservableCollection<IDialogViewModel> _Dialogs = new ObservableCollection<IDialogViewModel>();
-        public ObservableCollection<IDialogViewModel> Dialogs { get { return _Dialogs; } }
+        private ObservableCollection<IDialogViewModel> _dialogs = new ObservableCollection<IDialogViewModel>();
+        public ObservableCollection<IDialogViewModel> Dialogs { get { return _dialogs; } }
 
         public ConnectionViewModel Connection { get; set; }
 
@@ -41,6 +46,8 @@ namespace MalifoApp
         /// Reference to the complete game state, this includes players and decks
         /// </summary>
         public GameStateViewModel GameState { get; set; }
+
+       
 
         /// <summary>
         /// Keeps track of possible errors and displays them for some time
@@ -58,6 +65,8 @@ namespace MalifoApp
             // register ourselves as the data context so we can use bindings
             this.DataContext = this;
 
+            persitor = new Persistor<Common.models.GameState>();
+
             // initialize view models
             GameState = new GameStateViewModel(null);
             GameState.Players.Add(new PlayerViewModel(new Player() { Name = Properties.Settings.Default.username }));
@@ -68,12 +77,76 @@ namespace MalifoApp
                 Username = Properties.Settings.Default.username
             };
             GameState.Connection = Connection;  // we need to have a reference to know if we are the gamemaster
-            Server = new ServerViewModel() { Port = 35000 };
+            Server = new ServerViewModel(GameState) { Port = 35000 };
             Fatemaster = new FatemasterViewModel(GameState, Connection, Dialogs);
 
             InitializeComponent();
 
         }
+
+        private ICommand openFileDialogCommand;
+        public ICommand OpenFileDialogCommand
+        {
+            get
+            {
+                if (openFileDialogCommand == null)
+                {
+                    openFileDialogCommand = new RelayCommand(p => ExecuteOpenFileDialogCommand(p));
+                }
+                return openFileDialogCommand;
+            }
+        }
+
+        private void ExecuteOpenFileDialogCommand(object p)
+        {
+            var openFiledialog = new OpenFileDialogViewModel()
+            {
+                DefaultExtension = ".mres",
+                InitialDirectory = "c:\\",
+                Filter = "MalifoResources (*.mres) | *.mres"
+            };
+            _dialogs.Add(openFiledialog);
+            if (openFiledialog.Result)
+            {
+                string fileName = openFiledialog.FileName;
+                loadedGameState = persitor.LoadData(fileName);
+                GameState.NewGameState(loadedGameState);
+            }
+        }
+
+        private ICommand saveFileDialogCommand;
+        public ICommand SaveFileDialogCommand
+        {
+            get
+            {
+                if (saveFileDialogCommand == null)
+                {
+                    saveFileDialogCommand = new RelayCommand(p => ExecuteSaveFileDialogCommand(p));
+                }
+                return saveFileDialogCommand;
+            }
+        }
+
+        private void ExecuteSaveFileDialogCommand(object p)
+        {
+            var openFiledialog = new SaveFileDialogViewModel()
+            {
+                DefaultExtension = ".mres",
+                InitialDirectory = "c:\\",
+                Filter = "MalifoResources (*.mres) | *.mres",
+                OverwritePrompt = true
+            };
+            _dialogs.Add(openFiledialog);
+            if (openFiledialog.Result)
+            {
+                string fileName = openFiledialog.FileName;
+                var gameState = GameState.Model;
+                if (gameState != null)
+                {
+                    persitor.Save(gameState, fileName);
+                }
+            }
+        }    
 
 
         /// <summary>
@@ -135,7 +208,7 @@ namespace MalifoApp
 
         private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Dialogs.Add(new OpenFileDialogViewModel() { DefaultExt = ".txt", InitialDirectory = "c:\\" });
+            //Dialogs.Add(new OpenFileDialogViewModel() { DefaultExt = ".txt", InitialDirectory = "c:\\" });
         }
 
     }

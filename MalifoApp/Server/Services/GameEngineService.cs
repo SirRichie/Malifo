@@ -23,8 +23,12 @@ namespace Server.Services
 
         public GameEngineService()
         {
-            // TODO later, we want to load the model
             gameState = CreateEmptyGameState();
+        }
+
+        public GameEngineService(GameState gameState)
+        {
+            this.gameState = gameState;
         }
 
         private GameState CreateEmptyGameState()
@@ -48,8 +52,9 @@ namespace Server.Services
 
             if (gameState.Players.ContainsKey(name))
             {
-                // we already know the player, so don't do anything
+                // we already know the player, so don't do anything except broadcast so the connecting player's client has the current state
                 // the player is probably in the list because their data was loaded on startup
+                broadcastNewState();
                 return;
             }
             // add the player with an empty deck, decks are edited separately
@@ -173,12 +178,14 @@ namespace Server.Services
 
         private void EnsureFatemasterStatusOrThrowException(UserInfo requester)
         {
-            // debug - allow everything for now
+#if DEBUG
             return;
+#else
             if (!(requester.IsFatemaster))
             {
                 throw new BusinessException("This operation can only be done by the fatemaster");
             }
+#endif
         }
 
         private void broadcastNewState()

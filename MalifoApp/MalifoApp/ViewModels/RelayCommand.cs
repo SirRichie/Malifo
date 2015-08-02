@@ -96,16 +96,22 @@ namespace MalifoApp.Commands
         /// <remarks></remarks>
         public void Execute(object parameter)
         {
+#if DEBUG
+            execute(parameter);
+#else
             try
             {
                 execute(parameter);
             }
             catch (Exception e)
             {
+
                 ErrorStateViewModel.Instance.Message = e.Message;
+
             }
-            
+#endif
         }
+
 
         #endregion // ICommand Members
     }

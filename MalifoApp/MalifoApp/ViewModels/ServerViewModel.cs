@@ -5,7 +5,6 @@ using Server;
 using Server.configuration;
 using Server.Services;
 using Server.userManagement;
-using Server.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +23,12 @@ namespace MalifoApp.ViewModels
     public class ServerViewModel : ViewModel
     {
 
-        private ObservableCollection<IDialogViewModel> _dialogs;        
         private MalifoServer server;
-        private Persistor<GameState> persitor;
+        private GameStateViewModel gameState;
 
-
-        public ServerViewModel(ObservableCollection<IDialogViewModel> dialogs)
+        public ServerViewModel(GameStateViewModel gameState)
         {
-            persitor = new Persistor<GameState>();
-            _dialogs = dialogs;
+            this.gameState = gameState;
         }
 
         public int Port { get; set; }
@@ -81,67 +77,32 @@ namespace MalifoApp.ViewModels
             }
         }
 
-        private ICommand openFileDialogCommand;
-        public ICommand OpenFileDialogCommand
+        private ICommand toggleServerCommand;
+        public ICommand ToggleServerCommand
         {
             get
             {
-                if (openFileDialogCommand == null)
+                if (toggleServerCommand == null)
                 {
-                    openFileDialogCommand = new RelayCommand(p => ExecuteOpenFileDialogCommand(p));
+                    toggleServerCommand = new RelayCommand(p => ExecuteToggleServerCommand(p));
                 }
-                return openFileDialogCommand;
+                return toggleServerCommand;
             }
         }
 
-        private void ExecuteOpenFileDialogCommand(object p)
-        {          
-            var openFiledialog = new OpenFileDialogViewModel() {
-                DefaultExtension = ".mres", 
-                InitialDirectory = "c:\\",
-                Filter = "MalifoResources (*.mres) | *.mres"
-            };
-            _dialogs.Add(openFiledialog);
-            if (openFiledialog.Result)
-            {
-                string fileName = openFiledialog.FileName;
-            }
-        }
-
-        private ICommand saveFileDialogCommand;
-        public ICommand SaveFileDialogCommand
+        private void ExecuteToggleServerCommand(object p)
         {
-            get
+            if (Started)
             {
-                if (saveFileDialogCommand == null)
-                {
-                    saveFileDialogCommand = new RelayCommand(p => ExecuteSaveFileDialogCommand(p));
-                }
-                return saveFileDialogCommand;
+                ExecuteStopServerCommand(p);
+            }
+            else
+            {
+                ExecuteStartServerCommand(p);
             }
         }
 
-        private void ExecuteSaveFileDialogCommand(object p)
-        {
-            var openFiledialog = new SaveFileDialogViewModel()
-            {
-                DefaultExtension = ".mres",
-                InitialDirectory = "c:\\",
-                Filter = "MalifoResources (*.mres) | *.mres",
-                OverwritePrompt = true
-            };
-            _dialogs.Add(openFiledialog);
-            if (openFiledialog.Result)
-            {               
-                string fileName = openFiledialog.FileName;
-                var gameEngineService = ServiceManager.Instance.GetServiceByType(typeof(NewPlayer))as GameEngineService;
-                var gameState = gameEngineService.GameState;
-                if (gameState != null)
-                {
-                    persitor.Save(gameState, fileName);
-                }
-            }
-        }        
+            
 
         private void ExecuteStartServerCommand(object p)
         {
@@ -149,7 +110,7 @@ namespace MalifoApp.ViewModels
             server = new MalifoServer(config);
 
             ServiceManager.Instance.AddService(typeof(LoginRequest), new UserService(UserManager.Instance, ClientManager.Instance));
-            GameEngineService gameEngine = new GameEngineService();
+            GameEngineService gameEngine = gameState.Model == null ? new GameEngineService() : new GameEngineService(gameState.Model);
             ServiceManager.Instance.AddService(typeof(DrawFromMainDeck), gameEngine);
             ServiceManager.Instance.AddService(typeof(DrawFromPersonalDeck), gameEngine);
             ServiceManager.Instance.AddService(typeof(NewPlayer), gameEngine);

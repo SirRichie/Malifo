@@ -22,6 +22,8 @@
         <BitmapImage x:Key="DefaultFaceupImage" UriSource="Resources/faceup.png" />
         <BitmapImage x:Key="ConnectedImage" UriSource="Resources/connected.png" />
         <BitmapImage x:Key="DisconnectedImage" UriSource="Resources/disconnected.png" />
+        <BitmapImage x:Key="ServerStartedImage" UriSource="Resources/serverstarted.png" />
+        <BitmapImage x:Key="ServerStoppedImage" UriSource="Resources/serverstopped.png" />
         <DataTemplate x:Key="cardTemplateDrag">
             <StackPanel>
                 <Image Source="{Binding Path=Image}" Height="100" />
@@ -29,6 +31,8 @@
         </DataTemplate>
         <conv:BoolToImage x:Key="BoolToConnectionImage" TrueImage="{StaticResource ConnectedImage}" FalseImage="{StaticResource DisconnectedImage}" />
         <conv:BoolToString x:Key="BoolToConnectionString" TrueString="Disconnect" FalseString="Connect" />
+        <conv:BoolToImage x:Key="BoolToServerConnectionImage" TrueImage="{StaticResource ServerStartedImage}" FalseImage="{StaticResource ServerStoppedImage}" />
+        <conv:BoolToString x:Key="BoolToServerConnectionString" TrueString="Stop" FalseString="Start" />
     </Window.Resources>
 
     <Grid>
@@ -37,15 +41,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Ribbon x:Name="RibbonWin" SelectedIndex="0">
+        <Ribbon x:Name="RibbonWin" SelectedIndex="2">
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu>
-                    <RibbonApplicationMenuItem Header="Load Game"  Command="{Binding Server.OpenFileDialogCommand}"/>
-                    <RibbonApplicationMenuItem Header="Save Game As"  Command="{Binding Server.SaveFileDialogCommand}"/>
+                    <RibbonApplicationMenuItem Header="Load Game"  Command="{Binding OpenFileDialogCommand}"/>
+                    <RibbonApplicationMenuItem Header="Save Game As"  Command="{Binding SaveFileDialogCommand}"/>
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
-            <RibbonTab Header="Malifaux" KeyTip="H" >
+            <RibbonTab Header="Malifaux">
                 <RibbonGroup Header="Drawing - Fate Deck" Background="#FFA3CDFF">
                     <RibbonButton LargeImageSource="Resources/onecard.png" Label="Draw 1" Command="{Binding Connection.DrawMainCommand}" CommandParameter="1" />
                     <RibbonButton LargeImageSource="Resources/twocards.png"  Label="Draw 2" Command="{Binding Connection.DrawMainCommand}" CommandParameter="2" />
@@ -105,7 +109,11 @@
             <RibbonTab Header="Server">
                 <RibbonGroup Header="Server" IsEnabled="{Binding Connection.NotConnected}">
                     <RibbonTextBox Label="Port" Text="{Binding Server.Port, UpdateSourceTrigger=PropertyChanged}" />
-                    <RibbonButton LargeImageSource="Resources/server.png" Label="Start Server" Command="{Binding Server.StartServerCommand}" />
+                    <!--<RibbonButton LargeImageSource="Resources/server.png" Label="Start Server" Command="{Binding Server.StartServerCommand}" />-->
+                    <RibbonButton 
+                        LargeImageSource="{Binding Path=Server.Started, Converter={StaticResource BoolToServerConnectionImage}, FallbackValue={StaticResource ServerStoppedImage}}" 
+                        Label="{Binding Path=Server.Started, Converter={StaticResource BoolToServerConnectionString}, FallbackValue=Start}" 
+                        Command="{Binding Server.ToggleServerCommand}" />
                 </RibbonGroup> 
             </RibbonTab>
         </Ribbon>
